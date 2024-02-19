@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "toota/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "toota/wsgi.py"
+    }
+  ]
+}
