@@ -19,7 +19,7 @@ from rest_framework_simplejwt.views import  TokenRefreshView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from django.contrib.staticfiles.url import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from trips.views import SignUpView, LoginView, SendEmailConfirmationAPIView, UserInformationAPIView
 
@@ -52,4 +52,4 @@ urlpatterns = [
     
 ]
 
-urlpatterns += staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
