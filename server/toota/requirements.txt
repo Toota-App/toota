@@ -45,4 +45,5 @@ Twisted==23.10.0
 txaio==23.1.1
 typing_extensions==4.9.0
 uritemplate==4.1.1
+whitenoise==6.6.0
 zope.interface==6.2
