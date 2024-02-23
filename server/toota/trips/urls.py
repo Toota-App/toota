@@ -1,8 +1,9 @@
 from django.urls import path
+from .views import TripView
 
-from trips.views import index
-
+app_name = 'toota'
 
 urlpatterns = [
-    path('', index),
+    path('', TripView.as_view({'get': 'list'}), name='trip-list'),
+    path('<uuid:trip_id>', TripView.as_view({'get': 'retrieve'}), name='trip-detail'),
 ]

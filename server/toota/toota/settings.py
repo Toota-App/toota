@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 import datetime
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-aov%#o5ft#6c85j_3&vghmb^m(vri==)4r0sfxlk6sz%r-mqrt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     'trips'
 ]
 
@@ -79,15 +81,26 @@ ASGI_APPLICATION = 'toota.asgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'HOST': 'aws-0-us-west-1.pooler.supabase.com',
+#         'NAME': 'postgres',
+#         'USER': 'postgres.afjlgckcyumlpuppqslz',
+#         'PASSWORD': 'vMhjFBMVIb5WDSt5',
+#         'PORT': '5432',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'aws-0-us-west-1.pooler.supabase.com',
-        'NAME': 'postgres',
-        'USER': 'postgres.afjlgckcyumlpuppqslz',
-        'PASSWORD': 'vMhjFBMVIb5WDSt5',
-        'PORT': '5432',
-    }
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 AUTH_USER_MODEL = 'trips.User'
@@ -127,6 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
