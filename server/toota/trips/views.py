@@ -5,18 +5,23 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import UserSerializer, LoginSerializer, TripSerializer
-from .models import EmailVerificationToken, Trip
+from .serializers import UserSerializer, LoginSerializer, TripSerializer, DriverSerializer
+from .models import EmailVerificationToken, Trip, Driver
 from .utils import send_confirmation_email
 from rest_framework import viewsets
 from rest_framework import permissions
 
-class SignUpView(generics.CreateAPIView):
+class UserSignUpView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     
 class LoginView(Token):
     serializer_class = LoginSerializer
+    
+class DriverSignUpView(generics.CreateAPIView):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+    
     
     
 class TripView(viewsets.ReadOnlyModelViewSet):

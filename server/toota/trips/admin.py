@@ -4,14 +4,24 @@ from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from .models import User, Driver, PickupLocation, Trip 
 
 # Register your models here.
-
+admin.site.site_header = 'Toota Admin'
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
-    pass
+    def get_full_name(self, obj):
+        return obj.full_name
+    get_full_name.short_description = 'Full Name'
+    
+    list_display = ('email', 'get_full_name', 'phone_number', 'is_staff', 'is_active')
+    ordering = ('email',)
+    
+
 
 @admin.register(Driver)
 class DriverAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('email', 'full_name', 'phone_number', 'physical_address', 'vehicle_registration', 'vehicle_type', 'licence_no', 'is_staff', 'is_active')
+    ordering = ('email',)
+    
+
 
 @admin.register(PickupLocation)
 class PickupLocationAdmin(admin.ModelAdmin):
