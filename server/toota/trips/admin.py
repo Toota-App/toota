@@ -5,13 +5,12 @@ from .models import User, Driver, PickupLocation, Trip
 
 # Register your models here.
 admin.site.site_header = 'Toota Admin'
+admin.site.site_title = 'Toota Admin Area'
+admin.site.index_title = 'Welcome to Toota Admin Area'
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
-    def get_full_name(self, obj):
-        return obj.full_name
-    get_full_name.short_description = 'Full Name'
     
-    list_display = ('email', 'get_full_name', 'phone_number', 'is_staff', 'is_active')
+    list_display = ('email', 'full_name', 'phone_number', 'is_staff', 'is_active')
     ordering = ('email',)
     
 

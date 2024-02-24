@@ -1,0 +1,98 @@
+/* Basic styles */
+body {
+  background-color: #fff; /* White background */
+  font-family: sans-serif;
+}
+
+.MuiCard-root { /* Apply to all MUI cards */
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 4px; /* Rounded corners */
+  padding: 24px; /* Padding for content */
+}
+
+.MuiCardContent-root { /* Apply to card content */
+  color: #000; /* Black text */
+}
+
+/* Typography */
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Form fields */
+.MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+.MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(0, 0, 0, 0.2); /* Light border */
+}
+
+.Mui-focused .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border-color: #000; /* Darker border on focus */
+}
+
+.Mui-error .Mui-helperText {
+  color: #d32f2f; /* Red error messages */
+}
+
+/* Buttons */
+.MuiButton-root {
+  margin-top: 16px;
+  background-color: #000; /* Black button */
+  color: #fff; /* White text */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .MuiGrid-container { /* Responsive grid for smaller screens */
+    flex-direction: column;
+  }
+}
+
+/* Visual polish (optional) */
+h2 {
+  text-align: center; /* Centered title */
+}
+
+.MuiButton-root {
+  border-radius: 4px; /* Rounded button corners */
+}
+
+/* Accessibility */
+.MuiInputLabel-root.Mui-focused {
+  color: #000; /* Darker label on focus for better contrast */
+}
+
+/* Validation (implement logic for your specific validation rules) */
+.Mui-error .Mui-helperText {
+  padding-left: 16px; /* Align error message with input */
+}
+
+/* Checkbox */
+.MuiCheckbox-root {
+  margin-bottom: 8px;
+}
+
+.MuiFormControlLabel-label {
+  color: #000;
+}
+
+/* Link */
+a {
+  color: #000; /* Black link color */
+  text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+

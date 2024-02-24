@@ -1,0 +1,83 @@
+/* DriverLoginForm.css */
+
+.driver-login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.driver-heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.green-text {
+    color: #28a745;
+}
+
+.black-text {
+    color: #000000;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.login-card {
+    background-color: #28a745;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-header {
+    color: #fff;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    color: #fff;
+    text-align: left;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.forgot-password {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.forgot-password a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.driver-login-button {
+    background-color: #fff;
+    color: #28a745;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.signup-link {
+    margin-top: 20px;
+    color: #fff;
+}
