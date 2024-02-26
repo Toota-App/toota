@@ -27,8 +27,8 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <form className="bg-white rounded shadow-md p-6 w-full max-w-md">
+    <div className="bg-white rounded shadow-md p-6 w-full max-w-md mx-auto">
+      <form onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold mb-4">Reset Your Password</h2>
 
         <p className="text-gray-700 text-sm mb-4">

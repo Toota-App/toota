@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const UserRegistrationForm = ({ onSignUp }) => {
   const [formData, setFormData] = useState({
-    username: '',
+    
     fullName: '',
     phoneNumber: '',
     email: '',
@@ -26,20 +26,6 @@ const UserRegistrationForm = ({ onSignUp }) => {
       <form onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold mb-4">Join Toota Community</h2>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded shadow appearance-none"
-          />
-        </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">

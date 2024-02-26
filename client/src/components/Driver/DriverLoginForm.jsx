@@ -1,74 +1,62 @@
-// DriverLoginForm.js
-
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./DriverLoginForm.css";
+// DriverLoginForm.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const DriverLoginForm = () => {
-  const navigate = useNavigate();
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Send login data to Django backend (implement this part)
-    console.log("Login data:", loginData);
-    // Redirect to driver dashboard or appropriate page
-    navigate("/driver-dashboard");
-  };
-
   return (
-    <div className="driver-login-form">
-      <h1 className="driver-heading">
-        <span className="text-red-500">TOOTA</span>{" "}
-        <span className="black-text">DRIVER</span>
-      </h1>
-      <div className="login-card">
-        <h2 className="login-header">-- LOGIN IN --</h2>
-        <form onSubmit={handleLogin}>
-          <label htmlFor="email">Email</label>
+    <div className="flex items-center justify-center h-screen">
+      <form className="bg-white p-8 shadow-md rounded w-full sm:w-96">
+        <h2 className="text-2xl font-bold text-center mb-4">LOGIN AS TOOTA DRIVER</h2>
+        
+        {/* Email Field */}
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-600">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            value={loginData.email}
-            onChange={handleChange}
+            placeholder="Enter your email"
+            className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
+        </div>
 
-          <label htmlFor="password">Password</label>
+        {/* Password Field */}
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-sm font-semibold text-gray-600">Password</label>
           <input
             type="password"
             id="password"
             name="password"
-            value={loginData.password}
-            onChange={handleChange}
+            placeholder="Enter your password"
+            className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-
-          <div className="forgot-password">
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div>
-
-          <button type="submit" className="driver-login-button">
-            Login as Driver
-          </button>
-        </form>
-
-        <div className="signup-link">
-          Not a Toata driver? <Link to="/signup/driver">Sign up here</Link>
         </div>
-      </div>
+
+        {/* Login Button */}
+        <button
+          type="submit"
+          className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline-black w-full"
+        >
+          LOG IN
+        </button>
+
+        {/* Additional Links */}
+        <div className="mt-4 text-center">
+          <p>
+            Not a Toota driver?{' '}
+            <Link to="/signup/driver" className="text-blue-500 hover:underline">Sign up here</Link>
+          </p>
+          <p>
+            <Link to="/forgot-password" className="text-blue-500 hover:underline">Forgot your password?</Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 };
 
 export default DriverLoginForm;
+
