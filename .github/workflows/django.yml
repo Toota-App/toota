@@ -31,6 +31,6 @@ jobs:
     - name: Run tests
       run: |
         cd server/toota
-        python manage.py test trips.tests
+        python manage.py test
 
     # Additional steps can be added here, such as linting or deploying artifacts.
