@@ -7,6 +7,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.urls import reverse
 from .models import Driver, User
 
@@ -21,10 +23,9 @@ class UserSerializer(serializers.ModelSerializer):
         max_length=68,
         min_length=8,
         write_only=True)
+    
  
-    class Meta:
-        model = User
-        fields = ['id', 'email', 'full_name', 'phone_number', 'password1', 'password2']
+    
    
     def validate(self, attrs):
         
@@ -50,6 +51,10 @@ class UserSerializer(serializers.ModelSerializer):
         }
         data['password'] = validated_data['password1']
         return User.objects.create_user(**data)
+
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'full_name', 'phone_number', 'password1', 'password2']
     
         
 class DriverSerializer(serializers.ModelSerializer):
@@ -123,13 +128,18 @@ class LoginUserSerializer(serializers.ModelSerializer):
         password = attrs.get('password')
 
         user = auth.authenticate(email=email, password=password)
-        # if not user:
-        #     raise AuthenticationFailed('Invalid user, try again')
-        # if not user.is_active:
-        #     raise AuthenticationFailed('Acount disabled, please contact admin')
-        # if not user.is_verified:
-        #     raise AuthenticationFailed('Email not verified, please verify your account')
-        return user.tokens()
+        if not user:
+            raise AuthenticationFailed('Invalid user, try again')
+        if not user.is_active:
+            raise AuthenticationFailed('Acount disabled, please contact admin')
+        if not user.is_verified:
+            raise AuthenticationFailed('Email not verified, please verify your account')
+        refresh =  RefreshToken.for_user(user)
+        data = {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+        return data
         return super().validate(attrs)
 
 
@@ -153,7 +163,12 @@ class LoginDriverSerializer(serializers.ModelSerializer):
             raise AuthenticationFailed('Acount disabled, please contact admin')
         if not user.is_verified:
             raise AuthenticationFailed('Email not verified, please verify your account')
-        return user.tokens()
+        refresh =  RefreshToken.for_user(user)
+        data = {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+        return data
         return super().validate(attrs)
 
 class VerifyUserEmailSerializer(serializers.ModelSerializer):

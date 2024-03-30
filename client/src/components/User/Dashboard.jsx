@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import React, { useState, useEffect } from 'react';
+import { Disclosure, Transition } from '@headlessui/react';
 import { BellIcon, HomeIcon, UserIcon, MailIcon, CogIcon, LogoutIcon } from '@heroicons/react/outline';
-import LogoutConfirmationForm from './LogoutConfirmationForm'; // Import the LogoutConfirmationForm component
+import { useNavigate } from 'react-router-dom';
+import * as jwt_decode from 'jwt-decode';  // Import jwt-decode library
 
 const user = {
   name: 'Tom Cook',
@@ -26,24 +27,36 @@ function classNames(...classes) {
 }
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState(null);
-  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false); // State variable to manage logout confirmation form visibility
-  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false); // State variable to manage profile dropdown visibility
+  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-  // Function to handle logout action
+  useEffect(() => {
+    // Check if token has expired
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        // Token has expired, redirect to login
+        navigate('/login/user');
+      }
+    } else {
+      // Token not found, redirect to login
+      navigate('/login/user');
+    }
+  }, [navigate]);
+
   const handleLogout = () => {
-    // Show logout confirmation form
     setShowLogoutConfirmation(true);
   };
 
-  // Function to handle logout confirmation
   const handleLogoutConfirmation = (confirmLogout) => {
     if (confirmLogout) {
-      // Navigate to login/user route
-      // Replace this with the correct navigation function based on your routing library
-      console.log('Navigating to login/user');
+      localStorage.removeItem('token');
+      navigate('/login/user');
     }
-    // Close logout confirmation form
     setShowLogoutConfirmation(false);
   };
 
@@ -66,10 +79,10 @@ export default function Dashboard() {
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                      activeLink === item.name && 'border-b-2 border-yellow-500' // Add bottom border to active link
+                      activeLink === item.name && 'border-b-2 border-yellow-500'
                     )}
                     aria-current={item.current ? 'page' : undefined}
-                    onClick={() => setActiveLink(item.name)} // Set active link on click
+                    onClick={() => setActiveLink(item.name)}
                   >
                     <item.icon
                       className={classNames(
@@ -94,15 +107,15 @@ export default function Dashboard() {
                         href={item.href}
                         className={classNames(
                           'group flex items-center px-2 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md',
-                          activeLink === item.name && 'text-yellow-500' // Change color of active link
+                          activeLink === item.name && 'text-yellow-500'
                         )}
                         onClick={() => {
                           if (item.name === 'Logout') {
-                            handleLogout(); // Handle logout action
+                            handleLogout();
                           } else {
                             setActiveLink(item.name);
                           }
-                        }} // Set active link on click
+                        }}
                       >
                         {item.icon && (
                           <item.icon className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300" />
@@ -127,7 +140,7 @@ export default function Dashboard() {
           <div className="relative">
             <button
               className="inline-flex justify-center items-center w-12 h-12 rounded-full bg-gray-200 focus:outline-none"
-              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} // Toggle profile dropdown visibility
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
             >
               <img className="rounded-full" src={user.imageUrl} alt={user.name} />
             </button>

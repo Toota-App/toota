@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'authentication',
     'trips',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -157,10 +158,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-REDIS_URL = os.getenv('REDIS_URL', 'redis-18315.c323.us-east-1-2.ec2.cloud.redislabs.com:18315')
+REDIS_URL = os.getenv('REDIS_URL', 'redis://default:Tb6IaS9TgBvwFtJiwhb7Dw3RxoImm9LP@redis-12258.c14.us-east-1-2.ec2.cloud.redislabs.com:12258')
 
 CHANNEL_LAYERS = {
-    'default': {
+    'default': {        
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': [REDIS_URL],
@@ -171,10 +172,17 @@ CHANNEL_LAYERS = {
 
 REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': 'error',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+    
 }
 
 SIMPLE_JWT = {

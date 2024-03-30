@@ -42,7 +42,7 @@ class Trip(models.Model):
         on_delete=models.DO_NOTHING,
         null=True,
         blank=True,
-        related_name='trip_as_driver'
+        related_name='trips_as_driver'
         
         )
     user = models.ForeignKey(
@@ -50,7 +50,7 @@ class Trip(models.Model):
         on_delete=models.DO_NOTHING,
         null=True,
         blank=True,
-        related_name='trip_as_user'
+        related_name='trips_as_user'
        
     )
     vehicle_type = models.CharField(max_length=100, choices=VEHICLE_TYPES, null=False, blank=False)

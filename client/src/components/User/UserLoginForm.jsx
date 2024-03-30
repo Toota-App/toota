@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import * as jwt_decode from 'jwt-decode'
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
@@ -25,6 +26,18 @@ const UserLoginForm = () => {
     }, 5000);
   };
 
+  const handleLoginSuccess = (token) => {
+    // Decode the token to obtain user ID
+    const decodedToken = jwt.decode(token);
+    if (decodedToken && decodedToken.user_id) {
+      // Store user ID in local storage
+      localStorage.setItem('userId', decodedToken.user_id);
+    }
+
+    // Redirect to the user dashboard
+    navigate('/dashboard/user');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,13 +54,17 @@ const UserLoginForm = () => {
       });
 
       if (response.ok) {
-        console.log('Login successful');
-        setSuccessMessage('Login successful! Redirecting to the dashboard...');
-        setTimeout(() => {
-          navigate('/dashboard/user');
-        }, 3000);
-        setFormData({ email: '', password: '' });
-        setErrors({});
+        const data = await response.json();
+        if (data.token) {
+          setSuccessMessage('Login successful! Redirecting to the dashboard...');
+          setTimeout(() => {
+            handleLoginSuccess(data.token); // Call handleLoginSuccess with the received token
+          }, 3000);
+          setFormData({ email: '', password: '' });
+          setErrors({});
+        } else {
+          throw new Error('Token not found in response');
+        }
       } else {
         const errorData = await response.json();
         if (response.status === 401) {
@@ -75,6 +92,7 @@ const UserLoginForm = () => {
         <form onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold mb-4 text-center text-gray-900">Login To Toota</h2>
 
+          {/* Email input */}
           <div className="mb-4 flex items-center">
             <FaEnvelope className="text-gray-500 mr-2" />
             <input
@@ -89,6 +107,7 @@ const UserLoginForm = () => {
           </div>
           {errors.email && <p className="text-red-500 text-lg italic ml-7">{errors.email}</p>}
 
+          {/* Password input */}
           <div className="mb-4 relative flex items-center">
             <FaLock className="text-gray-500 mr-2" />
             <input
@@ -100,6 +119,7 @@ const UserLoginForm = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded shadow appearance-none"
             />
+            {/* Toggle password visibility button */}
             <span
               className="absolute right-0 bottom-1.5 mr-3 cursor-pointer"
               onClick={togglePasswordVisibility}
@@ -115,6 +135,7 @@ const UserLoginForm = () => {
             <p className="text-red-500 text-lg italic ml-7">{errors.generic}</p>
           )}
 
+          {/* Login button */}
           <button
             type="submit"
             className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline-black w-full"
@@ -123,6 +144,7 @@ const UserLoginForm = () => {
           </button>
         </form>
 
+        {/* Forgot password link */}
         <p className="mt-4 text-center text-sm text-gray-500">
           Forgot your password?{' '}
           <Link to="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
@@ -130,6 +152,7 @@ const UserLoginForm = () => {
           </Link>
         </p>
 
+        {/* Sign up link */}
         <p className="mt-4 text-center text-sm text-gray-500">
           Don't have an account with Toota?{' '}
           <Link to="/signup/user" className="font-semibold text-indigo-600 hover:text-indigo-500">

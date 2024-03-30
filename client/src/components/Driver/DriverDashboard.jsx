@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { BellIcon, UserIcon, CogIcon, ClockIcon, CurrencyDollarIcon, ClipboardCheckIcon, QuestionMarkCircleIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'; // Import required icons
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as jwt_decode from 'jwt-decode';
+import { BellIcon, UserIcon, CogIcon, ClockIcon, CurrencyDollarIcon, ClipboardCheckIcon } from '@heroicons/react/outline'; // Import required icons
 import LogoutConfirmationForm from './LogoutConfirmationForm'; // Import the LogoutConfirmationForm component
 import DriverProfileForm from "./DriverProfile";
 
@@ -8,6 +9,24 @@ const DriverDashboard = () => {
   const navigate = useNavigate();
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [editingProfile, setEditingProfile] = useState(false); // State variable to track profile editing mode
+  const [tokenExpired, setTokenExpired] = useState(false); // State variable to track token expiration
+
+  // Function to decode JWT token and check if it has expired
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const decodedToken = jwt.decode(token);
+
+      if (decodedToken && decodedToken.exp * 1000 < Date.now()) {
+        setTokenExpired(true); // Set tokenExpired state to true if token has expired
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkTokenExpiration(); // Check token expiration when component mounts
+  }, []);
 
   const handleLogout = () => {
     setShowLogoutConfirmation(true);
@@ -16,8 +35,8 @@ const DriverDashboard = () => {
   const handleLogoutConfirmation = (confirmLogout) => {
     if (confirmLogout) {
       // Perform logout action
-      // Redirect to login/driver route
-      navigate('/login/driver');
+      localStorage.removeItem('token'); // Remove token from local storage
+      navigate('/login/driver'); // Redirect to login page
     } else {
       setShowLogoutConfirmation(false);
     }
@@ -42,6 +61,13 @@ const DriverDashboard = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-8 py-6">
+        {/* Display token expiration message if token has expired */}
+        {tokenExpired && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 flex items-center">
+            <span>Your session has expired. Please log in again.</span>
+          </div>
+        )}
+
         {/* Dashboard Navigation */}
         <nav className="flex justify-between mb-8">
           <NavItem icon={<HomeIcon className="h-6 w-6" />} text="Dashboard" />
@@ -106,6 +132,13 @@ const NotificationIcon = () => {
 const ProfileIcon = () => {
   return (
     <UserIcon className="h-6 w-6 text-gray-600 cursor-pointer" />
+  );
+};
+
+// Logout icon component
+const LogoutIcon = ({ onClick }) => {
+  return (
+    <LogoutIcon className="h-6 w-6 text-gray-600 cursor-pointer" onClick={onClick} />
   );
 };
 

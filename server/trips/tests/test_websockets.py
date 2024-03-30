@@ -118,6 +118,7 @@ class TestWebSocket:
             path='/toota/?token={access}'
         )
         connected, _ = await communicator.connect()
+        
         message = {
             'type': 'echo.message',
             'data': 'This is a test message.',
@@ -125,6 +126,7 @@ class TestWebSocket:
        
         await communicator.send_json_to(message)
         response = await communicator.receive_json_from()
+
         assert response == message
         
         await communicator.disconnect()
@@ -144,13 +146,14 @@ class TestWebSocket:
 
     async def test_join_driver_pool(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
-        driver, access = await create_driver(
+        
+        _, access = await create_driver(
             'testdriver@test.com',
             'Test Driver',
             '0123456789',
             'Main Avenue',
             'reg-345-678',
-            VEHICLE_TYPES[1][1],
+            VEHICLE_TYPES[0][0],
             'dr-gy-56-89',
             'Test@password_driver'
             )
@@ -164,7 +167,7 @@ class TestWebSocket:
             'data': 'This is a test message',
         }
         channel_layer = get_channel_layer()
-        await channel_layer.group_send('drivers', message)
+        await channel_layer.group_send('drivers', message=message)
         response = await communicator.receive_json_from()
         assert response == message
         await communicator.disconnect()
@@ -178,6 +181,7 @@ class TestWebSocket:
             '1234567890',
             'password'
         )
+       
         communicator = WebsocketCommunicator(
             application=application,
             path=f'/toota/?token={access}')
@@ -192,6 +196,7 @@ class TestWebSocket:
                 'number_of_floors': 2,
                 'pickup_time': get_current_time(),
                 'load_description': 'Fridge',
+                'user': user.id,
                 'bid': 255,
                 },
             })
@@ -235,7 +240,7 @@ class TestWebSocket:
                 'number_of_floors': 2,
                 'pickup_time': get_current_time(),
                 'load_description': 'Fridge',
-                'user_name': user.full_name,
+                'user': user.id,
                 'bid': 255,
                 },
         })
@@ -243,7 +248,7 @@ class TestWebSocket:
         response = await channel_layer.receive('test_channel')
         response_data = response.get('data')
         assert response_data['id'] is not None
-        assert response_data['user_name'] == user.full_name
+        assert response_data['user']['full_name'] == user.full_name
         assert response_data['driver']  is None
         await communicator.disconnect()
 
@@ -271,7 +276,7 @@ class TestWebSocket:
                 'number_of_floors': 2,
                 'pickup_time': get_current_time(),
                 'load_description': 'Fridge',
-                'user_name': user.full_name,
+                'user': user.id,
                 'bid': 255,
                 },
         })
@@ -324,7 +329,7 @@ class TestWebSocket:
 
     async def test_driver_can_update_trip(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
-        user, _ = await create_user(
+        user, access = await create_user(
             'testuser1@test.com',
             'Test User',
             '1234567890',
@@ -332,13 +337,14 @@ class TestWebSocket:
         )
         
         trip = await create_trip(user=user)
+        print(trip)
         trip_id = f'{trip.id}'
         channel_layer = get_channel_layer()
         await channel_layer.group_add(
             group=trip_id,
             channel='test_channel'
         )
-        driver, access = await create_driver(
+        driver, _ = await create_driver(
             'testdriver@test.com',
             'Test Driver',
             '0123456789',
@@ -348,6 +354,7 @@ class TestWebSocket:
             'dr-gy-56-89',
             'Test@password_driver'
             )
+        
         communicator = WebsocketCommunicator(
             application=application,
             path=f'/toota/?token={access}',
@@ -362,9 +369,10 @@ class TestWebSocket:
                 'dropoff_location': 'Cresta Mall',
                 'vehicle_type': VEHICLE_TYPES[0][0],
                 'number_of_floors': 2,
-                'status': Trip.IN_PROGESS,
+                'status': Trip.IN_PROGRESS,
                 'pickup_time': get_current_time(),
                 'load_description': 'Fridge',
+                'driver': driver.id,
                 'bid': 255,
             }
         }
@@ -372,17 +380,18 @@ class TestWebSocket:
         await communicator.send_json_to(message)
 
         response = await channel_layer.receive('test_channel')
-        response_data = response.get(data)
-        pdb.set_trace()
+        response_data = response.get('data')
+        print(response_data)
         assert response_data['id'] == trip_id
         assert response_data['user']['full_name'] == user.full_name
-        assert response_data['driver']['full_name'] == driver.full_name
+        assert response_data['driver'] == driver.full_name
 
         await communicator.disconnect()
 
 
     async def test_driver_join_trip_group_on_connect(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
+        
         driver, access = await create_driver(
             'testdriver@test.com',
             'Test Driver',
@@ -404,8 +413,10 @@ class TestWebSocket:
             'type': 'echo.message',
             'data': 'This is a test message.'
         }
+        print(connected)
         channel_layer = get_channel_layer()
         await channel_layer.group_send(f'{trip.id}', message=message)
         response = await communicator.receive_json_from()
         assert response == messages
+        await communicator.disconnect()
 

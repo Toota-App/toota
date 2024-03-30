@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaPhone, FaEnvelope, FaLock } from 'react-icons/fa'; // Importing required icons
 
@@ -17,17 +17,14 @@ const UserRegistrationForm = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const resetForm = () => {
-    setFormData({
-      fullName: '',
-      phoneNumber: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
-    setSuccessMessage('');
-    setErrors({});
-  };
+  useEffect(() => {
+    const clearMessages = setTimeout(() => {
+      setSuccessMessage('');
+      setErrors({});
+    }, 5000); // Clear messages after 5 seconds
+
+    return () => clearTimeout(clearMessages);
+  }, [successMessage, errors]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -95,26 +92,28 @@ const UserRegistrationForm = () => {
           }),
         });
 
-        if (response.ok) {
-          setSuccessMessage('Registration successful! Redirecting to login page...');
-
-          setTimeout(() => {
-            navigate('/login/user');
-            resetForm(); // Clear the form after successful registration
-          }, 3000);
+        if (response.status === 201) {
+          setSuccessMessage('Registration successful! Please check your email to verify.');
+          setFormData({
+            fullName: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          });
+        } else if (response.status === 500) {
+          setErrors({ generic: 'Internal Server Error. Please try again later.' });
         } else {
           const errorData = await response.json();
-          setErrors(errorData);
-
-          if (
-            errorData.email &&
-            errorData.email[0] === 'user with this email address already exists.'
-          ) {
-            setErrors({ ...errors, email: 'Email is already in use. Please try another.' });
+          if (response.status === 400) {
+            setErrors({ generic: 'Bad request. Please check your input and try again.' });
+          } else {
+            setErrors(errorData);
           }
         }
       } catch (error) {
         console.error('Registration error:', error);
+        setErrors({ generic: 'An error occurred. Please try again later.' });
       }
     }
   };
@@ -124,9 +123,17 @@ const UserRegistrationForm = () => {
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/3" onSubmit={handleSubmit} method="post">
         <h2 className="text-2xl mb-6 font-bold text-center">Sign Up</h2>
 
-        {successMessage && <p className="text-green-600 text-lg italic mb-4">{successMessage}</p>}
+        {successMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
+            {successMessage}
+          </div>
+        )}
 
-        {errors.generic && <p className="text-red-500 text-lg italic mb-4">{errors.generic}</p>}
+        {errors.generic && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+            {errors.generic}
+          </div>
+        )}
 
         <div className="mb-4 flex items-center">
           <FaUser className="text-gray-500 mr-2" />
@@ -186,15 +193,15 @@ const UserRegistrationForm = () => {
             autoComplete="current-password"
           />
           <span
-            className="absolute right-0 bottom-1.5 mr-3 cursor-pointer"
+            className="text-gray-600 absolute right-0 mr-3 cursor-pointer"
             onClick={togglePasswordVisibility}
           >
-            {showPassword ? '👁️' : '👁️‍🗨️'}
+            {showPassword ? 'Hide' : 'Show'}
           </span>
         </div>
         {errors.password && <p className="text-red-500 text-lg italic ml-7">{errors.password}</p>}
 
-        <div className="mb-4 relative flex items-center">
+        <div className="mb-4 flex items-center">
           <FaLock className="text-gray-500 mr-2" />
           <input
             className={`appearance-none border rounded w-full py-2 px-3 ${errors.confirmPassword && 'border-red-500'}`}
@@ -204,7 +211,7 @@ const UserRegistrationForm = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            autoComplete="current-confirmPassword"
+            autoComplete="current-password"
           />
         </div>
         {errors.confirmPassword && <p className="text-red-500 text-lg italic ml-7">{errors.confirmPassword}</p>}

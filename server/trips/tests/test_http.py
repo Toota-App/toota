@@ -39,7 +39,6 @@ class UserLoginViewTest(TestCase):
         data = {'email': 'test@example.com', 'password': 'testpassword'}
         response = client.post(reverse('user-login'), data=data)
         # 
-        # pdb.set_trace()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('access', response.data)
         self.assertIn('refresh', response.data)
@@ -100,6 +99,7 @@ class TripViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(full_name='Test User', email='test@example.com', password='testpassword', phone_number='0834568900')
         self.user.is_verified = True
+        self.user.save()
         return super().setUp()
 
     def tearDown(self):
@@ -117,12 +117,14 @@ class TripViewTest(TestCase):
                 vehicle_type=VEHICLE_TYPES[0][0],
                 number_of_floors=2,
                 load_description='This is a test load description.',
+                user=self.user,
                 pickup_time=f'{datetime.date.today()}',
                 bid=500,
                 )
         res = self.client.get('/api/trip/', HTTP_AUTHORIZATION=f'Bearer {self.access}')
+        
         self.assertEqual(status.HTTP_200_OK, res.status_code)
-        self.assertTrue(Trip.objects.filter(id=res.data[0]['id']).exists())
+        # self.assertTrue(Trip.objects.filter(id=str(trip)).exists())
         self.assertEqual(res.data[0]['id'], str(trip.id))
         self.assertEqual(res.data[0]['pickup_location'], trip.pickup_location)
         self.assertEqual(res.data[0]['dropoff_location'], trip.dropoff_location)

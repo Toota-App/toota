@@ -8,7 +8,6 @@ class UserManager(BaseUserManager):
             raise ValueError('Phone number must be set')
         if not full_name:
             raise ValueError('Full Name must be set')
-        
         email = self.normalize_email(email)
         user = self.model(email=email, phone_number=phone_number, full_name=full_name, **extra_fields)
         user.set_password(password)

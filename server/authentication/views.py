@@ -20,21 +20,21 @@ from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnico
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-
+# Custom Redirect Frontend / mobile
 class CustomRedirect(HttpResponsePermanentRedirect):
 
     allowed_schemes=[os.environ.get('APP_SCHEME'), 'http', 'https']
 
-class UserProfileView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticated]
-    
+
 class UserSignUpView(generics.GenericAPIView):
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
     
     def post(self, request):
         user = request.data
@@ -58,13 +58,54 @@ class UserSignUpView(generics.GenericAPIView):
         Util.send_email(data)
         return Response(user_data, status=status.HTTP_201_CREATED)
 
+class UserProfileView(generics.GenericAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated,]
+    lookup_field = 'id'
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+    def get(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer = UserSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer = UserSerializer(user, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
 
 class LoginUserView(Token):
     serializer_class = LoginUserSerializer
+    permission_classes = [AllowAny]
     
     
 class VerifyEmailUser(views.APIView):
     serializer_class = VerifyUserEmailSerializer
+    permission_classes = [AllowAny]
 
     token_param_config=openapi.Parameter(
         'token', 
@@ -93,10 +134,12 @@ class VerifyEmailUser(views.APIView):
 
 class LoginDriverView(Token):
     serializer_class = LoginDriverSerializer
+    permission_classes = [AllowAny]
     
     
 class RequestUserPasswordResetEmail(generics.GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         data = {'request': request, 'data': request.data}
@@ -123,6 +166,8 @@ class RequestUserPasswordResetEmail(generics.GenericAPIView):
     
 class PasswordUserTokenCheck(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
+    permission_classes = [AllowAny]
+
     def get(self, request, uidb64, token):
         redirect_url = request.GET.get('redirect_url')
         try:
@@ -143,6 +188,7 @@ class PasswordUserTokenCheck(generics.GenericAPIView):
     
 class DriverSignUpView(generics.GenericAPIView):
     serializer_class = DriverSerializer
+    permission_classes = [AllowAny]
     
     def post(self, request):
         driver = request.data
@@ -166,14 +212,49 @@ class DriverSignUpView(generics.GenericAPIView):
         Util.send_email(data)
         return Response(driver_data, status=status.HTTP_201_CREATED)
     
-class DriverProfileView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Driver.objects.all()
-    serializer_class = DriverSerializer
+class DriverProfileView(generics.GenericAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated,]
     lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = DriverSerializer
+
+    def get(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer =DriverSerializer(user)
+            return Response(serializer.data)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer = DriverSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, id):
+        try: 
+            user = self.get_object()
+            serializer = DriverSerializer(user, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
     
 class VerifyEmailDriver(views.APIView):
     serializer_class = VerifyDriverEmailSerializer
+    permission_classes = [AllowAny]
 
     token_param_config=openapi.Parameter(
         'token', 
@@ -203,6 +284,7 @@ class VerifyEmailDriver(views.APIView):
     
 class RequestDriverPasswordResetEmail(generics.GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         data = {'request': request, 'data': request.data}
@@ -230,6 +312,7 @@ class RequestDriverPasswordResetEmail(generics.GenericAPIView):
 
 class PasswordDriverTokenCheck(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
+    permission_classes = [AllowAny]
     def get(self, request, uidb64, token):
         redirect_url = request.GET.get('redirect_url')
         try:
@@ -250,6 +333,8 @@ class PasswordDriverTokenCheck(generics.GenericAPIView):
 
 class CheckDriverVerification(generics.GenericAPIView):
     serializer_class = CheckDriverVerificationSerializer
+    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
+    permission_classes = [IsAuthenticated,]
 
     token_param_config=openapi.Parameter(
         'token', 
@@ -277,6 +362,7 @@ class CheckDriverVerification(generics.GenericAPIView):
 
 class SetNewPasswordAPIVIew(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
+    permission_classes = [AllowAny]
 
     def patch(self, request):
         serializer=self.serializer_class(data=request.data)
