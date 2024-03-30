@@ -9,6 +9,7 @@ urlpatterns = [
     path('user/password-reset/', views.RequestUserPasswordResetEmail.as_view(), name='password-reset-user'),
     path('user/password-reset/<uidb64>/<token>',views.PasswordUserTokenCheck.as_view(), name='password-reset-confirm'),
     path('user/confirm-password-reset/', views.SetNewPasswordAPIVIew.as_view(), name='confirm-password-reset'),
+    path('activation/success/', views.ActivationSuccessView.as_view(), name='activation_success'),
     # path('user/logout/', views.LogoutUserView.as_view(), name='user-logout'),
     path('driver/sign_up/', views.DriverSignUpView.as_view(), name='driver-sign_up'),
     path('driver/login/', views.LoginDriverView.as_view(), name='driver-login'),

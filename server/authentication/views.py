@@ -24,7 +24,9 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
+from django.shortcuts import redirect
+from django.views import View
+from django.http import HttpResponse
 
 # Custom Redirect Frontend / mobile
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -98,6 +100,7 @@ class UserProfileView(generics.GenericAPIView):
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
+
 class LoginUserView(Token):
     serializer_class = LoginUserSerializer
     permission_classes = [AllowAny]
@@ -113,8 +116,8 @@ class VerifyEmailUser(views.APIView):
         description='Description',
         type=openapi.TYPE_STRING)
     @swagger_auto_schema(manual_parameters=[token_param_config])
-    def post(self, request):
-        token = request.data['token']
+    def get(self, request):
+        token = request.GET.get('token')
 
         try:
             payload = AccessToken(token)
@@ -124,12 +127,16 @@ class VerifyEmailUser(views.APIView):
                 user.is_verified = True
                 user.save()
 
-            return Response({'account': 'Successfully activated'}, status=status.HTTP_200_OK)
+            return redirect('activation_success')
         except jwt.ExpiredSignatureError:
             return Response({'error': "Activation link expired"}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError:
             return Response({'error': "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+class ActivationSuccessView(View):
+    def get(self, request):
+        # Displaying account activation success message
+        return HttpResponse("Your account has been successfully activated!")
 
 
 class LoginDriverView(Token):
@@ -262,8 +269,8 @@ class VerifyEmailDriver(views.APIView):
         description='Description',
         type=openapi.TYPE_STRING)
     @swagger_auto_schema(manual_parameters=[token_param_config])
-    def post(self, request):
-        token = request.data['token']
+    def get(self, request):
+        token = request.GET.get('token')
 
         try:
             payload = AccessToken(token)
@@ -273,7 +280,7 @@ class VerifyEmailDriver(views.APIView):
                 user.is_verified = True
                 user.save()
 
-            return Response({'account': 'Successfully activated'}, status=status.HTTP_200_OK)
+            return redirect('activation_success')
         except jwt.ExpiredSignatureError:
             return Response({'error': "Activation link expired"}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError:
