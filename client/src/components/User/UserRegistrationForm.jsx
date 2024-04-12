@@ -61,8 +61,6 @@ const UserRegistrationForm = () => {
       newErrors.password = 'Password is required';
     } else if (formData.password.trim().length < 8) {
       newErrors.password = 'Password must be at least 8 characters';
-    } else if (!/^(?=.*[!@#$%^&*(),.?":{}|<>])/.test(formData.password.trim())) {
-      newErrors.password = 'Password must contain at least one special symbol';
     }
 
     if (formData.confirmPassword.trim() !== formData.password.trim()) {
@@ -101,15 +99,21 @@ const UserRegistrationForm = () => {
             password: '',
             confirmPassword: '',
           });
+        } else if (response.status === 400) {
+          const errorData = await response.json();
+          if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
+            setErrors({ email: 'Email already exists. Please try another one.' });
+          }
+          if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
+            setErrors({ phoneNumber: 'Phone number already exists. Please try another one.' });
+          }
+          if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
+            setErrors({ fullName: 'Full name already exists. Please try another one.' });
+          }
         } else if (response.status === 500) {
           setErrors({ generic: 'Internal Server Error. Please try again later.' });
         } else {
-          const errorData = await response.json();
-          if (response.status === 400) {
-            setErrors({ generic: 'Bad request. Please check your input and try again.' });
-          } else {
-            setErrors(errorData);
-          }
+          setErrors({ generic: 'Unknown error occurred. Please try again later.' });
         }
       } catch (error) {
         console.error('Registration error:', error);

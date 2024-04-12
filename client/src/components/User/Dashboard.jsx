@@ -2,25 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { BellIcon, HomeIcon, UserIcon, MailIcon, CogIcon, LogoutIcon } from '@heroicons/react/outline';
 import { useNavigate } from 'react-router-dom';
-import * as jwt_decode from 'jwt-decode';  // Import jwt-decode library
+import { jwtDecode } from "jwt-decode"; // Importing jwt_decode from js-jwt library
+import SessionExpiredBanner from './SessionExpiredBanner'; // Import the SessionExpiredBanner component
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
-const navigation = [
-  { name: 'Home', href: '#', current: true, icon: HomeIcon },
-  { name: 'Profile', href: '#', current: false, icon: UserIcon },
-  { name: 'Ride History', href: '#', current: false, icon: MailIcon },
-  { name: 'Notifications', href: '#', current: false, icon: BellIcon },
-  { name: 'Settings', href: '#', current: false, icon: CogIcon },
-];
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Logout', href: '#', icon: LogoutIcon },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -31,22 +15,57 @@ export default function Dashboard() {
   const [activeLink, setActiveLink] = useState(null);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [isSessionExpired, setIsSessionExpired] = useState(false);
+
+  // Fetch token (replace with your actual token retrieval logic)
+  
+  const token = localStorage.getItem('access_token');
+  const decodedToken = jwtDecode(token);
+  const user_id = decodedToken["user_id"];
+  const user = {
+  name: 'Tom Cook',
+  email: 'tom@example.com',
+  imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+};
+
+
+
+const navigation = [
+  { name: 'Home', href: '#', current: true, icon: HomeIcon },
+  { name: 'Profile', to: `/profile/user/${user_id}`, current: false, icon: UserIcon },
+  { name: 'Ride History', href: '#', current: false, icon: MailIcon },
+  { name: 'Notifications', href: '#', current: false, icon: BellIcon },
+  { name: 'Settings', href: '#', current: false, icon: CogIcon },
+];
+
+const userNavigation = [
+  { name: 'Your Profile', to: `/profile/user/${user_id}` },
+  { name: 'Settings', href: '#' },
+  { name: 'Logout', href: '#', icon: LogoutIcon },
+];
 
   useEffect(() => {
-    // Check if token has expired
-    const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = jwt_decode(token);
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-        // Token has expired, redirect to login
-        navigate('/login/user');
+      try {
+        
+	console.log(decodedToken["user_id"]);
+        const currentTime = Date.now() / 1000;
+
+        if (decodedToken.exp < currentTime) {
+          setIsSessionExpired(true);
+          localStorage.removeItem('access_token'); // Clear expired token
+          navigate('/login/user'); // Redirect to login on expiration
+        } else {
+          setIsSessionExpired(false);
+        }
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        setIsSessionExpired(true); // Handle decoding errors as expired
       }
     } else {
-      // Token not found, redirect to login
-      navigate('/login/user');
+      setIsSessionExpired(true); // No token found, assume expired
     }
-  }, [navigate]);
+  }, [token]); // Update effect whenever token changes
 
   const handleLogout = () => {
     setShowLogoutConfirmation(true);
@@ -54,8 +73,8 @@ export default function Dashboard() {
 
   const handleLogoutConfirmation = (confirmLogout) => {
     if (confirmLogout) {
-      localStorage.removeItem('token');
-      navigate('/login/user');
+      localStorage.removeItem('access_token'); // Remove token on logout
+      navigate('/login/user'); // Redirect to login
     }
     setShowLogoutConfirmation(false);
   };
@@ -156,13 +175,23 @@ export default function Dashboard() {
               leaveTo="transform opacity-0 scale-95"
             >
               <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <div
+                  className="py-1"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
                   {userNavigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
+                      onClick={() => {
+                        if (item.name === 'Logout') {
+                          handleLogout();
+                        }
+                      }}
                     >
                       {item.name}
                     </a>
@@ -174,17 +203,11 @@ export default function Dashboard() {
         </header>
 
         {/* Main content area */}
-        <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none">
-          <div className="py-6">
-            {/* Your content goes here */}
-          </div>
-        </main>
+        <div className="flex-1 overflow-y-auto p-4">
+          {/* Your content goes here */}
+          <p>Main Content Goes Here</p>
+        </div>
       </div>
-
-      {/* Render LogoutConfirmationForm if showLogoutConfirmation is true */}
-      {showLogoutConfirmation && (
-        <LogoutConfirmationForm onConfirm={handleLogoutConfirmation} />
-      )}
     </div>
   );
 }

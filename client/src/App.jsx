@@ -1,3 +1,4 @@
+// App.jsx
 import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DriverRegistrationForm from "./components/Driver/DriverRegistrationForm";
@@ -9,7 +10,8 @@ import ResetPasswordForm from "./components/User/ResetPasswordForm";
 import NotFound from "./pages/NotFound";
 import Dashboard from './components/User/Dashboard';
 import DriverDashboard from './components/Driver/DriverDashboard';
-import DocumentUploadForm from "./components/Driver/DocumentUploadForm"; // Import the DocumentUploadForm component
+import DocumentUploadForm from "./components/Driver/DocumentUploadForm";
+import ProfilePage from './pages/ProfilePage'; // Import the ProfilePage component
 
 export const AuthContext = createContext();
 
@@ -35,6 +37,9 @@ function App() {
 
           {/* Route for document upload form */}
           <Route path="/upload-document" element={<DocumentUploadForm />} />
+
+          {/* Route for profile page */}
+          <Route path="/profile/user/:id" element={<ProfilePage />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

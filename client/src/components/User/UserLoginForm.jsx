@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
-import * as jwt_decode from 'jwt-decode'
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
@@ -26,18 +25,6 @@ const UserLoginForm = () => {
     }, 5000);
   };
 
-  const handleLoginSuccess = (token) => {
-    // Decode the token to obtain user ID
-    const decodedToken = jwt.decode(token);
-    if (decodedToken && decodedToken.user_id) {
-      // Store user ID in local storage
-      localStorage.setItem('userId', decodedToken.user_id);
-    }
-
-    // Redirect to the user dashboard
-    navigate('/dashboard/user');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,11 +42,13 @@ const UserLoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        if (data.token) {
+        if (data.access) {
+          // Store the access token in localStorage
+          localStorage.setItem('access_token', data.access);
           setSuccessMessage('Login successful! Redirecting to the dashboard...');
           setTimeout(() => {
-            handleLoginSuccess(data.token); // Call handleLoginSuccess with the received token
-          }, 3000);
+            navigate('/dashboard/user');
+          }, 2000);
           setFormData({ email: '', password: '' });
           setErrors({});
         } else {
@@ -86,7 +75,9 @@ const UserLoginForm = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white rounded shadow-md p-6 w-full max-w-md mx-auto">
         {successMessage && (
-          <p className="mt-4 text-center text-green-500 font-bold">{successMessage}</p>
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {successMessage}
+          </div>
         )}
 
         <form onSubmit={handleSubmit}>
@@ -129,10 +120,14 @@ const UserLoginForm = () => {
           </div>
           {errors.password && <p className="text-red-500 text-lg italic ml-7">{errors.password}</p>}
           {errors.invalidCredentials && (
-            <p className="text-red-500 text-lg italic ml-7">{errors.invalidCredentials}</p>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {errors.invalidCredentials}
+            </div>
           )}
           {errors.generic && (
-            <p className="text-red-500 text-lg italic ml-7">{errors.generic}</p>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {errors.generic}
+            </div>
           )}
 
           {/* Login button */}
