@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import * as jwt_decode from 'jwt-decode'
-import { FaEnvelope, FaLock, FaExclamationCircle } from 'react-icons/fa'; // Import icons
+import { FaEnvelope, FaLock, FaExclamationCircle } from 'react-icons/fa';
 
 const DriverLoginForm = () => {
   const navigate = useNavigate();
@@ -13,56 +12,56 @@ const DriverLoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
-  const [tokenExpired, setTokenExpired] = useState(false);
 
-  useEffect(() => {
-    if (tokenExpired) {
-      setTimeout(() => {
-        setTokenExpired(false);
-      }, 3000);
-    }
-  }, [tokenExpired]);
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleLoginSuccess = (token) => {
-    const decoded = jwt.decode(token);
-    const userId = decoded.user_id;
-
-    localStorage.setItem('userId', userId);
-    navigate('/dashboard/driver');
+  // function to clear error message after 7 seconds
+  const clearErrors = () => {
+    setTimeout(() => {
+      setFormErrors({});
+    }, 7000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await fetch('http://localhost:8000/api/driver/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/driver/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
       });
-      const data = await response.json();
 
-      if (response.ok) {
-        handleLoginSuccess(data.access);
-        setFormData({ email: '', password: '' });
-        setFormErrors({});
-        setSuccessMessage('Login successful!');
-      } else {
-        const errorMessage = data.detail;
-        if (errorMessage === 'Token has expired') {
-          setTokenExpired(true);
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          setFormErrors({ general: 'Invalid email or password. Please try again.' });
+        } else {
+          setFormErrors(responseData);
         }
-        setFormErrors({ general: errorMessage });
+        clearErrors(); // Call clearErrors function
+      } else {
+        const { access } = responseData;
+        localStorage.setItem('access_token', access);
+        setSuccessMessage('Login successful! Redirecting to the dashboard...');
+        setTimeout(() => {
+          navigate('/dashboard/driver');
+        }, 2000);
+        setFormData({ email: '', password: '' });
       }
     } catch (error) {
-      console.error('An error occurred:', error.message);
-      setFormErrors({ general: 'An error occurred. Please try again later.' });
+      console.error('Error during login:', error);
+      setFormErrors({ generic: 'An error occurred. Please try again later.' });
+      clearErrors(); // Call clearErrors function
     }
   };
 
@@ -79,14 +78,6 @@ const DriverLoginForm = () => {
           </div>
         )}
 
-        {/* Token Expiration Message */}
-        {tokenExpired && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 flex items-center">
-            <FaExclamationCircle className="mr-2" />
-            <span>Your session has expired. Please log in again.</span>
-          </div>
-        )}
-
         {/* Email Field */}
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold text-gray-600 flex items-center">
@@ -98,12 +89,11 @@ const DriverLoginForm = () => {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleInputChange}
+            onChange={handleChange} 
             placeholder="Enter your email"
             className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-          {formErrors.email && <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>}
         </div>
 
         {/* Password Field */}
@@ -118,7 +108,7 @@ const DriverLoginForm = () => {
               id="password"
               name="password"
               value={formData.password}
-              onChange={handleInputChange}
+              onChange={handleChange} 
               placeholder="Enter your password"
               className="w-full mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
               required
@@ -131,7 +121,6 @@ const DriverLoginForm = () => {
               {showPassword ? 'Hide' : 'Show'}
             </button>
           </div>
-          {formErrors.password && <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>}
         </div>
 
         {/* Login Button */}

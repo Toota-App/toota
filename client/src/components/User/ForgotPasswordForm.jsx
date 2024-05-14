@@ -18,26 +18,15 @@ const ForgotPasswordForm = () => {
         return;
       }
 
-      // Check for valid email format
-      const emailRegex = /^\S+@\S+\.\S+$/;
-      if (!emailRegex.test(email.trim())) {
-        setMessage('Email is invalid.');
-        setMessageType('error');
-        return;
-      }
-
-      const response = await axios.post('http://localhost:3001/auth/forgot-password', { email });
+      // Make the backend API call to send reset password link
+      const response = await axios.post('http://localhost:8000/api/user/password-reset/', { email });
 
       if (response.status === 200) {
-        setMessage(response.data.message);
+        setMessage('Reset link has been sent to your email.');
         setMessageType('success');
       }
     } catch (error) {
-      if (error.response.status === 404) {
-        setMessage('User not found.');
-      } else {
-        setMessage(error.response.data.message || 'An unexpected error occurred.');
-      }
+      setMessage(error.response.data.message || 'An unexpected error occurred.');
       setMessageType('error');
     }
   };

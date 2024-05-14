@@ -21,7 +21,7 @@ const UserRegistrationForm = () => {
     const clearMessages = setTimeout(() => {
       setSuccessMessage('');
       setErrors({});
-    }, 5000); // Clear messages after 5 seconds
+    }, 7000); // Clear messages after 7 seconds
 
     return () => clearTimeout(clearMessages);
   }, [successMessage, errors]);
@@ -72,55 +72,65 @@ const UserRegistrationForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (validateForm(formData)) {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/user/sign_up/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            full_name: formData.fullName,
-            phone_number: formData.phoneNumber,
-            email: formData.email,
-            password1: formData.password,
-            password2: formData.confirmPassword,
-          }),
+  if (validateForm(formData)) {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/user/sign_up/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: formData.fullName,
+          phone_number: formData.phoneNumber,
+          email: formData.email,
+          password: formData.password,
+          confirm_password: formData.confirmPassword,
+        }),
+      });
+
+      if (response.status === 201) {
+        setSuccessMessage('Registration successful! Please check your email to verify.');
+        setFormData({
+          fullName: '',
+          phoneNumber: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
         });
+      } else if (response.status === 400) {
+        const errorData = await response.json();
+        const newErrors = {};
 
-        if (response.status === 201) {
-          setSuccessMessage('Registration successful! Please check your email to verify.');
-          setFormData({
-            fullName: '',
-            phoneNumber: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-          });
-        } else if (response.status === 400) {
-          const errorData = await response.json();
-          if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
-            setErrors({ email: 'Email already exists. Please try another one.' });
-          }
-          if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
-            setErrors({ phoneNumber: 'Phone number already exists. Please try another one.' });
-          }
-          if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
-            setErrors({ fullName: 'Full name already exists. Please try another one.' });
-          }
-        } else if (response.status === 500) {
-          setErrors({ generic: 'Internal Server Error. Please try again later.' });
-        } else {
-          setErrors({ generic: 'Unknown error occurred. Please try again later.' });
+        if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
+          newErrors.email = 'Email already exists. Please try another one.';
         }
-      } catch (error) {
-        console.error('Registration error:', error);
-        setErrors({ generic: 'An error occurred. Please try again later.' });
+
+        if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
+          newErrors.phoneNumber = 'Phone number already exists. Please try another one.';
+        }
+
+        if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
+          newErrors.fullName = 'Full name already exists. Please try another one.';
+        }
+
+        if (errorData.password && errorData.password[0] === 'Password must be at least 8 characters') {
+          newErrors.password = 'Password must be at least 8 characters';
+        }
+
+        setErrors(newErrors);
+      } else if (response.status === 500) {
+        setErrors({ generic: 'Internal Server Error. Please try again later.' });
+      } else {
+        setErrors({ generic: 'Unknown error occurred. Please try again later.' });
       }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setErrors({ generic: 'An error occurred. Please try again later.' });
     }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center">

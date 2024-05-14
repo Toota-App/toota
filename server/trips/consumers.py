@@ -2,7 +2,7 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 from trips.models import Trip
-from trips.serializers import NestedTripSerializer, TripSerializer
+
 
 
 class TootaConsumer(AsyncJsonWebsocketConsumer):
@@ -26,15 +26,14 @@ class TootaConsumer(AsyncJsonWebsocketConsumer):
                 status=Trip.COMPLETED
             ).only('id').values_list('id', flat=True)
         else:
-            trip_ids = user.trips_as_user.exclude(
+            trip_ids = user.trips_as_rider.exclude(
                 status=Trip.COMPLETED
             ).only('id').values_list('id', flat=True)
         return map(str, trip_ids)
 
     @database_sync_to_async
     def _get_user_group(self, user):
-        first_group = user.groups.first()
-        return first_group.name if first_group else None
+        return user.groups.first().name
 
     @database_sync_to_async
     def _update_trip(self, data):

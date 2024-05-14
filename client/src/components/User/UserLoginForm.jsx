@@ -25,6 +25,13 @@ const UserLoginForm = () => {
     }, 5000);
   };
 
+  // Function to clear error messages after a certain period of time
+  const clearErrors = () => {
+    setTimeout(() => {
+      setErrors({});
+    }, 5000);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,8 +50,11 @@ const UserLoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.access) {
-          // Store the access token in localStorage
           localStorage.setItem('access_token', data.access);
+          localStorage.setItem('refresh_token', data.refresh)
+          console.log('Token retrieved from server:', data.access);
+          console.log('Token retrieved from server:', data.refresh);
+          console.log('Token stored in localStorage:', localStorage.getItem('access_token'));
           setSuccessMessage('Login successful! Redirecting to the dashboard...');
           setTimeout(() => {
             navigate('/dashboard/user');
@@ -64,10 +74,12 @@ const UserLoginForm = () => {
         } else {
           setErrors(errorData);
         }
+        clearErrors(); // Call clearErrors function
       }
     } catch (error) {
       console.error('Error during login:', error);
       setErrors({ generic: 'An error occurred. Please try again later.' });
+      clearErrors(); // Call clearErrors function
     }
   };
 
@@ -83,7 +95,6 @@ const UserLoginForm = () => {
         <form onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold mb-4 text-center text-gray-900">Login To Toota</h2>
 
-          {/* Email input */}
           <div className="mb-4 flex items-center">
             <FaEnvelope className="text-gray-500 mr-2" />
             <input
@@ -98,7 +109,6 @@ const UserLoginForm = () => {
           </div>
           {errors.email && <p className="text-red-500 text-lg italic ml-7">{errors.email}</p>}
 
-          {/* Password input */}
           <div className="mb-4 relative flex items-center">
             <FaLock className="text-gray-500 mr-2" />
             <input
@@ -110,7 +120,6 @@ const UserLoginForm = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded shadow appearance-none"
             />
-            {/* Toggle password visibility button */}
             <span
               className="absolute right-0 bottom-1.5 mr-3 cursor-pointer"
               onClick={togglePasswordVisibility}
@@ -130,7 +139,6 @@ const UserLoginForm = () => {
             </div>
           )}
 
-          {/* Login button */}
           <button
             type="submit"
             className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline-black w-full"
@@ -139,7 +147,6 @@ const UserLoginForm = () => {
           </button>
         </form>
 
-        {/* Forgot password link */}
         <p className="mt-4 text-center text-sm text-gray-500">
           Forgot your password?{' '}
           <Link to="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
@@ -147,7 +154,6 @@ const UserLoginForm = () => {
           </Link>
         </p>
 
-        {/* Sign up link */}
         <p className="mt-4 text-center text-sm text-gray-500">
           Don't have an account with Toota?{' '}
           <Link to="/signup/user" className="font-semibold text-indigo-600 hover:text-indigo-500">

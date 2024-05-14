@@ -1,73 +1,124 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Message from './Message';
+import axios from 'axios';
+import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const ResetPasswordForm = () => {
-  const { token } = useParams();
-  const [newPassword, setNewPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
+  const { uidb64, token } = useParams();
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isTokenValid, setIsTokenValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleResetPassword = async (e) => {
+  useEffect(() => {
+    console.log('Verifying token...');
+    const verifyToken = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/user/password-reset/${uidb64}/${token}`);
+        console.log('Token verification response:', response);
+        if (response.status === 200) {
+          console.log('Token is valid');
+          setIsTokenValid(true);
+        }
+      } catch (error) {
+        console.error('Token verification error:', error);
+        setError('Invalid or expired token. Please request a new password reset link.');
+      }
+    };
+    verifyToken();
+  }, [uidb64, token]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting password reset form...');
+    setError('');
+    setSuccessMessage('');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      return;
+    }
 
     try {
-      // Validation
-      if (!newPassword.trim()) {
-        setMessage('New password is required.');
-        setMessageType('error');
-        return;
-      }
-
-      // Make the backend API call to reset password
-      const response = await axios.post(`http://localhost:3001/auth/reset-password/${token}`, { newPassword });
-
-      if (response.status === 200) {
-        setMessage(response.data.message);
-        setMessageType('success');
-      }
+      const response = await axios.patch(
+        `http://localhost:8000/api/user/confirm-password-reset/`,
+        { password, uidb64, token }
+      );
+      console.log('Password reset response:', response);
+      setSuccessMessage(response.data.message);
     } catch (error) {
-      if (error.response.status === 404) {
-        setMessage('User not found.');
+      console.error('Password reset error:', error);
+      if (error.response) {
+        setError(error.response.data.detail || 'An error occurred. Please try again later.');
       } else {
-        setMessage(error.response.data.message || 'An unexpected error occurred.');
+        setError('An error occurred. Please try again later.');
       }
-      setMessageType('error');
     }
   };
 
+  if (!isTokenValid) {
+    console.log('Token is not valid yet, waiting...');
+    return null;
+  }
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      {message && <Message message={message} type={messageType} />}
-
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/3" onSubmit={handleResetPassword}>
-        <h2 className="text-2xl mb-6 font-bold text-center">Reset Password</h2>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="newPassword">
-            New Password
-          </label>
-          <input
-            className="appearance-none border rounded w-full py-2 px-3"
-            id="newPassword"
-            type="password"
-            placeholder="New Password"
-            name="newPassword"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-6">
-          <button
-            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-black hover:bg-gray-800"
-            type="submit"
-          >
-            Reset Password
-          </button>
-        </div>
-      </form>
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-full max-w-md bg-white shadow-md rounded p-8">
+	  <h2 className="text-center text-lg mb-6">User Reset Password <FaLock className="inline-block ml-2" /></h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-6 relative border border-gray-300 rounded">
+            <label htmlFor="password" className="block mb-2 text-gray-600">New Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-2 rounded border-transparent focus:border-black focus:outline-none"
+              />
+              <span onClick={() => setShowPassword(!showPassword)} className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-600 mr-4 cursor-pointer">
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+          </div>
+          <div className="mb-6 relative border border-gray-300 rounded">
+            <label htmlFor="confirmPassword" className="block mb-2 text-gray-600">Confirm Password</label>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                className="w-full px-4 py-2 rounded border-transparent focus:border-black focus:outline-none"
+              />
+              <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-600 mr-4 cursor-pointer">
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+          </div>
+          {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+          {successMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+              <span className="block sm:inline">{successMessage}</span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={() => window.location.href="/login/user"}>
+                <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.354 5.354a2 2 0 0 1 2.828 2.828l-9 9a2 2 0 0 1-2.828 0l-9-9a2 2 0 1 1 2.828-2.828L10 11.172l4.243-4.243z"/></svg>
+              </span>
+            </div>
+          )}
+          <button type="submit" className="w-full px-4 py-2 bg-black text-white rounded focus:outline-none hover:bg-gray-800">Reset Password</button>
+          <p className="text-center mt-4">Finished setting up your password? <a href="/login/user" className="text-blue-500">Login here</a>.</p>
+        </form>
+      </div>
     </div>
   );
 };

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'rest_framework',
     'drf_yasg',
     'corsheaders',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'authentication',
     'trips',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,12 @@ CORS_ALLOW_CREDENTIALS = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -122,19 +130,13 @@ CORS_ALLOW_CREDENTIALS = True
 #         'USER': 'postgres.afjlgckcyumlpuppqslz',
 #         'PASSWORD': 'vMhjFBMVIb5WDSt5',
 #         'PORT': '5432',
-#     }
+#     } postgres://postgres.zwaikffsydhvwjxioewc:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:5432/postgres
 # # }
+# }
 
 DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-
-# DATABASES = {
-#     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-# }
 
 AUTH_USER_MODEL = 'authentication.User'
 AUTH_DRIVER_MODEL = 'authentication.Driver'
@@ -158,25 +160,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-REDIS_URL = os.getenv('REDIS_URL', 'redis://default:Tb6IaS9TgBvwFtJiwhb7Dw3RxoImm9LP@redis-12258.c14.us-east-1-2.ec2.cloud.redislabs.com:12258')
+REDIS_URL = os.getenv('REDIS_URL', 'rediss://red-cn9ilmdjm4es73c5biig:XNalq7X5mJVpdVewgf4anUJ9Dr8EDji3@oregon-redis.render.com:6379')
 
 CHANNEL_LAYERS = {
-    'default': {        
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [REDIS_URL],
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
         },
+        
     },
 }
-
 
 REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': 'error',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        
     ],
 
     'DEFAULT_PERMISSION_CLASSES': [
@@ -188,6 +189,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    
 }
 
 
@@ -219,10 +221,7 @@ STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-
-
+APPEND_SLASH=False
 
 
 #Email

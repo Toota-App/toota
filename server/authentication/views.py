@@ -3,7 +3,7 @@ import os
 from rest_framework import generics, status, views, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView as Token, TokenVerifyView
 from rest_framework.response import Response
-from .serializers import UserSerializer, LoginUserSerializer, DriverSerializer, VerifyUserEmailSerializer, VerifyDriverEmailSerializer, LoginDriverSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer, CheckDriverVerificationSerializer
+from .serializers import UserSerializer, LoginUserSerializer, DriverSerializer, VerifyUserEmailSerializer, VerifyDriverEmailSerializer, LoginDriverSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer, CheckDriverVerificationSerializer, UserProfileSerializer, AdminUserSerializer, LogoutSerializer, DriverProfileSerializer
 from .models import  Driver, User
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -21,7 +21,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.shortcuts import redirect
@@ -32,6 +32,63 @@ from django.http import HttpResponse
 class CustomRedirect(HttpResponsePermanentRedirect):
 
     allowed_schemes=[os.environ.get('APP_SCHEME'), 'http', 'https']
+
+class AdminUserSignUpView(generics.GenericAPIView):
+    serializer_class = AdminUserSerializer
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        
+        user_data = serializer.data
+        user=User.objects.get(email=user_data['email'])
+
+        token = RefreshToken.for_user(user).access_token
+        current_site = get_current_site(request).domain
+        relative_link = reverse('verify-user')
+        abs_url = 'http://'+current_site+relative_link+"?token="+str(token)
+        email_body=f'Hey {user.full_name} \nThank you for signing up for a Toota account, just one more step!\nFor security purposes, Please verify your email address using the link below \n {abs_url}'
+        data={
+            'email_body': email_body,
+            'domain': abs_url, 
+            'to_email': user.email,
+            'email_subject': 'Please verify your Toota Account'}
+        Util.send_email(data)
+        return Response(user_data, status=status.HTTP_201_CREATED)
+
+
+class UserListView(generics.ListAPIView):
+    """
+    UserListView - Gets all users saved
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser & IsAuthenticated]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({"count": count, "users": serializer.data}, status=status.HTTP_200_OK)
+
+
+
+class DriverListView(generics.ListAPIView):
+    """
+    UserListView - Gets all users saved
+    """
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
+    permission_classes = [permissions.IsAdminUser & IsAuthenticated]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({"count": count, "users": serializer.data}, status=status.HTTP_200_OK)
 
 
 class UserSignUpView(generics.GenericAPIView):
@@ -61,16 +118,16 @@ class UserSignUpView(generics.GenericAPIView):
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 class UserProfileView(generics.GenericAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
     permission_classes = [IsAuthenticated,]
     lookup_field = 'id'
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserProfileSerializer
     
     def get(self, request, id):
         try: 
-            user = self.get_object()
+            user = User.objects.get(id=id)
             serializer = UserSerializer(user)
+
             return Response(serializer.data)
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -158,39 +215,36 @@ class RequestUserPasswordResetEmail(generics.GenericAPIView):
             token = PasswordResetTokenGenerator().make_token(user)
             current_site = get_current_site(request=request).domain
             relative_link = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
-            redirect_url = request.data.get('redirect_url', '')
-            abs_url = f'http://{current_site}{relative_link}'
-            email_body=f"Hey {user.full_name} \n\n It seems like you've requested a password reset for your Toota account.No worries, we've got you covered!\nTo reset your password, please follow the link below:\n{abs_url}?redirect_url={redirect_url}\n\nIf you did not request this password reset, please ignore this email. Your account is secure, and no changes have been made.\n\nToota Support Team"
+            redirect_url = 'http://localhost:5173/reset-password/'+uidb64+'/'+token
+            email_body=f"Hey {user.full_name} \n\n It seems like you've requested a password reset for your Toota account no worries, we've got you covered!\nTo reset your password, please follow the link below:\n{redirect_url}\n\nIf you did not request this password reset, please ignore this email. Your account is secure, and no changes have been made.\n\nToota Support Team"
             data={
                 'email_body': email_body,
-                'domain': abs_url, 
+                'domain': current_site, 
                 'to_email': user.email,
                 'email_subject': 'Reset your Password'
             }
             Util.send_email(data)
         return Response({'success': 'We have sent a link to reset your password'}, status=status.HTTP_200_OK)
     
-    
 class PasswordUserTokenCheck(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
     permission_classes = [AllowAny]
 
     def get(self, request, uidb64, token):
-        redirect_url = request.GET.get('redirect_url')
         try:
-            id = smart_str(urlsafe_base64_decode(uidb64))
+            id = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(id=id)
 
             if not PasswordResetTokenGenerator().check_token(user, token):
-                if len(redirect_url) > 3:
-                    return CustomRedirect(redirect_url+'?token_valid=False')
-                else:
-                    return CustomRedirect(os.environ.get('FRONTEND_URL', '')+'?token_valid=False')
+                return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
-            return CustomRedirect(redirect_url+'?token_valid=True&message=Credentials Valid&uidb64='+uidb64+'&token='+token)
+            return Response({'message': 'Credentials Valid', 'uidb64': uidb64, 'token': token}, status=status.HTTP_200_OK)
 
-        except DjangoUnicodeDecodeError as identifier:
-           return CustomRedirect(f'{redirect_url}?token_valid=False')
+        except (ValueError, User.DoesNotExist, DjangoUnicodeDecodeError):
+            return Response({'error': 'Invalid parameters'}, status=status.HTTP_400_BAD_REQUEST)
+
+    
+
        
     
 class DriverSignUpView(generics.GenericAPIView):
@@ -220,11 +274,10 @@ class DriverSignUpView(generics.GenericAPIView):
         return Response(driver_data, status=status.HTTP_201_CREATED)
     
 class DriverProfileView(generics.GenericAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
     permission_classes = [IsAuthenticated,]
     lookup_field = 'id'
-    queryset = User.objects.all()
-    serializer_class = DriverSerializer
+    queryset = Driver.objects.all()
+    serializer_class = DriverProfileSerializer
 
     def get(self, request, id):
         try: 
@@ -299,16 +352,15 @@ class RequestDriverPasswordResetEmail(generics.GenericAPIView):
         email = request.data['email']
         if Driver.objects.filter(email=email).exists():
             user = Driver.objects.get(email=email)
-            uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
+            uidb64 = urlsafe_base64_encode(smart_bytes(str(user.id)))
             token = PasswordResetTokenGenerator().make_token(user)
             current_site = get_current_site(request=request).domain
             relative_link = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
-            redirect_url = request.data.get('redirect_url', '')
-            abs_url = f'http://{current_site}{relative_link}'
-            email_body=f"Hey {user.full_name} \n\n It seems like you've requested a password reset for your Toota account.No worries, we've got you covered!\nTo reset your password, please follow the link below:\n{abs_url}?redirect_url={redirect_url}\n\nIf you did not request this password reset, please ignore this email. Your account is secure, and no changes have been made.\n\nToota Support Team"
+            redirect_url = 'http://localhost:5173/driver-reset-password/'+uidb64+'/'+token
+            email_body=f"Hey {user.full_name} \n\n It seems like you've requested a password reset for your Toota account no worries, we've got you covered!\nTo reset your password, please follow the link below:\n{redirect_url}\n\nIf you did not request this password reset, please ignore this email. Your account is secure, and no changes have been made.\n\nToota Support Team"
             data={
                 'email_body': email_body,
-                'domain': abs_url, 
+                'domain': current_site,
                 'to_email': user.email,
                 'email_subject': 'Reset your Password'
             }
@@ -320,50 +372,39 @@ class RequestDriverPasswordResetEmail(generics.GenericAPIView):
 class PasswordDriverTokenCheck(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
     permission_classes = [AllowAny]
+
     def get(self, request, uidb64, token):
-        redirect_url = request.GET.get('redirect_url')
         try:
-            id = smart_str(urlsafe_base64_decode(uidb64))
-            user = Driver.objects.get(id=id)
+            id = urlsafe_base64_decode(uidb64).decode()
+            driver = Driver.objects.get(id=id)
 
-            if not PasswordResetTokenGenerator().check_token(user, token):
-                if len(redirect_url) > 3:
-                    return CustomRedirect(redirect_url+'?token_valid=False')
-                else:
-                    return CustomRedirect(os.environ.get('FRONTEND_URL', '')+'?token_valid=False')
+            if not PasswordResetTokenGenerator().check_token(driver, token):
+                return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
-            return CustomRedirect(redirect_url+'?token_valid=True&message=Credentials Valid&uidb64='+uidb64+'&token='+token)
+            return Response({'message': 'Credentials Valid', 'uidb64': uidb64, 'token': token}, status=status.HTTP_200_OK)
 
-        except DjangoUnicodeDecodeError as identifier:
-           return CustomRedirect(f'{redirect_url}?token_valid=False')
+        except (ValueError, Driver.DoesNotExist, DjangoUnicodeDecodeError):
+            return Response({'error': 'Invalid parameters'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CheckDriverVerification(generics.GenericAPIView):
+    lookup_field = 'id'
+    queryset = Driver.objects.all()
     serializer_class = CheckDriverVerificationSerializer
-    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
-    permission_classes = [IsAuthenticated,]
-
-    token_param_config=openapi.Parameter(
-        'token', 
-        in_=openapi.IN_QUERY, 
-        description='Description',
-        type=openapi.TYPE_STRING)
-    @swagger_auto_schema(manual_parameters=[token_param_config])
-    def post(self, request):
-        token = request.data['token']
+    
+    permission_classes = [AllowAny]
+    
+    def get(self, request, id):
         try:
-            payload = AccessToken(token)
-            driver = Driver.objects.get(id=payload['user_id'])
+            driver = Driver.objects.get(id=id)
 
             if driver:
                 if driver.identity_document and driver.drivers_license and driver.vehicle_registration and driver.criminal_record_check:
                     return Response({"verified": True})
                 else:
                     return Response({"verified:": False})
-        except jwt.ExpiredSignatureError:
-            return Response({'error': "link expired"}, status=status.HTTP_400_BAD_REQUEST)
-        except jwt.exceptions.DecodeError:
-            return Response({'error': "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+        except Driver.DoesNotExist:
+            return Response({"error": "Driver not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
 
@@ -376,3 +417,14 @@ class SetNewPasswordAPIVIew(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         return Response({'sucess': True, 'message': 'Password reset success'}, status=status.HTTP_200_OK)
  
+
+class LogoutView(generics.GenericAPIView):
+    serializer_class = LogoutSerializer
+    permission_classes = [IsAuthenticated,]
+
+    def post(self, request):
+        serializer=self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(status = status.HTTP_204_NO_CONTENT)

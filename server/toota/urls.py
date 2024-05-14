@@ -44,7 +44,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
-    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/trip/', include('trips.urls', 'trip',))
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
