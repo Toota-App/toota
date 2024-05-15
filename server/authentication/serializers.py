@@ -109,39 +109,39 @@ class DriverSerializer(serializers.ModelSerializer):
          
     def validate(self, attrs):
         
-        if not attrs['full_name']:
-            raise serializers.ValidationError(
-                {"full_name": "Full name is requred"}
-            )
+        # if not attrs['full_name']:
+        #     raise serializers.ValidationError(
+        #         {"full_name": "Full name is requred"}
+        #     )
        
-        if Driver.objects.filter(email=attrs['email']).exists():
-            raise serializers.ValidationError(
-                {"email": "Email is already in use"}
-            )
+        # if Driver.objects.filter(email=attrs['email']).exists():
+        #     raise serializers.ValidationError(
+        #         {"email": "Email is already in use"}
+        #     )
 
-        if Driver.objects.filter(full_name=attrs['full_name']).exists():
-            raise serializers.ValidationError(
-                    {"full_name": "Full name is already in use"}
-            )
-        if attrs['password'] != attrs['confirm_password']:
-            raise serializers.ValidationError(
-                {"password": "Password fields didn't match"}
-            )
+        # if Driver.objects.filter(full_name=attrs['full_name']).exists():
+        #     raise serializers.ValidationError(
+        #             {"full_name": "Full name is already in use"}
+        #     )
+        # if attrs['password'] != attrs['confirm_password']:
+        #     raise serializers.ValidationError(
+        #         {"password": "Password fields didn't match"}
+        #     )
                 
-        if Driver.objects.filter(licence_no=attrs['licence_no']).exists():
-            raise serializers.ValidationError(
-                {'licence_no': 'Licence Number already exists'}
-            )
+        # if Driver.objects.filter(licence_no=attrs['licence_no']).exists():
+        #     raise serializers.ValidationError(
+        #         {'licence_no': 'Licence Number already exists'}
+        #     )
             
-        if Driver.objects.filter(vehicle_registration_no=attrs['vehicle_registration_no']).exists():
-            raise serializers.ValidationError(
-                {'vehichle_registration': 'Vehicle_Registration already exists'}
-            )
+        # if Driver.objects.filter(vehicle_registration_no=attrs['vehicle_registration_no']).exists():
+        #     raise serializers.ValidationError(
+        #         {'vehichle_registration': 'Vehicle_Registration already exists'}
+        #     )
         
-        if not attrs['physical_address']:
-            raise serializers.ValidationError(
-                {'physical address': 'Physical Address is required'}
-            )
+        # if not attrs['physical_address']:
+        #     raise serializers.ValidationError(
+        #         {'physical address': 'Physical Address is required'}
+        #     )
             
         return super().validate(attrs)
     
@@ -283,7 +283,7 @@ class DriverProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Driver
-        fields = ['id', 'email', 'full_name', 'phone_number','profile_picture', 'vehicle_registration_no', 'vehicle_type']
+        fields = ['id','email', 'full_name', 'phone_number', 'physical_address', 'profile_picture', 'vehicle_registration_no', 'vehicle_type', 'licence_no', 'identity_document', 'driver_licence', 'vehicle_registration','criminal_record_check']
         read_only_fields = ['id']
 
     def update(self, user, data):
@@ -292,5 +292,11 @@ class DriverProfileSerializer(serializers.ModelSerializer):
         user.phone_number = data.get('phone_number', user.phone_number)
         user.profile_picture = data.get('profile_picture', profile_picture)
         user.vehicle_type = data.get('vehicle_type', vehicle_type)
+        user.vehicle_registration_no = data.get('vehicle_registration_no', vehicle_registration_no)
+        user.vehicle_registration = data.get('vehicle_registration', vehicle_registration)
+        user.licence_no = data.get('licence_no', licence_no)
+        user.identity_document = data.get('identity_document', identity_document)
+        user.driver_licence = data.get('driver_licence', driver_licence)
+        user.criminal_record_check = data.get('criminal_record_check', criminal_record_check)
 
         return user

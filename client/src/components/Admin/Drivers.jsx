@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { getAllDrivers } from '../../services/AuthService';
 import { Link } from 'react-router-dom';

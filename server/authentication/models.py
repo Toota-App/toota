@@ -39,7 +39,7 @@ class Driver(User):
     criminal_record_check = models.FileField(upload_to='static/media/criminal_record_check', null=True, blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['full_name', 'phone_number', 'physical_address', 'vehicle_registration', 'vehicle_type', 'licence_no']
+    REQUIRED_FIELDS = ['full_name', 'phone_number', 'physical_address', 'vehicle_registration', 'vehicle_type', 'licence_no', 'driver_licence']
 
     objects = DriverUserManager()
     

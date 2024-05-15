@@ -19,7 +19,7 @@ export default  function Header(){
         
         if (jwt) {
           const response =  await getUser()
-          console.log(response)
+          
           setUser(response);
         } else {
           setErrorMessage('No authentication token available');

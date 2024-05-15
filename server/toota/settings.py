@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-aov%#o5ft#6c85j_3&vghmb^m(vri==)4r0sfxlk6sz%r-mqrt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'toota.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build/static')],
+        'DIRS': [os.path.join(BASE_DIR, '/static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,16 +122,6 @@ CORS_ALLOW_CREDENTIALS = True
 #        'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'HOST': 'aws-0-us-west-1.pooler.supabase.com',
-#         'NAME': 'postgres',
-#         'USER': 'postgres.afjlgckcyumlpuppqslz',
-#         'PASSWORD': 'vMhjFBMVIb5WDSt5',
-#         'PORT': '5432',
-#     } postgres://postgres.zwaikffsydhvwjxioewc:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:5432/postgres
-# # }
 # }
 
 DATABASES = {
@@ -187,7 +177,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=360),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     
 }
@@ -209,11 +199,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, '/static')
     ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR / 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type

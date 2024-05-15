@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Assuming using React Router
-import logo from '../logo.jpg'; // Adjust the path accordingly
+import logo from '../72dpi_logo_white.jpg'; // Adjust the path accordingly
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,7 @@ function Header() {
   return (
     <header className="flex justify-between items-center py-4 px-6 bg-black text-white">
       <div className="flex items-center">
-        <img src={logo} alt="Toota" className="h-12" /> {/* Adjust the height as needed */}
+        <img src={logo} alt="Toota" className="h-16" /> {/* Adjust the height as needed */}
       </div>
       <nav className="hidden md:flex space-x-4">
         <Link to="/" className="hover:text-primary">Home</Link>

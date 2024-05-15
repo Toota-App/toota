@@ -39,7 +39,7 @@ export const getAllUsers = async () => {
 
 export const getAllDrivers = async () => {
 	const token = getAccessToken(); 
-	console.log(token);
+	
 	const config = { headers: { Authorization: `Bearer ${token}` } };
 
 	try {
@@ -60,7 +60,6 @@ export const getDriver = async () => {
 	try {
 		const decodedToken = jwtDecode(token); // Decode the JWT token
 		const user_id = decodedToken["user_id"];
-		console.log(user_id)
 		const response = await axios.get(`http://localhost:8000/api/driver/profile/${user_id}/`, config);
 		const userData = response.data 
 		return userData

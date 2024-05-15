@@ -85,6 +85,8 @@ class TripCompletedCountView(generics.GenericAPIView):
     TripCompletedCountView - Gets the count of completed trips for each month
     """
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = TripSerializer
+    queryset = Trip.objects.all()
 
     def get(self, request, *args, **kwargs):
         completed_trips_data = self.get_completed_trips_data()
@@ -116,7 +118,12 @@ class TripCompletedCountView(generics.GenericAPIView):
 class PaymentListCreateAPIView(generics.ListCreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save()  # This saves the validated data to create a new Payment instance
 
 class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+    permission_classes = [permissions.IsAuthenticated]

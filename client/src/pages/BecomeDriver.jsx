@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { RiTimeLine, RiRoadMapLine } from 'react-icons/ri';
 import { FaHandshake } from 'react-icons/fa';
-import logo from '../logo.jpg'; // Import the logo image
 
 const BecomeDriver = () => {
   return (
     <section className="become-driver shadow-md rounded overflow-hidden">
       <div className="flex items-center justify-center mb-6"> {/* Adjusted alignment */}
-        <img src={logo} alt="Toota Logo" className="w-12 h-12 mr-4" /> {/* Logo */}
-        <h2 className="text-4xl font-bold mb-0 text-center">BECOME A TOOTA DRIVER</h2> {/* Heading */}
+        <div className="text-center"> {/* Centered heading */}
+          <h2 className="text-4xl font-bold mb-0">BECOME A TOOTA DRIVER</h2> {/* Heading */}
+        </div>
       </div>
       <div className="benefits p-8 bg-gray-100">
         <h3 className="text-2xl font-bold mb-6 text-blue-500">BENEFITS</h3>

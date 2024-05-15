@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAccessToken } from "../../services/AuthService";
-
+import PaymentForm from "./PaymentForm"
 
 const DriverCalendar = () => {
+  const token = getAccessToken();
   const [trips, setTrips] = useState([]);
+  const [trip, setTrip] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState(null);
+  const [paymentAmount, setPaymentAmount] = useState('');
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   useEffect(() => {
     fetchTrips();
@@ -34,6 +39,8 @@ const DriverCalendar = () => {
 
   const handleCloseMessage = () => {
     setMessage(null);
+    setPaymentAmount('');
+    setPaymentSuccess(false);
   };
 
   const handleAcceptTrip = async (trip) => {
@@ -42,8 +49,8 @@ const DriverCalendar = () => {
     try {
       const token = getAccessToken();
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.put(`http://localhost:8000/api/trip/${trip.id}`, { status: 'ACCEPTED' }, config);
-      console.log('Accept Trip Response:', response);
+      const acceptResponse = await axios.patch(`http://localhost:8000/api/trip/${trip.id}/`, { status: 'ACCEPTED' }, config);
+      console.log('Accept Trip Response:', acceptResponse);
       setMessage({ text: 'Trip accepted.', type: 'success' });
       // Update the status of the selected trip to 'ACCEPTED'
       setSelectedTrip(prevTrip => ({ ...prevTrip, status: 'ACCEPTED' }));
@@ -56,15 +63,16 @@ const DriverCalendar = () => {
     }
   };
 
-  const handleStartTrip = async () => {
+  const handleStartTrip = async (trip) => {
+    setSelectedTrip(trip)
     setIsSubmitting(true);
     try {
       const token = getAccessToken();
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const tripId = selectedTrip.id;
+      const tripId = trip.id;
       console.log('Starting trip with ID:', tripId);
-      const response = await axios.put(`http://localhost:8000/api/trip/${tripId}`, { status: 'IN_PROGRESS' }, config);
-      console.log('Start Trip Response:', response);
+      const startResponse = await axios.patch(`http://localhost:8000/api/trip/${tripId}/`, { status: 'IN_PROGRESS' }, config);
+      console.log('Start Trip Response:', startResponse);
       setMessage({ text: 'Trip has started.', type: 'success' });
       setSelectedTrip(null); // Reset selected trip after starting
       fetchTrips(); // Refresh trip list after starting
@@ -76,18 +84,20 @@ const DriverCalendar = () => {
     }
   };
 
-  const handleEndTrip = async () => {
+  const handleEndTrip = async (trip) => {
+    setSelectedTrip(trip)
     setIsSubmitting(true);
     try {
+      if (!selectedTrip) {
+        console.error("No trip selected.");
+        return;
+      }
       const token = getAccessToken();
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const tripId = selectedTrip.id;
+      const tripId = trip.id;
       console.log('Ending trip with ID:', tripId);
-      const response = await axios.put(`http://localhost:8000/api/trip/${tripId}`, { status: 'COMPLETED' }, config);
-      console.log('End Trip Response:', response);
-      setMessage({ text: 'Trip has completed.', type: 'success' });
-      setSelectedTrip(null); // Reset selected trip after ending
-      fetchTrips(); // Refresh trip list after ending
+      const endResponse = await axios.patch(`http://localhost:8000/api/trip/${tripId}/`, { status: 'COMPLETED' }, config);
+      console.log('End Trip Response:', endResponse);
     } catch (err) {
       console.error(err);
       setMessage({ text: 'Error ending trip. Please try again later.', type: 'error' });
@@ -95,6 +105,16 @@ const DriverCalendar = () => {
       setIsSubmitting(false);
     }
   };
+
+  const handlePaymentSubmit = async (e) => {
+    e.preventDefault();
+    // Handle payment submission here, you can make an API call to process the payment
+    // For simplicity, let's assume the payment is successful
+   
+  };
+  const handleOpenModal = async () =>{
+    setShowPaymentModal(true)
+  }
 
   return (
     <div className="container mx-auto p-4 pt-6">
@@ -109,9 +129,19 @@ const DriverCalendar = () => {
               <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-bold">{trip.name}</h2>
                 {/* Always display the Accept button unless the trip is already accepted */}
-                {trip.status !== 'ACCEPTED' && (
+                {trip.status === 'REQUESTED' && (
                   <button onClick={() => handleAcceptTrip(trip)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    {selectedTrip && selectedTrip.id === trip.id && selectedTrip.status === 'ACCEPTED' ? 'Start Trip' : 'Accept'}
+                    Accept
+                  </button>
+                )}
+                {trip.status === 'ACCEPTED' && (
+                  <button onClick={() => { setSelectedTrip(trip);  handleStartTrip(trip)}} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Start Trip
+                  </button>
+                )}
+                {trip.status === 'IN_PROGRESS' && (
+                  <button onClick={() => { setSelectedTrip(trip); handleEndTrip(trip); handleOpenModal() }} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    End Trip
                   </button>
                 )}
               </div>
@@ -125,23 +155,27 @@ const DriverCalendar = () => {
               <p className="text-gray-600">Pickup Time: {trip.pickup_time}</p>
               {/* Display drop-off contact number only when trip is accepted */}
               {trip.status === 'ACCEPTED' && <p className="text-gray-600">Drop-off Contact Number: {trip.dropoff_contact_number}</p>}
-              {/* Show buttons to start and end trip */}
-              {selectedTrip && selectedTrip.id === trip.id && selectedTrip.status === 'ACCEPTED' && (
-                <div>
-                  <button onClick={handleStartTrip} disabled={isSubmitting} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-                    Start Trip
-                  </button>
-                  <button onClick={handleEndTrip} disabled={isSubmitting} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    End Trip
-                  </button>
-                </div>
-              )}
             </div>
           ))
         ) : (
           <p className="text-center text-gray-500">No active trips found.</p>
         )
       )}
+
+      {selectedTrip && (
+      <dialog open={showPaymentModal && !paymentSuccess} className="modal">
+        <div className="modal-box">
+          <PaymentForm tripId={selectedTrip.id} driverId={selectedTrip.driver}  bid={selectedTrip.bid} onSubmit={handlePaymentSubmit} token={token}/>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button onClick={() => setShowPaymentModal(false)}>Close</button>
+        </form>
+      </dialog>
+    )}
+
+
+      {/* Thank You Message */}
+  
 
       {/* Render message */}
       {message && (
@@ -155,4 +189,3 @@ const DriverCalendar = () => {
 };
 
 export default DriverCalendar;
-

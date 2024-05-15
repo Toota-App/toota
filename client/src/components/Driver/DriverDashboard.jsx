@@ -1,30 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BellIcon, UserIcon, CogIcon, ClockIcon, CurrencyDollarIcon, ClipboardCheckIcon, QuestionMarkCircleIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'; // Import required icons
 import { useNavigate } from 'react-router-dom';
 import LogoutConfirmationForm from './LogoutConfirmationForm'; // Import the LogoutConfirmationForm component
 import DriverProfileForm from "./DriverProfile";
 import { ToastContainer, toast } from 'react-toastify';
 import supabase from '../../services/SupaBaseClient';
+import { getDriver, getAccessToken } from "../../services/AuthService";
+>>>>>>> origin/main
 
 const DriverDashboard = () => {
   const navigate = useNavigate();
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [editingProfile, setEditingProfile] = useState(false); // State variable to track profile editing mode
+  const [verified, setVerified] = useState(false);
+  const token = getAccessToken();
+
+  useEffect(() => {
+    const fetchVerificationStatus = async () => {
+      try {
+        if (token) {
+          const driver = await getDriver();
+          const response = await fetch(`http://127.0.0.1:8000/api/driver/verification-check/${driver.id}/`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          const { verified } = data;
+          setVerified(verified);
+        }
+      } catch (error) {
+        console.error('Error fetching verification status:', error);
+      }
+    };
+
+    fetchVerificationStatus();
+  }, [token]);
+
+  useEffect(() => {
+    if (!verified) {
+      navigate('/driver-verification-documents');
+    }
+  }, [verified, navigate]);
+
 
   const handleLogout = () => {
     setShowLogoutConfirmation(true);
   };
-  supabase
-  .channel('drivers').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'trips_trip' }, (payload) => toast("New Trip Created")).subscribe()
+
   const handleLogoutConfirmation = (confirmLogout) => {
     if (confirmLogout) {
       // Perform logout action
       // Redirect to login/driver route
-      navigate('/login/driver');
+      navigate('/login/driver/');
     } else {
       setShowLogoutConfirmation(false);
     }
   };
+
+ 
 
   // Function to toggle profile editing mode
   const toggleEditingProfile = () => {
@@ -86,31 +121,10 @@ const NavItem = ({ icon, text, handleClick }) => { // Added handleClick prop
 // Component for dashboard sections
 const DashboardSection = ({ icon, title }) => {
   return (
-
     <div className="bg-white p-6 rounded-lg shadow-md flex items-center space-x-4">
       {icon}
       <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
     </div>
-  );
-};
-
-// Notification icon component
-const NotificationIcon = () => {
-  return (
-    <div className="relative">
-      <BellIcon className="h-6 w-6 text-gray-600 cursor-pointer" />
-      {/* Add notification badge if needed */}
-      {/* <div className="bg-red-500 w-3 h-3 rounded-full absolute top-0 right-0 transform translate-x-1 -translate-y-1"></div> */}
-
-    </div>
-  );
-};
-
-// Profile icon component
-const ProfileIcon = () => {
-  return (
-    <UserIcon className="h-6 w-6 text-gray-600 cursor-pointer" />
-    
   );
 };
 

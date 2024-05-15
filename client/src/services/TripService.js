@@ -15,6 +15,23 @@ export const getTrip = async (id) => {
   }
 }
 
+export const updateTrip = async (id, data) => {
+  const url = `http://localhost:8000/api/trip/${id}/`;
+  const token = getAccessToken();
+  
+  const headers = { Authorization: `Bearer ${token}` };
+  
+  try {
+    const response = await axios.put(url, data, { headers });
+    const trips = response.data;
+    return trips;
+  } catch (error) {
+    return { response: error.response, isError: true };
+  }
+};
+
+
+
 export const getAllTrips = async () => {
   const token = getAccessToken(); 
   console.log(token);

@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaIdCard, FaPassport, FaFile, FaCheck, FaTimes } from 'react-icons/fa'; // Import icons from Font Awesome
 import DocumentVerificationMessageForm from './DocumentVerificationMessageForm'; // Import the message form component
+import { getDriver, getAccessToken } from "../../services/AuthService";
+import { useNavigate } from 'react-router-dom';
 
 const DocumentUploadForm = () => {
   const [formData, setFormData] = useState({
-    idDocument: null,
-    passport: null,
-    license: null,
-    criminalRecordCheck: null, // Add criminalRecordCheck to the state
+    identity_document: null,
+    driver_licence: null,
+    criminal_record_check: null,
+    vehicle_registration: null,
   });
 
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const token = getAccessToken();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDriverId = async () => {
+      try {
+        if (token) {
+          const driver = await getDriver();
+          console.log('Driver ID:', driver.id);
+        }
+      } catch (error) {
+        console.error('Error fetching driver ID:', error);
+      }
+    };
+
+    fetchDriverId();
+  }, [token]);
 
   const handleFileChange = (e, fileType) => {
     const file = e.target.files[0];
@@ -21,17 +40,38 @@ const DocumentUploadForm = () => {
     setFormData({ ...formData, [fileType]: null });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Check if driver's license is uploaded
-    if (!formData.license || !formData.criminalRecordCheck) { // Check if license and criminalRecordCheck are uploaded
-      alert('Driver license and Criminal Record Check are required'); // Update error message
+    // Check if all fields are uploaded
+    if (!formData.identity_document || !formData.driver_licence || !formData.criminal_record_check || !formData.vehicle_registration) {
+      alert('All documents are required'); 
       return;
     }
-    // Handle form submission logic here
-    console.log(formData); // Temporary: Display uploaded files in console
-    // After successful submission, set submissionSuccess to true
-    setSubmissionSuccess(true);
+
+    try {
+      const driver = await getDriver();
+      const { id } = driver;
+
+      const response = await fetch(`http://127.0.0.1:8000/api/driver/profile/${id}/`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // After successful submission, set submissionSuccess to true
+        setSubmissionSuccess(true);
+        // Redirect to the driver dashboard
+        navigate('/dashboard/driver');
+      } else {
+        console.error('Failed to upload documents');
+      }
+    } catch (error) {
+      console.error('Error uploading documents:', error);
+    }
   };
 
   return (
@@ -56,18 +96,18 @@ const DocumentUploadForm = () => {
                     National ID Card or Passport <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center">
-                    {formData.idDocument ? (
+                    {formData.identity_document ? (
                       <div className="flex items-center">
                         <FaCheck className="text-green-500 mr-2" />
-                        <span className="text-gray-700">{formData.idDocument.name}</span>
-                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('idDocument')} />
+                        <span className="text-gray-700">{formData.identity_document.name}</span>
+                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('identity_document')} />
                       </div>
                     ) : (
                       <input
                         type="file"
                         id="idDocument"
                         name="idDocument"
-                        onChange={(e) => handleFileChange(e, 'idDocument')}
+                        onChange={(e) => handleFileChange(e, 'identity_document')}
                         accept=".pdf,.jpg,.jpeg,.png"
                         className="w-full px-3 py-2 border rounded"
                         required
@@ -76,23 +116,23 @@ const DocumentUploadForm = () => {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-semibold mb-2" htmlFor="license">
+                  <label className="block text-sm font-semibold mb-2" htmlFor="driverLicense">
                     <FaFile className="inline-block mr-2" />
                     Driver's License <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center">
-                    {formData.license ? (
+                    {formData.driver_licence ? (
                       <div className="flex items-center">
                         <FaCheck className="text-green-500 mr-2" />
-                        <span className="text-gray-700">{formData.license.name}</span>
-                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('license')} />
+                        <span className="text-gray-700">{formData.driver_licence.name}</span>
+                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('driver_licence')} />
                       </div>
                     ) : (
                       <input
                         type="file"
-                        id="license"
-                        name="license"
-                        onChange={(e) => handleFileChange(e, 'license')}
+                        id="driverLicense"
+                        name="driverLicense"
+                        onChange={(e) => handleFileChange(e, 'driver_licence')}
                         accept=".pdf,.jpg,.jpeg,.png"
                         className="w-full px-3 py-2 border rounded"
                         required
@@ -106,17 +146,47 @@ const DocumentUploadForm = () => {
                     Criminal Record Check <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center">
-                    <input
-                      type="file"
-                      id="criminalRecordCheck"
-                      name="criminalRecordCheck"
-                      onChange={(e) => handleFileChange(e, 'criminalRecordCheck')}
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      className="w-full px-3 py-2 border rounded"
-                      required
-                    />
-                    {formData.criminalRecordCheck && (
-                      <FaCheck className="text-green-500 ml-2" />
+                    {formData.criminal_record_check ? (
+                      <div className="flex items-center">
+                        <FaCheck className="text-green-500 mr-2" />
+                        <span className="text-gray-700">{formData.criminal_record_check.name}</span>
+                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('criminal_record_check')} />
+                      </div>
+                    ) : (
+                      <input
+                        type="file"
+                        id="criminalRecordCheck"
+                        name="criminalRecordCheck"
+                        onChange={(e) => handleFileChange(e, 'criminal_record_check')}
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        className="w-full px-3 py-2 border rounded"
+                        required
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold mb-2" htmlFor="vehicleRegistration">
+                    <FaFile className="inline-block mr-2" />
+                    Vehicle Registration <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex items-center">
+                    {formData.vehicle_registration ? (
+                      <div className="flex items-center">
+                        <FaCheck className="text-green-500 mr-2" />
+                        <span className="text-gray-700">{formData.vehicle_registration.name}</span>
+                        <FaTimes className="text-red-500 ml-2 cursor-pointer" onClick={() => handleRemoveFile('vehicle_registration')} />
+                      </div>
+                    ) : (
+                      <input
+                        type="file"
+                        id="vehicleRegistration"
+                       name="vehicleRegistration"
+                        onChange={(e) => handleFileChange(e, 'vehicle_registration')}
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        className="w-full px-3 py-2 border rounded"
+                        required
+                      />
                     )}
                   </div>
                 </div>

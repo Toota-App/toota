@@ -399,7 +399,7 @@ class CheckDriverVerification(generics.GenericAPIView):
             driver = Driver.objects.get(id=id)
 
             if driver:
-                if driver.identity_document and driver.drivers_license and driver.vehicle_registration and driver.criminal_record_check:
+                if driver.identity_document and driver.driver_license and driver.vehicle_registration and driver.criminal_record_check:
                     return Response({"verified": True})
                 else:
                     return Response({"verified:": False})
