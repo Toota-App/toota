@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from "../../../logo.jpg";
 import classNames from 'classnames';
 
-const linkStyles = 'flex items-center gap-2 py-2 hover:bg-gray-700 hover:no-underline active:bg-gray-600 rounded-sm text-base';
+const linkStyles = 'flex items-center gap-2 py-2 px-2 hover:bg-gray-700 hover:no-underline active:bg-gray-600 rounded-sm text-base';
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false); // Initial expanded state
@@ -14,12 +14,12 @@ export default function Sidebar() {
   return (
     <div
       className={classNames(
-        'bg-[#414043] p-3 text-white flex flex-col transition duration-300 ease-in-out',
+        'bg-[#414043] text-white flex flex-col transition-all duration-300 ease-in-out h-screen',
         isExpanded ? 'w-60' : 'w-16' // Conditional width based on expanded state
       )}
     >
-      <div className="flex items-center gap-2 px-1 py-2">
-        <img src={logo} className="object-fit mx-auto w-2/4" alt="logo" />
+      <div className="flex items-center justify-between px-2 py-4">
+        <img src={logo} className={classNames("object-contain mx-auto", isExpanded ? "w-3/4" : "w-full h-auto")} alt="logo" />
         <button onClick={toggleSidebar} className="focus:outline-none">
           {isExpanded ? (
             <svg
@@ -48,7 +48,7 @@ export default function Sidebar() {
       </div>
       <div
         className={classNames(
-          'flex-1 py-8 flex flex-col gap-0.5',
+          'flex-1 py-4 flex flex-col gap-0.5 overflow-y-auto',
           !isExpanded && 'text-gray-400' // Dim text on collapse
         )}
       >
@@ -77,7 +77,8 @@ const SideBarLink = ({ item, isExpanded }) => {
       )}
     >
       <span className="text-xl">{item.icon}</span>
-      {isExpanded && item.label} {/* Only show label on expanded state */}
+      {isExpanded && <span>{item.label}</span>} {/* Only show label on expanded state */}
     </Link>
   );
 };
+
