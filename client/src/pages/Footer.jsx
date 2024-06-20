@@ -27,7 +27,7 @@ const Footer = () => {
                     <div className="col-span-2 md:col-span-2 flex items-center justify-center md:justify-end">
                         <a href="mailto:info@toota.com" className="flex items-center">
                             <FaEnvelope className="text-xl mr-2" />
-                            <span>info@toota.com</span>
+                            <span>info@tootapp.co.za</span>
                         </a>
                     </div>
                 </div>

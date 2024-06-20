@@ -11,7 +11,7 @@ const AboutUs = () => {
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-8">About Us</h2>
                     <p className="text-lg text-gray-700 leading-relaxed">
-                        Toota is a digital platform revolutionizing the logistics industry by connecting customers with a diverse fleet of vehicles and experienced drivers. Our platform ensures a seamless transportation experience for all, whether you're moving goods or seeking a ride. Toota is committed to providing reliable, efficient, and hassle-free transportation solutions to meet your needs.
+                        Toota is a digital platform revolutionizing the logistics industry by connecting customers with a diverse fleet of vehicles and experienced drivers. Our platform ensures a seamless transportation experience for all. Toota is committed to providing reliable, efficient, and hassle-free transportation solutions to meet your needs.
                     </p>
                 </div>
             </section>
