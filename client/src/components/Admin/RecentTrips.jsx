@@ -19,14 +19,14 @@ export default function RecentTrips({ trips }) {
                       <div className="flex items-center px-2 py-1">
                         <div className="ml-6">
                           <p className="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Pickup Location:</p>
-                          <h6 className="mb-0 text-sm leading-normal dark:text-white">{trips[id].pickup_location}</h6>
+                          <h6 className="mb-0 text-sm leading-normal dark:text-white">{trips[id].pickup_location.location}</h6>
                         </div>
                       </div>
                     </td>
                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                       <div className="text-center">
                         <p className="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Drop Off Location:</p>
-                        <h6 className="mb-0 text-sm leading-normal dark:text-white">{trips[id].dropoff_location}</h6>
+                        <h6 className="mb-0 text-sm leading-normal dark:text-white">{trips[id].dropoff_location.location}</h6>
                       </div>
                     </td>
                     <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
@@ -51,3 +51,4 @@ export default function RecentTrips({ trips }) {
     </div>
   );
 }
+
