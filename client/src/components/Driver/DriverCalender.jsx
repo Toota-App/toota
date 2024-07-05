@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../../services/AuthService';
 import PaymentForm from './PaymentForm';
+import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 const DriverCalendar = () => {
   const token = getAccessToken();
@@ -12,82 +13,64 @@ const DriverCalendar = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [directions, setDirections] = useState(null);
 
   useEffect(() => {
     fetchTrips();
   }, []);
-
   const fetchTrips = async () => {
     setIsLoading(true);
     setError(null);
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/trip/`, config);
-      setTrips(response.data.filter(trip => trip.status !== 'COMPLETED')); // Filter out completed trips
+      const filteredTrips = response.data.filter(trip => trip.status !== 'COMPLETED');
+      setTrips(filteredTrips);
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
   };
-
-  const handleCloseMessage = () => {
-    setMessage(null);
-  };
-
-  const handleAcceptTrip = async (trip) => {
+  const handleAction = async (trip, status) => {
     setIsSubmitting(true);
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/trip/${trip.id}/`, { status: 'ACCEPTED' }, config);
-      setMessage({ text: 'Trip accepted.', type: 'success' });
+      await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/trip/${trip.id}/`, { status }, config);
+      setMessage({ text: `Trip ${status.toLowerCase()}.`, type: 'success' });
       fetchTrips();
     } catch (err) {
-      setMessage({ text: 'Failed to accept trip. Please try again later.', type: 'error' });
+      setMessage({ text: `Failed to ${status.toLowerCase()} trip. Please try again later.`, type: 'error' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleStartTrip = async (trip) => {
-    setIsSubmitting(true);
-    try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/trip/${trip.id}/`, { status: 'IN_PROGRESS' }, config);
-      setMessage({ text: 'Trip has started.', type: 'success' });
-      fetchTrips();
-    } catch (err) {
-      setMessage({ text: 'Error starting trip. Please try again later.', type: 'error' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleEndTrip = async (trip) => {
-    setIsSubmitting(true);
-    try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/trip/${trip.id}/`, { status: 'COMPLETED' }, config);
-      setMessage({ text: 'Trip completed.', type: 'success' });
-      setSelectedTrip(trip);
-      setShowPaymentModal(true);
-      fetchTrips();
-    } catch (err) {
-      setMessage({ text: 'Error ending trip. Please try again later.', type: 'error' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handlePaymentSubmit = async (e) => {
-    e.preventDefault();
-    // Handle payment submission here
-  };
-
-  const handleOpenModal = () => {
+  const handleAcceptTrip = (trip) => handleAction(trip, 'ACCEPTED');
+  const handleStartTrip = (trip) => handleAction(trip, 'IN_PROGRESS');
+  const handleEndTrip = (trip) => {
+    handleAction(trip, 'COMPLETED');
+    setSelectedTrip(trip);
     setShowPaymentModal(true);
   };
+  const mapStyles = {        
+    height: "200px",
+    width: "100%"
+  };
 
+  const defaultCenter = {
+    lat: -3.745,
+    lng: -38.523
+  };
+
+  const calculateRoute = (trip) => {
+    if (trip.pickup_location && trip.dropoff_location) {
+      setDirections({
+        origin: { lat: trip.pickup_location.latitude, lng: trip.pickup_location.longitude },
+        destination: { lat: trip.dropoff_location.latitude, lng: trip.dropoff_location.longitude }
+      });
+    }
+  };
   return (
     <div className="container mx-auto p-4 pt-6">
       <h1 className="text-2xl font-bold text-center mb-6">Driver Calendar</h1>
@@ -105,14 +88,14 @@ const DriverCalendar = () => {
                   {trip.status === 'REQUESTED' && (
                     <button 
                       onClick={() => handleAcceptTrip(trip)} 
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                       Accept
                     </button>
                   )}
                   {trip.status === 'ACCEPTED' && (
                     <button 
                       onClick={() => handleStartTrip(trip)} 
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                       Start Trip
                     </button>
                   )}
@@ -136,6 +119,22 @@ const DriverCalendar = () => {
                   {trip.status === 'ACCEPTED' && (
                     <p><strong>Drop-off Contact Number:</strong> {trip.dropoff_location.phone_number}</p>
                   )}
+                  <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+                    <GoogleMap
+                      mapContainerStyle={mapStyles}
+                      zoom={13}
+                      center={defaultCenter}
+                      onLoad={() => calculateRoute(trip)}
+                    >
+                      {directions && (
+                        <DirectionsRenderer
+                          directions={directions}
+                        />
+                      )}
+                      <Marker position={{ lat: trip.pickup_location.latitude, lng: trip.pickup_location.longitude }} />
+                      <Marker position={{ lat: trip.dropoff_location.latitude, lng: trip.dropoff_location.longitude }} />
+                    </GoogleMap>
+                  </LoadScript>
                 </div>
               </div>
             ))}
