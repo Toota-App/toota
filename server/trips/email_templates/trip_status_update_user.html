@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Status Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #007BFF;
+        }
+        .content {
+            line-height: 1.6;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Trip Status Update</h1>
+        </div>
+        <div class="content">
+            <p>Dear {{ user_name }},</p>
+            <p>Your trip status has been updated. Driver on the way:</p>
+            <p><strong>Pickup Location:</strong> {{ pickup_location }}</p>
+            <p><strong>Dropoff Location:</strong> {{ dropoff_location }}</p>
+            <p><strong>Pickup Time:</strong> {{ pickup_time }}</p>
+            <p><strong>Load Description:</strong> {{ load_description }}</p>
+            <p><strong>Status:</strong> {{ trip.status }}</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+

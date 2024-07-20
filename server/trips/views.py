@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from .models import Trip, Payment
+from .models import Trip, Payment, Driver 
 from .serializers import TripSerializer, PaymentSerializer
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -11,10 +11,32 @@ import calendar
 
 logger = logging.getLogger(__name__)
 
-# Define IsOwnerOrDriver before using it
 class IsOwnerOrDriver(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.user == request.user or obj.driver.user == request.user
+
+def send_trip_email(trip, recipient, template_name, subject):
+    context = {
+        'user_name': trip.user.full_name,
+        'driver_name': trip.driver.full_name if trip.driver else '',
+        'pickup_location': trip.pickup_location.location,
+        'dropoff_location': trip.dropoff_location.location,
+        'pickup_time': trip.pickup_time.strftime('%Y-%m-%d %H:%M'),
+        'load_description': trip.load_description,
+    }
+    try:
+        message = render_to_string(template_name, context)
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [recipient],
+            fail_silently=False,
+        )
+        logger.info(f"Email sent to {recipient} with subject '{subject}'")
+    except Exception as e:
+        logger.error(f"Failed to send email to {recipient}: {e}")
+
 
 class TripListCreateView(generics.ListCreateAPIView):
     serializer_class = TripSerializer
@@ -24,8 +46,12 @@ class TripListCreateView(generics.ListCreateAPIView):
         return Trip.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
+        trip = serializer.save(user=self.request.user)
+        # Send email to user
+        send_trip_email(trip, trip.user.email, 'trips/email_templates/trip_created_user.html', 'Trip Created Successfully')
+        # Send email to all drivers
+        for driver in Driver.objects.all():
+            send_trip_email(trip, driver.email, 'trips/email_templates/trip_created_driver.html', 'New Trip Request')
 class TripRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TripSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrDriver]
@@ -35,7 +61,11 @@ class TripRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
         return Trip.objects.filter(user=self.request.user) | Trip.objects.filter(driver__user=self.request.user)
 
     def perform_update(self, serializer):
-        serializer.save(driver=self.request.user.driver)
+        trip = serializer.save(driver=self.request.user.driver)
+        # Send email to user and driver about the status update
+        send_trip_email(trip, trip.user.email, 'trip_status_update_user.html', 'Trip Status Updated')
+        send_trip_email(trip, trip.driver.user.email, 'trip_status_update_driver.html', 'Trip Status Updated')
+
 
 class TripRetrieveByDriverView(generics.ListAPIView):
     serializer_class = TripSerializer
