@@ -6,6 +6,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from reportlab.pdfgen import canvas
 from io import BytesIO
+from django.conf import settings
 import logging
 import calendar
 
