@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Homepage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import BecomeDriver from "./pages/BecomeDriver";
+import FAQPage from './pages/FAQPage';
 
 import Dashboard from './components/User/Dashboard';
 import DriverDashboard from './components/Driver/DriverDashboard';
@@ -87,6 +88,7 @@ function App() {
 	  <Route path="/" element={<Homepage />} />
 	  <Route path="/become-driver" element={<BecomeDriver />} />
 	  <Route path="/about" element={<AboutUs />} />
+	  <Route path="/faqs" element={<FAQPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
      

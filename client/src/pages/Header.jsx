@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logo.jpg';
 
@@ -10,31 +10,31 @@ function Header() {
   };
 
   return (
-    <header className="bg-[#404042] shadow-lg">
+    <header className="sticky top-0 z-50 bg-[#404042] shadow-lg">
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <img src={logo} alt="Toota" className="h-16" />
+            <Link aria-label="Visit the homepage" to="/"><img aria-hidden="true" src={logo} alt="Toota icon to redirect to homepage" className="h-16" /></Link>
           </div>
           {/* Navigation Links (centered on large screens) */}
           <div className="hidden md:flex flex-grow justify-center space-x-4">
-            <Link to="/" className="text-white hover:text-gray-800">Home</Link>
-            <Link to="/about" className="text-white hover:text-gray-800">About Us</Link>
-            <Link to="/become-driver" className="text-white hover:text-gray-800">Become a Driver</Link>
+            <Link aria-label="Visit the homepage" to="/" className="text-white hover:text-[#f89f1b]">Home</Link>
+            <Link aria-label="Read about the company" to="/about" className="text-white hover:text-[#f89f1b]">About Us</Link>
+            <Link aria-label="Sign up as a driver" to="/become-driver" className="text-white hover:text-[#f89f1b]">Become a Driver</Link>
           </div>
           {/* Login and Signup Buttons (shown on large screens) */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/login/user" className="px-4 py-2 rounded-md bg-[#f89f1b] text-white hover:bg-gray-300 transition-colors duration-300">
+            <Link aria-label="Log in as a user to start creating trips" to="/login/user" className="px-4 py-2 rounded-md bg-[#f89f1b] text-black hover:bg-gray-300 transition-colors duration-300">
               Login
             </Link>
-            <Link to="/signup/user" className="px-4 py-2 rounded-md bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors duration-300">
+            <Link aria-label="Sign up as a user" to="/signup/user" className="px-4 py-2 rounded-md bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors duration-300">
               Sign Up
             </Link>
           </div>
           {/* Mobile Navigation */}
-          <button onClick={toggleMenu} className="md:hidden focus:outline-none">
-            <svg
+          <button aria-label="Expand menu bar" onClick={toggleMenu} className="md:hidden focus:outline-none">
+            <svg aria-hidden="true"
               className="h-6 w-6 text-white hover:text-[#f89f1b]"
               viewBox="0 0 24 24"
               fill="none"

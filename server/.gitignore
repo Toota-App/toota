@@ -1,2 +1,13 @@
 venv
 .env
+
+__pycache__
+django_email.log
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore log files
+*.log
+

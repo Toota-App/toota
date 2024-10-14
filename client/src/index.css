@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+  
+.swiper {
+    width: 100%;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.swiper-wrapper {
+    margin-block-end: 2rem;
+}
+
+.swiper-pagination-bullet {
+    background: #f89f1b !important;
+}

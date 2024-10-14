@@ -2,14 +2,9 @@ import React, { useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { getAccessToken } from '../../services/AuthService';
-import {
-    GoogleMap,
-    Marker,
-    Autocomplete,
-    useJsApiLoader,
-    DirectionsService,
-    DirectionsRenderer,
-} from '@react-google-maps/api';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Autocomplete, useJsApiLoader } from '@react-google-maps/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMapMarkerAlt,
@@ -22,26 +17,6 @@ import {
     faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
-const mapContainerStyle = {
-    width: '100%',
-    height: '500px',
-    borderRadius: '8px',
-    marginBottom: '20px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-};
-
-const center = {
-    lat: -30.5595,
-    lng: 22.9375,
-};
-
-const bounds = {
-    south: -34.819166,
-    west: 18.618444,
-    north: -22.126612,
-    east: 32.825388,
-};
-
 const libraries = ['places'];
 
 const CreateTripForm = () => {
@@ -51,10 +26,10 @@ const CreateTripForm = () => {
     });
 
     const [message, setMessage] = useState(null);
-    const [currentStep, setCurrentStep] = useState(0);
     const [pickupPosition, setPickupPosition] = useState(null);
     const [dropoffPosition, setDropoffPosition] = useState(null);
-    const [directions, setDirections] = useState(null);
+    const [currentStep, setCurrentStep] = useState(0); // Add currentStep state
+
     const autocompletePickupRef = useRef(null);
     const autocompleteDropoffRef = useRef(null);
 
@@ -62,64 +37,68 @@ const CreateTripForm = () => {
     const decodedToken = jwtDecode(token);
     const user_id = decodedToken.user_id;
 
-    const initialFormData = {
-        pickup_location: {
-            location: '',
-            phone_number: '',
+    const formik = useFormik({
+        initialValues: {
+            pickup_location: {
+                location: '',
+                phone_number: '',
+            },
+            dropoff_location: {
+                location: '',
+                phone_number: '',
+            },
+            pickup_time: '',
+            load_description: '',
+            vehicle_type: '',
+            number_of_floors: '',
+            bid: '',
+            user: user_id,
         },
-        dropoff_location: {
-            location: '',
-            phone_number: '',
+        validationSchema: Yup.object({
+            pickup_location: Yup.object({
+                location: Yup.string().required('Pickup location is required'),
+                phone_number: Yup.string()
+                    .required('Pickup contact number is required')
+                    .matches(/^\d+$/, 'Pickup contact number must be numeric')
+                    .length(10, 'Pickup contact number must be exactly 10 digits'),
+            }),
+            dropoff_location: Yup.object({
+                location: Yup.string().required('Dropoff location is required'),
+                phone_number: Yup.string()
+                    .required('Dropoff contact number is required')
+                    .matches(/^\d+$/, 'Dropoff contact number must be numeric')
+                    .length(10, 'Dropoff contact number must be exactly 10 digits'),
+            }),
+            pickup_time: Yup.string().required('Pickup time is required'),
+            load_description: Yup.string().required('Load description is required'),
+            vehicle_type: Yup.string().required('Vehicle type is required'),
+            number_of_floors: Yup.number()
+                .required('Number of floors is required')
+                .min(0, 'Number of floors must be at least 0'),
+            bid: Yup.number()
+                .required('Bid amount is required')
+                .min(50, 'Bid amount must be at least 50'),
+        }),
+        onSubmit: async (values) => {
+            try {
+                const response = await axios.post(
+                    `${import.meta.env.VITE_BASE_URL}/api/trip/`,
+                    values,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                formik.resetForm();
+                setMessage({ text: 'Trip created successfully!', type: 'success' });
+            } catch (error) {
+                console.error('Error creating trip:', error);
+                setMessage({ text: 'Failed to create trip. Please try again.', type: 'error' });
+            }
         },
-        pickup_time: '',
-        load_description: '',
-        vehicle_type: '',
-        number_of_floors: '',
-        bid: '',
-        user: user_id,
-    };
-
-    const [formData, setFormData] = useState(initialFormData);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name.includes('.')) {
-            const [key, subKey] = name.split('.');
-            setFormData((prevState) => ({
-                ...prevState,
-                [key]: {
-                    ...prevState[key],
-                    [subKey]: value,
-                },
-            }));
-        } else {
-            setFormData({
-                ...formData,
-                [name]: name === 'number_of_floors' ? parseInt(value) : value,
-            });
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(
-                `${import.meta.env.VITE_BASE_URL}/api/trip/`,
-                formData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            setFormData(initialFormData);
-            setMessage({ text: 'Trip created successfully!', type: 'success' });
-        } catch (error) {
-            console.error('Error creating trip:', error);
-            setMessage({ text: 'Failed to create trip. Please try again.', type: 'error' });
-        }
-    };
+    });
 
     const handleCloseMessage = () => {
         setMessage(null);
@@ -134,49 +113,12 @@ const CreateTripForm = () => {
 
         if (isPickup) {
             setPickupPosition(position);
-            setFormData((prevState) => ({
-                ...prevState,
-                pickup_location: {
-                    ...prevState.pickup_location,
-                    location: address,
-                },
-            }));
+            formik.setFieldValue('pickup_location.location', address);
         } else {
             setDropoffPosition(position);
-            setFormData((prevState) => ({
-                ...prevState,
-                dropoff_location: {
-                    ...prevState.dropoff_location,
-                    location: address,
-                },
-            }));
-        }
-
-        if (pickupPosition && dropoffPosition) {
-            calculateRoute();
+            formik.setFieldValue('dropoff_location.location', address);
         }
     }, []);
-
-    const calculateRoute = () => {
-        if (!pickupPosition || !dropoffPosition) return;
-
-        const directionsService = new window.google.maps.DirectionsService();
-
-        directionsService.route(
-            {
-                origin: pickupPosition,
-                destination: dropoffPosition,
-                travelMode: window.google.maps.TravelMode.DRIVING,
-            },
-            (result, status) => {
-                if (status === window.google.maps.DirectionsStatus.OK) {
-                    setDirections(result);
-                } else {
-                    console.error(`error fetching directions ${result}`);
-                }
-            }
-        );
-    };
 
     const autocompleteOptions = {
         componentRestrictions: { country: 'za' },
@@ -186,7 +128,7 @@ const CreateTripForm = () => {
     return (
         <div className="w-full p-8 bg-gray-100 rounded-lg">
             {isLoaded ? (
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={formik.handleSubmit} className="space-y-8">
                     {message && (
                         <div
                             className={`fixed top-0 inset-x-0 p-4 text-white ${
@@ -208,23 +150,6 @@ const CreateTripForm = () => {
                     >
                         Create Your Trip
                     </div>
-
-                    {/* Map showing both locations */}
-                    {currentStep === 0 && (
-                        <GoogleMap
-                            mapContainerStyle={mapContainerStyle}
-                            center={pickupPosition || dropoffPosition || center}
-                            zoom={pickupPosition && dropoffPosition ? 10 : 7}
-                            options={{
-                                restriction: { latLngBounds: bounds },
-                                scrollwheel: false,
-                            }}
-                        >
-                            {pickupPosition && <Marker position={pickupPosition} label="P" />}
-                            {dropoffPosition && <Marker position={dropoffPosition} label="D" />}
-                            {directions && <DirectionsRenderer directions={directions} />}
-                        </GoogleMap>
-                    )}
 
                     {currentStep === 0 && (
                         <div>
@@ -259,13 +184,25 @@ const CreateTripForm = () => {
                                             <input
                                                 type="text"
                                                 name="pickup_location.location"
-                                                value={formData.pickup_location.location}
-                                                onChange={handleChange}
+                                                value={formik.values.pickup_location.location}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
                                                 placeholder="Enter pickup location"
-                                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                                    formik.touched.pickup_location?.location &&
+                                                    formik.errors.pickup_location?.location
+                                                        ? 'border-red-500'
+                                                        : ''
+                                                }`}
                                                 required
                                             />
                                         </Autocomplete>
+                                        {formik.touched.pickup_location?.location &&
+                                        formik.errors.pickup_location?.location ? (
+                                            <p className="text-red-500 text-xs italic">
+                                                {formik.errors.pickup_location.location}
+                                            </p>
+                                        ) : null}
                                     </div>
                                     <div className="mb-4">
                                         <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -276,14 +213,26 @@ const CreateTripForm = () => {
                                             Pickup Contact Number
                                         </label>
                                         <input
-                                            type="tel"
+                                            type="text"
                                             name="pickup_location.phone_number"
-                                            value={formData.pickup_location.phone_number}
-                                            onChange={handleChange}
+                                            value={formik.values.pickup_location.phone_number}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
                                             placeholder="Enter pickup contact number"
-                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                                formik.touched.pickup_location?.phone_number &&
+                                                formik.errors.pickup_location?.phone_number
+                                                    ? 'border-red-500'
+                                                    : ''
+                                            }`}
                                             required
                                         />
+                                        {formik.touched.pickup_location?.phone_number &&
+                                        formik.errors.pickup_location?.phone_number ? (
+                                            <p className="text-red-500 text-xs italic">
+                                                {formik.errors.pickup_location.phone_number}
+                                            </p>
+                                        ) : null}
                                     </div>
                                 </div>
 
@@ -317,13 +266,25 @@ const CreateTripForm = () => {
                                             <input
                                                 type="text"
                                                 name="dropoff_location.location"
-                                                value={formData.dropoff_location.location}
-                                                onChange={handleChange}
+                                                value={formik.values.dropoff_location.location}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
                                                 placeholder="Enter dropoff location"
-                                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                                    formik.touched.dropoff_location?.location &&
+                                                    formik.errors.dropoff_location?.location
+                                                        ? 'border-red-500'
+                                                        : ''
+                                                }`}
                                                 required
                                             />
                                         </Autocomplete>
+                                        {formik.touched.dropoff_location?.location &&
+                                        formik.errors.dropoff_location?.location ? (
+                                            <p className="text-red-500 text-xs italic">
+                                                {formik.errors.dropoff_location.location}
+                                            </p>
+                                        ) : null}
                                     </div>
                                     <div className="mb-4">
                                         <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -334,145 +295,184 @@ const CreateTripForm = () => {
                                             Dropoff Contact Number
                                         </label>
                                         <input
-                                            type="tel"
+                                            type="text"
                                             name="dropoff_location.phone_number"
-                                            value={formData.dropoff_location.phone_number}
-                                            onChange={handleChange}
+                                            value={formik.values.dropoff_location.phone_number}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
                                             placeholder="Enter dropoff contact number"
-                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                                formik.touched.dropoff_location?.phone_number &&
+                                                formik.errors.dropoff_location?.phone_number
+                                                    ? 'border-red-500'
+                                                    : ''
+                                            }`}
                                             required
                                         />
+                                        {formik.touched.dropoff_location?.phone_number &&
+                                        formik.errors.dropoff_location?.phone_number ? (
+                                            <p className="text-red-500 text-xs italic">
+                                                {formik.errors.dropoff_location.phone_number}
+                                            </p>
+                                        ) : null}
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className="text-center mt-6">
+                                <button
+                                    type="button"
+                                    onClick={() => setCurrentStep(1)} // Move to the next step
+                                    className="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none"
+                                >
+                                    Next
+                                </button>
                             </div>
                         </div>
                     )}
 
                     {currentStep === 1 && (
                         <div>
-                            <h2 className="text-xl font-bold mb-4" style={{ color: '#f89f1b' }}>
-                                Trip Details
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                                        <FontAwesomeIcon icon={faClock} className="mr-2" />
-                                        Pickup Time
-                                    </label>
-                                    <input
-                                        type="datetime-local"
-                                        name="pickup_time"
-                                        value={formData.pickup_time}
-                                        onChange={handleChange}
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                                        <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
-                                        Load Description
-                                    </label>
-                                    <textarea
-                                        name="load_description"
-                                        value={formData.load_description}
-                                        onChange={handleChange}
-                                        placeholder="Enter load description"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                                        <FontAwesomeIcon icon={faTruck} className="mr-2" />
-                                        Vehicle Type
-                                    </label>
-                                    <select
-                                        name="vehicle_type"
-                                        value={formData.vehicle_type}
-                                        onChange={handleChange}
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    >
-                                        <option value="">Select vehicle type</option>
-                                        <option value="1 ton Truck">1 ton Truck</option>
-                                        <option value="1.5 ton Truck">1.5 ton Truck</option>
-                                        <option value="2 ton Truck">2 ton Truck</option>
-                                        <option value="4 ton Truck">4 ton Truck</option>
-                                        <option value="Bakkie">Bakkie</option>
-                                        <option value="8 ton Truck">8 ton Truck</option>
-                                    </select>
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                                        <FontAwesomeIcon icon={faBuilding} className="mr-2" />
-                                        Number of Floors
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="number_of_floors"
-                                        value={formData.number_of_floors}
-                                        onChange={handleChange}
-                                        placeholder="Enter number of floors"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                                        <FontAwesomeIcon icon={faMoneyBillWave} className="mr-2" />
-                                        Bid Amount
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="bid"
-                                        value={formData.bid}
-                                        onChange={handleChange}
-                                        placeholder="Enter bid amount"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    />
-                                </div>
+                            {/* Additional fields for the next step */}
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <FontAwesomeIcon icon={faClock} className="mr-2" />
+                                    Pickup Time
+                                </label>
+                                <input
+                                    type="datetime-local"
+                                    name="pickup_time"
+                                    value={formik.values.pickup_time}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                        formik.touched.pickup_time && formik.errors.pickup_time
+                                            ? 'border-red-500'
+                                            : ''
+                                    }`}
+                                    required
+                                />
+                                {formik.touched.pickup_time && formik.errors.pickup_time ? (
+                                    <p className="text-red-500 text-xs italic">{formik.errors.pickup_time}</p>
+                                ) : null}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                                    Load Description
+                                </label>
+                                <textarea
+                                    name="load_description"
+                                    value={formik.values.load_description}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Describe the load"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                        formik.touched.load_description && formik.errors.load_description
+                                            ? 'border-red-500'
+                                            : ''
+                                    }`}
+                                    required
+                                />
+                                {formik.touched.load_description && formik.errors.load_description ? (
+                                    <p className="text-red-500 text-xs italic">{formik.errors.load_description}</p>
+                                ) : null}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <FontAwesomeIcon icon={faTruck} className="mr-2" />
+                                    Vehicle Type
+                                </label>
+                                <select
+                                    name="vehicle_type"
+                                    value={formik.values.vehicle_type}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                        formik.touched.vehicle_type && formik.errors.vehicle_type
+                                            ? 'border-red-500'
+                                            : ''
+                                    }`}
+                                    required
+                                >
+                                    <option value="" label="Select vehicle type" />
+                                    <option value="bakkie" label="Bakkie" />
+                                    <option value="truck_1" label="1 ton Truck" />
+                                    <option value="truck_1.5" label="1.5 ton Truck" />
+                                    <option value="truck_2" label="2 ton Truck" />
+                                    <option value="truck_4" label="4 ton Truck" />
+                                    <option value="truck_8" label="8 ton Truck" />
+                                </select>
+                                {formik.touched.vehicle_type && formik.errors.vehicle_type ? (
+                                    <p className="text-red-500 text-xs italic">{formik.errors.vehicle_type}</p>
+                                ) : null}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <FontAwesomeIcon icon={faBuilding} className="mr-2" />
+                                    Number of Floors
+                                </label>
+                                <input
+                                    type="number"
+                                    name="number_of_floors"
+                                    value={formik.values.number_of_floors}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Number of floors"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                        formik.touched.number_of_floors && formik.errors.number_of_floors
+                                            ? 'border-red-500'
+                                            : ''
+                                    }`}
+                                    required
+                                />
+                                {formik.touched.number_of_floors && formik.errors.number_of_floors ? (
+                                    <p className="text-red-500 text-xs italic">{formik.errors.number_of_floors}</p>
+                                ) : null}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <FontAwesomeIcon icon={faMoneyBillWave} className="mr-2" />
+                                    Bid Amount
+                                </label>
+                                <input
+                                    type="number"
+                                    name="bid"
+                                    value={formik.values.bid}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Enter your bid"
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                                        formik.touched.bid && formik.errors.bid
+                                            ? 'border-red-500'
+                                            : ''
+                                    }`}
+                                    required
+                                />
+                                {formik.touched.bid && formik.errors.bid ? (
+                                    <p className="text-red-500 text-xs italic">{formik.errors.bid}</p>
+                                ) : null}
+                            </div>
+                            <div className="text-center mt-6">
+                                <button
+                                    type="button"
+                                    onClick={() => setCurrentStep(0)} // Move to the previous step
+                                    className="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none mr-4"
+                                >
+                                    Back
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none"
+                                >
+                                    Submit
+                                </button>
                             </div>
                         </div>
                     )}
-
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-between mt-8">
-                        {currentStep > 0 && (
-                            <button
-                                type="button"
-                                onClick={() => setCurrentStep(currentStep - 1)}
-                                className={`bg-${
-                                    currentStep === 0 ? 'black' : 'gray-200'
-                                } text-black py-2 px-4 rounded-lg`}
-                            >
-                                Previous
-                            </button>
-                        )}
-                        {currentStep < 1 && (
-                            <button
-                                type="button"
-                                onClick={() => setCurrentStep(currentStep + 1)}
-                                className="bg-gray-200 text-black py-2 px-4 rounded-lg"
-                            >
-                                Next
-                            </button>
-                        )}
-                        {currentStep === 1 && (
-                            <button
-                                type="submit"
-                                className="bg-green-500 text-white py-2 px-4 rounded-lg"
-                            >
-                                Submit
-                            </button>
-                        )}
-                    </div>
                 </form>
             ) : (
-                <div className="text-center">
-                    <p>Loading...</p>
-                </div>
+                <p>Loading...</p>
             )}
         </div>
     );
