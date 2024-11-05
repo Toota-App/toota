@@ -34,7 +34,7 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      # Optional: Add step to run tests here (e.g., using pytest or Django's test suite)
       - name: Zip artifact for deployment
         run: |
           cd server
@@ -63,9 +63,8 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: |
-          mkdir -p server
           cd server
-          unzip ../release.zip
+          unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -79,4 +78,4 @@ jobs:
         run: |
           cd server
           source venv/bin/activate
-          gunicorn --workers 3 myapp.wsgi:application
+          gunicorn --workers 3 toota.wsgi:application
