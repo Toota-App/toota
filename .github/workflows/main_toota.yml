@@ -24,23 +24,29 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
+          cd server
           python -m venv venv
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          cd server
+          source venv/bin/activate
+          pip install -r requirements.txt
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd server
+          zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
           path: |
-            release.zip
-            !venv/
+            server/release.zip
+            !server/venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,7 +62,10 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: |
+          mkdir -p server
+          cd server
+          unzip ../release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -65,3 +74,9 @@ jobs:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_598317C082D04CCEA9BABEDD8AABBF64 }}
+
+      - name: Run Django app with Gunicorn
+        run: |
+          cd server
+          source venv/bin/activate
+          gunicorn --workers 3 myapp.wsgi:application
