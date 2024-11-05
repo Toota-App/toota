@@ -17,6 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Debugging step to confirm directory structure
+      - name: List files and directories
+        run: ls -R
+
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -34,7 +38,6 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      # Optional: Add step to run tests here (e.g., using pytest or Django's test suite)
       - name: Zip artifact for deployment
         run: |
           cd server
