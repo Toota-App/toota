@@ -15,36 +15,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Debugging step to confirm directory structure
+      # Debugging step to confirm directory structure after checkout
       - name: List files and directories
         run: ls -R
+        # This will help identify where the 'server' directory is located.
 
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
           python-version: '3.11'
 
+      # Modify this step to only try to access 'server' if it actually exists
       - name: Create and start virtual environment
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           python -m venv venv
           source venv/bin/activate
 
       - name: Install dependencies
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Zip artifact for deployment
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         with:
           name: python-app
           path: |
@@ -65,6 +72,7 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           unzip release.zip
@@ -78,6 +86,7 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_598317C082D04CCEA9BABEDD8AABBF64 }}
 
       - name: Run Django app with Gunicorn
+        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           source venv/bin/activate
