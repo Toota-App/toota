@@ -2,6 +2,10 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+
 name: Build and deploy Python app to Azure Web App - Toota
 
 on:
@@ -71,6 +75,10 @@ jobs:
         with:
           name: python-app
 
+      # Create server directory if it doesn't exist
+      - name: Create server directory
+        run: mkdir -p server
+
       - name: Unzip artifact for deployment
         if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
@@ -86,8 +94,4 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_598317C082D04CCEA9BABEDD8AABBF64 }}
 
       - name: Run Django app with Gunicorn
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
-        run: |
-          cd server
-          source venv/bin/activate
-          gunicorn --workers 3 toota.wsgi:application
+        if: "contains(steps.'List files and directories'.outputs.stdout
