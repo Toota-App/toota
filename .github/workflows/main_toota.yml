@@ -29,7 +29,7 @@ jobs:
           cd server
           pip install -r requirements.txt
         
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      # Optional: Add step to run tests here (e.g., PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: |
@@ -58,8 +58,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: Navigate to server and install dependencies
+      - name: Ensure server directory exists and install dependencies
         run: |
+          if [ ! -d "server" ]; then
+            echo "server directory does not exist. Creating it..."
+            mkdir server
+          fi
           cd server
           pip install -r requirements.txt
 
