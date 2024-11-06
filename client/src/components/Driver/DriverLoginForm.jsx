@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaExclamationCircle } from 'react-icons/fa';
-import logo from '../../logo.jpg'; // Adjust the path based on your file structure
+import logo from "../../assets/logo.png";
+
 
 const DriverLoginForm = () => {
   const navigate = useNavigate();

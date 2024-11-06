@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEnvelope, FaUser, FaPhone, FaHome, FaCar, FaIdCard, FaLock, FaExclamationCircle } from 'react-icons/fa';
-import logo from '../../logo.jpg'; // Ensure the path is correct
+import logo from "../../assets/logo.png";
+
 
 const DriverRegistrationForm = () => {
   const [formData, setFormData] = useState({
