@@ -47,6 +47,12 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
+      - name: Verify server directory content before zipping
+        if: env.exists == 'true'
+        run: |
+          echo "Contents of server directory:"
+          ls -la server
+
       - name: Zip artifact for deployment
         if: env.exists == 'true'
         run: |
@@ -54,8 +60,7 @@ jobs:
           zip -r ../release.zip ./*
           
       - name: Verify the artifact creation
-        if: env.exists == 'true'
-        run: ls -l ../release.zip
+        run: ls -l release.zip
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
