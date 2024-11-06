@@ -1,51 +1,28 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
-import Header from '../../pages/Header'; // Adjusted the path to the correct location
-import Footer from '../../pages/Footer'; // Adjusted the path to the correct location
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import logo from '../../assets/logo.png';
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+  });
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 5000);
-  };
-
-  const clearErrors = () => {
-    setTimeout(() => {
-      setErrors({});
-    }, 5000);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: JSON.stringify(values),
       });
 
       if (response.ok) {
@@ -53,116 +30,106 @@ const UserLoginForm = () => {
         if (data.access) {
           localStorage.setItem('access_token', data.access);
           localStorage.setItem('refresh_token', data.refresh);
-          setSuccessMessage('Login successful! Redirecting to the dashboard...');
-          setTimeout(() => {
-            navigate('/dashboard/user');
-          }, 2000);
-          setFormData({ email: '', password: '' });
-          setErrors({});
+          setSuccessMessage('Login successful! Redirecting to your dashboard...');
+          setTimeout(() => navigate('/dashboard/user'), 2000);
         } else {
           throw new Error('Token not found in response');
         }
       } else {
         const errorData = await response.json();
-        if (response.status === 401) {
-          setErrors({
-            ...errors,
-            invalidCredentials: 'Invalid email or password. Please try again.',
-          });
-        } else {
-          setErrors(errorData);
-        }
-        clearErrors();
+        setErrors({ generic: 'Invalid email or password. Please try again.' });
       }
     } catch (error) {
-      console.error('Error during login:', error);
       setErrors({ generic: 'An error occurred. Please try again later.' });
-      clearErrors();
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <div className="flex-grow flex items-center justify-center">
-        <div className="bg-white rounded shadow-md p-6 w-full max-w-md mx-auto">
-          {successMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-              {successMessage}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit}>
-            <h2 className="text-3xl font-bold mb-4 text-center text-gray-900">Login To Toota</h2>
-
-            <div className="mb-4 flex items-center">
-              <FaEnvelope className="text-gray-500 mr-2" />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email address"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded shadow appearance-none"
-              />
-            </div>
-            {errors.email && <p className="text-red-500 text-lg italic ml-7">{errors.email}</p>}
-
-            <div className="mb-4 relative flex items-center">
-              <FaLock className="text-gray-500 mr-2" />
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded shadow appearance-none"
-              />
-              <span
-                className="absolute right-0 bottom-1.5 mr-3 cursor-pointer"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
-              </span>
-            </div>
-            {errors.password && <p className="text-red-500 text-lg italic ml-7">{errors.password}</p>}
-            {errors.invalidCredentials && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                {errors.invalidCredentials}
-              </div>
-            )}
-            {errors.generic && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                {errors.generic}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline-black w-full"
-            >
-              Login
-            </button>
-          </form>
-
-          <p className="mt-4 text-center text-sm text-gray-500">
-            Forgot your password?{' '}
-            <Link to="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Reset it here
-            </Link>
-          </p>
-
-          <p className="mt-4 text-center text-sm text-gray-500">
-            Don't have an account with Toota?{' '}
-            <Link to="/signup/user" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Register here
-            </Link>
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
+      <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <div className="flex justify-center mb-6">
+          <img src={logo} alt="Toota Logo" className="h-20 md:h-24" />
         </div>
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-900">Welcome back to Toota!</h2>
+        <p className="text-center text-sm mb-6 text-gray-600">
+          Login now to start moving your goods, property, and more.
+        </p>
+
+        {successMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4 text-center">
+            {successMessage}
+          </div>
+        )}
+
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, errors }) => (
+            <Form className="space-y-4">
+              <div className="relative">
+                <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:border-gray-500 focus:ring-0"
+                />
+                <ErrorMessage name="email" component="p" className="text-red-500 text-sm mt-1" />
+              </div>
+
+              <div className="relative">
+                <FaLock className="absolute left-3 top-3 text-gray-400" />
+                <Field
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Enter your password"
+                  className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:border-gray-500 focus:ring-0"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-gray-400"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+                <ErrorMessage name="password" component="p" className="text-red-500 text-sm mt-1" />
+              </div>
+
+              {errors.generic && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-center">
+                  {errors.generic}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 transition duration-200 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                {isSubmitting ? 'Logging in...' : 'Login'}
+              </button>
+            </Form>
+          )}
+        </Formik>
+
+        <p className="mt-4 text-center text-sm text-gray-500">
+          Forgot your password?{' '}
+          <Link to="/forgot-password" className="text-orange-500 font-semibold hover:underline">
+            Reset it here
+          </Link>
+        </p>
+
+        <p className="mt-4 text-center text-sm text-gray-500">
+          Don't have an account?{' '}
+          <Link to="/signup/user" className="text-orange-500 font-semibold hover:underline">
+            Register here
+          </Link>
+        </p>
       </div>
-      <Footer />
     </div>
   );
 };
