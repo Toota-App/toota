@@ -18,19 +18,21 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Create and start virtual environment in server directory
+      - name: Navigate to server and create/start virtual environment
         run: |
           cd server
           python -m venv venv
           source venv/bin/activate
-          pip install -r ../requirements.txt  # Adjust path if requirements.txt is outside server
 
+      - name: Install dependencies
+        run: |
+          cd server
+          pip install -r requirements.txt
+        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Zip artifact for deployment with server directory
+      - name: Zip artifact for deployment
         run: |
-          mkdir -p server
-          cp -r * server/  # Copy all files into server for deployment
           cd server
           zip -r ../release.zip ./*
 
@@ -53,12 +55,10 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment and ensure server directory
-        run: |
-          unzip release.zip
-          mkdir -p server  # Ensure server directory exists
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
 
-      - name: Install dependencies in server directory
+      - name: Navigate to server and install dependencies
         run: |
           cd server
           pip install -r requirements.txt
