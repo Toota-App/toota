@@ -17,7 +17,7 @@ jobs:
       - name: List files and directories
         run: |
           ls -R > directory_structure.txt
-        # Output directory structure to a file
+          cat directory_structure.txt
 
       - name: Check for server directory
         id: check_server
@@ -51,16 +51,18 @@ jobs:
         if: env.exists == 'true'
         run: |
           cd server
-          zip release.zip ./* -r
+          zip -r ../release.zip ./*
+          
+      - name: Verify the artifact creation
+        if: env.exists == 'true'
+        run: ls -l ../release.zip
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         if: env.exists == 'true'
         with:
           name: python-app
-          path: |
-            server/release.zip
-            !server/venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -76,6 +78,9 @@ jobs:
 
       - name: Create server directory
         run: mkdir -p server
+
+      - name: Move artifact to server directory
+        run: mv release.zip server/
 
       - name: Unzip artifact for deployment
         run: |
