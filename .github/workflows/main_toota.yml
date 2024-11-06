@@ -1,11 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
 name: Build and deploy Python app to Azure Web App - Toota
 
 on:
@@ -22,40 +14,48 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Debugging step to confirm directory structure after checkout
       - name: List files and directories
-        run: ls -R
-        # This will help identify where the 'server' directory is located.
+        run: |
+          ls -R > directory_structure.txt
+        # Output directory structure to a file
+
+      - name: Check for server directory
+        id: check_server
+        run: |
+          if [ -d "server" ]; then
+            echo "exists=true" >> $GITHUB_ENV
+          else
+            echo "exists=false" >> $GITHUB_ENV
+          fi
 
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
           python-version: '3.11'
 
-      # Modify this step to only try to access 'server' if it actually exists
       - name: Create and start virtual environment
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
+        if: env.exists == 'true'
         run: |
           cd server
           python -m venv venv
           source venv/bin/activate
 
       - name: Install dependencies
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
+        if: env.exists == 'true'
         run: |
           cd server
           source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Zip artifact for deployment
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
+        if: env.exists == 'true'
         run: |
           cd server
           zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
+        if: env.exists == 'true'
         with:
           name: python-app
           path: |
@@ -67,7 +67,6 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -75,12 +74,10 @@ jobs:
         with:
           name: python-app
 
-      # Create server directory if it doesn't exist
       - name: Create server directory
         run: mkdir -p server
 
       - name: Unzip artifact for deployment
-        if: "contains(steps.'List files and directories'.outputs.stdout, 'server')"
         run: |
           cd server
           unzip release.zip
@@ -92,6 +89,3 @@ jobs:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_598317C082D04CCEA9BABEDD8AABBF64 }}
-
-      - name: Run Django app with Gunicorn
-        if: "contains(steps.'List files and directories'.outputs.stdout
