@@ -3,7 +3,7 @@ from .settings import *
 from .settings import BASE_DIR
 
 
-SECRET_KEY = os.environ['SECRET']
+SECRET_KEY = os.environ['SECRET_KEY']
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
 CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
 DEBUG = False
@@ -20,7 +20,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ] 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
