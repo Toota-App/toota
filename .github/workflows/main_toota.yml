@@ -34,7 +34,7 @@ jobs:
            python -m pip install --upgrade pip
            pip install -r requirements.txt
 
-      - name: Install dependencies
+      - name: Collect Staticfiles
         run: |
            cd server
            python manage.py collectstatic -noinput
