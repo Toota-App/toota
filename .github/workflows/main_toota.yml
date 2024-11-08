@@ -16,11 +16,11 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.10'  # Use 3.10 or 3.11 to ensure compatibility
+          python-version: '3.10'  # 3.10 is fully compatible with Azure Python runtime
 
       - name: Install dependencies
         run: |
-          cd server 
+          cd server
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -29,18 +29,18 @@ jobs:
           cd server
           python manage.py collectstatic --noinput
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      # Optional: Add step to run tests here (e.g., PyTest, Django test suites)
 
       - name: Zip artifact for deployment
         run: |
           cd server
-          zip -r ../release.zip ./*  # Zips content from server directory to release.zip at the root
+          zip -r ../release.zip . -x "venv/*" "*.git*" "*.DS_Store"  # Exclude unnecessary files
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: release.zip  # This now points to the root
+          path: server/release.zip  # This now points to the root
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,12 +56,16 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip -d .  # Unzips release.zip content to root directory
+        run: release.zip -d .  # Unzips release.zip content to root directory
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6A79DE623AD4EFDA432A730767F3134 }}
+          verbose: true  # Enables detailed logging for debugging
+
+      - name: Run database migrations
+        run: python manage.py migrate  # Runs migrations as the final deployment step
