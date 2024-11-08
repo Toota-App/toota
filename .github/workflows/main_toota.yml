@@ -18,40 +18,28 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v1
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Create and start virtual environment
         run: |
-          cd server
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
-        run: |
-           cd server
-           python -m pip install --upgrade pip
-           pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Collect Staticfiles
-        run: |
-           cd server
-           python manage.py collectstatic --noinput
-        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-
       - name: Zip artifact for deployment
-        run: |
-            cd server
-            zip release.zip ./* -r
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: python-app
           path: |
-            server/release.zip
+            release.zip
             !venv/
 
   deploy:
@@ -60,21 +48,20 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: python-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'Toota'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8235261FC7C24A0AABD0E88F306731C4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6A79DE623AD4EFDA432A730767F3134 }}
