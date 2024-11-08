@@ -22,12 +22,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create and start virtual environment
-        run: |
-          cd server
-          python -m venv venv
-          source venv/bin/activate
-
       - name: Install dependencies
         run: |
           cd server 
