@@ -24,11 +24,20 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
+          cd server
           python -m venv venv
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          cd server 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Collect static
+        run: |
+          cd server
+          python manage.py collectstatic --noinput
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
@@ -39,7 +48,7 @@ jobs:
         with:
           name: python-app
           path: |
-            release.zip
+            server/release.zip
             !venv/
 
   deploy:
