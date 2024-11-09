@@ -40,7 +40,7 @@ jobs:
           cd server
           zip -r ../release.zip ./*
 
-      - name: Debug: Verify release.zip creation
+      - name: Verify 
         run: |
           ls -la ../  # Lists files in the root directory
 
