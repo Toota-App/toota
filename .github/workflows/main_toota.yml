@@ -1,8 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
-name: Build and deploy Python app to Azure Web App - Toota
+name: Build and deploy Python app to Azure Web App - Toota
 
 on:
   push:
@@ -27,35 +26,30 @@ jobs:
           cd server
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: |
-           cd server
-           python -m pip install --upgrade pip
-           pip install -r requirements.txt
+          cd server
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Collect Static files
         run: |
-           cd server
-           python manage.py collectstatic --noinput
-      
+          cd server
+          python manage.py collectstatic --noinput
 
-     
-        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: |
-         cd server
-         zip release.zip ./* -r
+          cd server
+          zip -r release.zip . -x 'venv/*' '*.git*' '*.github*'
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            server/release.zip
-            !venv/
+          path: server/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -70,14 +64,17 @@ jobs:
         with:
           name: python-app
 
+      - name: List files in package
+        run: unzip -l release.zip
+
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_262BFA6688244C50BB9B28CBF3891AEE }}
+          package: release.zip
