@@ -78,3 +78,11 @@ jobs:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DA348D8FF8564C06BB6DE937011E7DCD }}
+     
+      - name: Run database migrations
+        run: |
+          cd server
+          python manage.py migrate
+
+
+      
