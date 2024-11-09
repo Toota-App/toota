@@ -1,5 +1,3 @@
-name: Build and deploy Python app to Azure Web App - Toota
-
 on:
   push:
     branches:
@@ -34,8 +32,6 @@ jobs:
         run: |
           cd server
           python manage.py collectstatic --noinput
-        
-      # Optional: Add step to run tests here (e.g., PyTest, Django test suites)
 
       - name: Zip artifact for deployment
         run: |
@@ -46,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: release.zip  # Adjusted path to be in the root
+          path: release.zip  # Ensure correct path to release.zip
 
   deploy:
     runs-on: ubuntu-latest
