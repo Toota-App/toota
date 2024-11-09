@@ -1,7 +1,3 @@
-
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
 name: Build and deploy Python app to Azure Web App - Toota
 
 on:
@@ -22,28 +18,54 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create and start virtual environment
-        run: |
-          cd server
-          python -m venv venv
-          source venv/bin/activate
-
       - name: Install dependencies
         run: |
-          cd server 
+          cd server
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Collect static
+      - name: Collect static files
         run: |
           cd server
           python manage.py collectstatic --noinput
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      # Optional: Add step to run tests here (e.g., PyTest, Django test suites)
+
       - name: Zip artifact for deployment
         run: |
           cd server
-          zip release.zip ./* -
+          zip -r ../release.zip .  # Creates release.zip one level up from "server" directory
+
+      - name: Upload artifact for deployment jobs
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-app
+          path: release.zip  # This now points to the root where release.zip is created
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: python-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip -d .  # Unzips release.zip content to root directory
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
+        with:
+          app-name: 'Toota'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6A79DE623AD4EFDA432A730767F3134 }}
+          verbose: true  # Enables detailed logging for debugging
 
       - name: Run database migrations
         run: |
