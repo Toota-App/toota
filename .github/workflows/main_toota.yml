@@ -50,7 +50,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: server/release.zip
+          path: |
+              cd server
+              release.zip
 
   deploy:
     runs-on: ubuntu-latest
