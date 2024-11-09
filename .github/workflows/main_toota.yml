@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: release.zip
+          path: release.zip  # This now points to the root where release.zip is created
 
   deploy:
     runs-on: ubuntu-latest
