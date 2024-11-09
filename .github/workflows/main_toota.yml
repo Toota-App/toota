@@ -37,7 +37,8 @@ jobs:
       - name: Collect Static files
         run: |
            cd server
-           python manage.py collectstatic —-noinput
+           python manage.py collectstatic --noinput
+      
 
      
         
