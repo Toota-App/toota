@@ -30,13 +30,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd sever
+          cd server
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Collect static files
         run: |
-          cd backend 
+          cd server
           python manage.py collectstatic --noinput
 
 
