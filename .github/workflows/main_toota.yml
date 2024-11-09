@@ -44,16 +44,13 @@ jobs:
       - name: Zip artifact for deployment
         run: |
            cd server
-           zip release.zip ./* -r
+           zip -r release.zip . -x 'venv/*'
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            server/release.zip
-            !venv
-            
+          path: server/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,13 +66,12 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip server/release.zip -d server
 
-      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'Toota'
-          slot-name: 'Production'
+          app-name: 'Toota'  # Ensure this matches your Azure Web App name
+          slot-name: 'Production'  # Ensure this matches the correct deployment slot
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F11ACDFC7A84511B2FFA0E727E43969 }}
