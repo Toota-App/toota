@@ -52,6 +52,7 @@ jobs:
           name: python-app
           path: |
             server/release.zip
+            !venv
             
 
   deploy:
