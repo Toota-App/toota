@@ -1,3 +1,11 @@
+name: Build and deploy Python app to Azure Web App - Toota
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
