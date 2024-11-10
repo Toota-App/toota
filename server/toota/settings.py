@@ -119,23 +119,15 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+ DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DATABASE"),
-        'HOST': os.getenv("SERVER"),
-        'USER': os.getenv("USER"),
-        'PASSWORD': os.getenv("PASSWORD"),
-    }
-}
+
 
 AUTH_USER_MODEL = 'authentication.User'
 AUTH_DRIVER_MODEL = 'authentication.Driver'
