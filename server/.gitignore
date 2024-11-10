@@ -1,6 +1,7 @@
 venv
 .env
-
+static
+static_files
 __pycache__
 django_email.log
 
