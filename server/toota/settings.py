@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env()
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -32,7 +31,6 @@ SECRET_KEY = '@sgjkndrdxjkixsgjddckhvfjkjdkf'
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -72,7 +70,7 @@ ROOT_URLCONF = 'toota.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '/static')],
+        'DIRS': [os.path.join(BASE_DIR, 'static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,7 +89,7 @@ ASGI_APPLICATION = 'toota.asgi.application'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-   'https://locahost:5173',
+   'https://localhost:5173',
    'http://localhost:8000'
 ]
 
@@ -104,30 +102,22 @@ CORS_ALLOW_METHODS = (
     "PUT",
 )
 
-
-
 CSRF_TRUSTED_ORIGINS = [
-    'https://locahost:5173',
+    'https://localhost:5173',
     'http://localhost:8000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-
-
- DATABASES = {
-     'default': {
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': BASE_DIR / 'db.sqlite3',
-     }
- }
-
-
-
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 AUTH_USER_MODEL = 'authentication.User'
 AUTH_DRIVER_MODEL = 'authentication.Driver'
@@ -150,7 +140,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 REDIS_URL = os.getenv('REDIS_URL', 'rediss://red-cn9ilmdjm4es73c5biig:XNalq7X5mJVpdVewgf4anUJ9Dr8EDji3@oregon-redis.render.com:6379')
 
 CHANNEL_LAYERS = {
@@ -159,7 +148,6 @@ CHANNEL_LAYERS = {
         "CONFIG": {
             "hosts": [("127.0.0.1", 6379)],
         },
-        
     },
 }
 
@@ -168,21 +156,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        
     ],
-
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
-    
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=360),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -194,16 +177,15 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '/static')
-    ]
+    os.path.join(BASE_DIR, 'static')
+]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(BASE_DIR / 'static')
+MEDIA_ROOT = BASE_DIR / 'static'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -211,20 +193,9 @@ STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+APPEND_SLASH = False
 
-APPEND_SLASH=False
-
-
-#Email
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'mail.tootapp.co.za'
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = False 
-# EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-
+# Email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.tootapp.co.za'
@@ -235,30 +206,3 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'django_email.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        '': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-        },
-    },
-}
