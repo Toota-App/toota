@@ -18,11 +18,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v1
         with:
           python-version: '3.10'
 
-      - name: Create and activate virtual environment
+      - name: Create and start virtual environment
         run: |
           cd server
           python -m venv venv
@@ -31,26 +31,29 @@ jobs:
       - name: Install dependencies
         run: |
           cd server
-          source venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Collect static files
         run: |
           cd server
-          source venv/bin/activate
           python manage.py collectstatic --noinput
 
+
+       
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
         run: |
-          cd server
-          zip -r ../release.zip . -x "venv/*"
+         cd server
+         zip release.zip ./* -r
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: release.zip
+          path: |
+            server/release.zip
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,12 +69,16 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip -d server
+        run: unzip release.zip
 
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DA348D8FF8564C06BB6DE937011E7DCD }}
+    
+
+
+      
