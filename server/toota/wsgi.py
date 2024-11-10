@@ -1,21 +1,9 @@
-"""
-WSGI config for toota project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
-"""
-
 import os
-
 from django.core.wsgi import get_wsgi_application
 
-settings_module = 'toota.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'toota.settings'
-
-#settings_module =  'toota.settings'
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+# Set the default settings module based on the environment
+# Use 'production' settings if the PRODUCTION environment variable is set to 'true'
+settings_module = "toota.settings.production" if os.getenv("PRODUCTION") == "true" else "toota.settings.development"
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
 
 application = get_wsgi_application()
-
-app = application
