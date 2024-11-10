@@ -130,10 +130,10 @@ CORS_ALLOW_CREDENTIALS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv(”DATABASE”),
-        'HOST': os.getenv(”SERVER”),
-        'USER': os.getenv(”USER”),
-        'PASSWORD': os.getenv(”PASSWORD”),
+        'NAME': os.getenv("DATABASE"),
+        'HOST': os.getenv("SERVER"),
+        'USER': os.getenv("USER"),
+        'PASSWORD': os.getenv("PASSWORD"),
     }
 }
 
