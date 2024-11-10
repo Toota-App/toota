@@ -35,9 +35,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Collect static files
-        run: |
-          cd server
-          python manage.py collectstatic --noinput
+        run: python manage.py collectstatic --noinput
 
 
        
