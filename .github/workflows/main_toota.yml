@@ -36,9 +36,7 @@ jobs:
      
 
       - name: Collect Static files
-        run: |
-           cd server
-           python manage.py collectstatic --noinput
+        run: python manage.py collectstatic --noinput
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
