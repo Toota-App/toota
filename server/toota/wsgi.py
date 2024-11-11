@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-settings_module = 'toota.deployment'
-#settings_module = 'toota.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'toota.settings'
+#settings_module = 'toota.deployment'
+settings_module = 'toota.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'toota.settings'
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
