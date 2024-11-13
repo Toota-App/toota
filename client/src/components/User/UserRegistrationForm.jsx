@@ -1,257 +1,156 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUser, FaPhone, FaEnvelope, FaLock } from 'react-icons/fa'; // Importing required icons
-import Header from '../../pages/Header'; // Adjust the path if necessary
-import Footer from '../../pages/Footer'; // Adjust the path if necessary
+import welcomeImage from '../../assets/WELCOME_SCREEN_-_RIDER[1].png';
 
 const UserRegistrationForm = () => {
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const [formData, setFormData] = useState({
+  const initialValues = {
     fullName: '',
     phoneNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full Name is required'),
+    phoneNumber: Yup.string()
+      .matches(/^\d{10}$/, 'Phone Number must be 10 digits')
+      .required('Phone Number is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords do not match')
+      .required('Confirm Password is required'),
   });
 
-  const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
+    setSubmitting(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/sign_up/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-  useEffect(() => {
-    const clearMessages = setTimeout(() => {
-      setSuccessMessage('');
-      setErrors({});
-    }, 7000); // Clear messages after 7 seconds
-
-    return () => clearTimeout(clearMessages);
-  }, [successMessage, errors]);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 5000);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full Name is required';
-    }
-
-    if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Phone Number is required';
-    } else if (!/^\d{10}$/.test(formData.phoneNumber.trim())) {
-      newErrors.phoneNumber = 'Phone Number must be 10 digits';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      newErrors.email = 'Invalid email address';
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.trim().length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    }
-
-    if (formData.confirmPassword.trim() !== formData.password.trim()) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateForm(formData)) {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/sign_up/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            full_name: formData.fullName,
-            phone_number: formData.phoneNumber,
-            email: formData.email,
-            password: formData.password,
-            confirm_password: formData.confirmPassword,
-          }),
-        });
-
-        if (response.status === 201) {
-          setSuccessMessage('Registration successful! Please check your email to verify.');
-          setFormData({
-            fullName: '',
-            phoneNumber: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-          });
-        } else if (response.status === 400) {
-          const errorData = await response.json();
-          const newErrors = {};
-
-          if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
-            newErrors.email = 'Email already exists. Please try another one.';
-          }
-
-          if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
-            newErrors.phoneNumber = 'Phone number already exists. Please try another one.';
-          }
-
-          if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
-            newErrors.fullName = 'Full name already exists. Please try another one.';
-          }
-
-          if (errorData.password && errorData.password[0] === 'Password must be at least 8 characters') {
-            newErrors.password = 'Password must be at least 8 characters';
-          }
-
-          setErrors(newErrors);
-        } else if (response.status === 500) {
-          setErrors({ generic: 'Internal Server Error. Please try again later.' });
-        } else {
-          setErrors({ generic: 'Unknown error occurred. Please try again later.' });
-        }
-      } catch (error) {
-        console.error('Registration error:', error);
+      if (response.status === 201) {
+        setSuccessMessage('Registration successful! Please check your email to verify.');
+        resetForm();
+      } else if (response.status === 400) {
+        const errorData = await response.json();
+        setErrors(errorData);
+      } else {
         setErrors({ generic: 'An error occurred. Please try again later.' });
       }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setErrors({ generic: 'An error occurred. Please try again later.' });
     }
+    setSubmitting(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <div className="flex-grow flex items-center justify-center">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/3" onSubmit={handleSubmit} method="post">
-          <h2 className="text-2xl mb-6 font-bold text-center">Sign Up</h2>
+    <div className="min-h-screen flex flex-col items-center bg-gray-100">
+      <img src={welcomeImage} alt="Welcome" className="mb-4 w-full max-w-xs" />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, errors }) => (
+          <Form className="bg-white shadow-md rounded p-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
 
-          {successMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
-              {successMessage}
+            {successMessage && (
+              <div className="text-green-700 bg-green-100 p-3 rounded mb-4">{successMessage}</div>
+            )}
+            {errors.generic && (
+              <div className="text-red-700 bg-red-100 p-3 rounded mb-4">{errors.generic}</div>
+            )}
+
+            <div className="mb-4">
+              <Field
+                name="fullName"
+                type="text"
+                placeholder="Full Name"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="fullName" component="div" className="text-red-500 text-sm mt-1" />
             </div>
-          )}
 
-          {errors.generic && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-              {errors.generic}
+            <div className="mb-4">
+              <Field
+                name="phoneNumber"
+                type="text"
+                placeholder="Phone Number"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage
+                name="phoneNumber"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
             </div>
-          )}
 
-          <div className="mb-4 flex items-center">
-            <FaUser className="text-gray-500 mr-2" />
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 ${errors.fullName && 'border-red-500'}`}
-              id="fullName"
-              type="text"
-              placeholder="Full Name"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              autoComplete="current-fullName"
-            />
-          </div>
-          {errors.fullName && <p className="text-red-500 text-lg italic ml-7">{errors.fullName}</p>}
+            <div className="mb-4">
+              <Field
+                name="email"
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+            </div>
 
-          <div className="mb-4 flex items-center">
-            <FaPhone className="text-gray-500 mr-2" />
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 ${errors.phoneNumber && 'border-red-500'}`}
-              id="phoneNumber"
-              type="text"
-              placeholder="Phone Number"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              autoComplete="current-phoneNumber"
-            />
-          </div>
-          {errors.phoneNumber && <p className="text-red-500 text-lg italic ml-7">{errors.phoneNumber}</p>}
+            <div className="mb-4">
+              <Field
+                name="password"
+                type="password"
+                placeholder="Password"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+            </div>
 
-          <div className="mb-4 flex items-center">
-            <FaEnvelope className="text-gray-500 mr-2" />
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 ${errors.email && 'border-red-500'}`}
-              id="email"
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              autoComplete="current-email"
-            />
-          </div>
-          {errors.email && <p className="text-red-500 text-lg italic ml-7">{errors.email}</p>}
+            <div className="mb-4">
+              <Field
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
 
-          <div className="mb-4 relative flex items-center">
-            <FaLock className="text-gray-500 mr-2" />
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 ${errors.password && 'border-red-500'}`}
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="current-password"
-            />
-            <span
-              className="text-gray-600 absolute right-0 mr-3 cursor-pointer"
-              onClick={togglePasswordVisibility}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded mt-4 hover:bg-orange-600"
             >
-              {showPassword ? 'Hide' : 'Show'}
-            </span>
-          </div>
-          {errors.password && <p className="text-red-500 text-lg italic ml-7">{errors.password}</p>}
+              Register Your Account
+            </button>
 
-          <div className="mb-4 flex items-center">
-            <FaLock className="text-gray-500 mr-2" />
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 ${errors.confirmPassword && 'border-red-500'}`}
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              autoComplete="current-password"
-            />
-          </div>
-          {errors.confirmPassword && <p className="text-red-500 text-lg italic ml-7">{errors.confirmPassword}</p>}
-
-          <button
-            type="submit"
-            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-black hover:bg-gray-800 mt-6"
-          >
-            Register Your Account
-          </button>
-
-          <div className="text-center mt-4">
-            <p className="text-sm">
+            <p className="text-center mt-4 text-sm">
               Already have an account?{' '}
               <Link to="/login/user" className="text-blue-500 hover:underline">
                 Log in here
               </Link>
             </p>
-          </div>
-        </form>
-      </div>
-      <Footer />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
