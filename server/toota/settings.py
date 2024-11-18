@@ -17,13 +17,9 @@ environ.Env.read_env()
 SECRET_KEY = '@sgjkndrdxjkixsgjddckhvfjkjdkf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
-    'auth.toota.co.za',
-    '*'
-]
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
