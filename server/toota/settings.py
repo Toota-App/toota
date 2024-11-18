@@ -158,7 +158,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Directory where static files will be collected for production
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Directories where additional static files are located
 MEDIA_URL = '/media/'
