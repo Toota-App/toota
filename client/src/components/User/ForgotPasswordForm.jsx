@@ -1,71 +1,95 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import Message from './Message';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 const ForgotPasswordForm = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
+  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
+  const initialValues = {
+    email: '',
+  };
 
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+  });
+
+  const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
+    setSubmitting(true);
     try {
-      // Validation
-      if (!email.trim()) {
-        setMessage('Email is required.');
-        setMessageType('error');
-        return;
-      }
-
-      // Make the backend API call to send reset password link
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/password-reset/`, { email });
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/password-reset/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
       if (response.status === 200) {
-        setMessage('Reset link has been sent to your email.');
-        setMessageType('success');
+        setSuccessMessage('Reset link has been sent to your email.');
+        resetForm();
+      } else {
+        const errorData = await response.json();
+        setErrors({ email: errorData.message || 'An error occurred. Please try again later.' });
       }
     } catch (error) {
-      setMessage(error.response.data.message || 'An unexpected error occurred.');
-      setMessageType('error');
+      setErrors({ email: 'An unexpected error occurred. Please try again later.' });
     }
+    setSubmitting(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      {message && <Message message={message} type={messageType} />}
+    <div className="min-h-screen flex flex-col items-center">
+      <img src={logo} alt="Logo" className="mb-6 w-20 h-20" />
 
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/3" onSubmit={handleResetPassword}>
-        <h2 className="text-2xl mb-6 font-bold text-center">Forgot Password</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="bg-white shadow-md rounded p-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
 
-        <p className="text-gray-700 text-sm mb-4 text-center">
-          Enter your email and we'll send you a link to reset your password.
-        </p>
+            {successMessage && (
+              <div className="text-green-700 bg-green-100 p-3 rounded mb-4 text-center">
+                {successMessage}
+              </div>
+            )}
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="appearance-none border rounded w-full py-2 px-3"
-            id="email"
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+            <p className="text-gray-700 text-sm mb-4 text-center">
+              Enter your email, and we’ll send you a link to reset your password.
+            </p>
 
-        <div className="mb-6">
-          <button
-            className="w-full bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-black hover:bg-gray-800"
-            type="submit"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+            <div className="mb-4">
+              <Field
+                name="email"
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded mt-4 hover:bg-orange-600"
+            >
+              Submit
+            </button>
+
+            <p className="text-center mt-4 text-sm">
+              Remembered your password?{' '}
+              <Link to="/login/user" className="text-blue-500 hover:underline">
+                Log in here
+              </Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
