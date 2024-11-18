@@ -160,12 +160,9 @@ STATIC_URL = '/static/'
 
 
 # Directory where static files will be collected for production
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
 
 # Directories where additional static files are located
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # if you have a directory named "static" for your static files
-]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR / 'static')  # You might want to separate static and media files
