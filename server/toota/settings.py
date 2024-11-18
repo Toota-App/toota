@@ -158,13 +158,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
-# Ensure static directory exists and static files are collected from it
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Points to /toota/server/static
-]
 
-# The directory where collected static files will be saved
-STATIC_ROOT = BASE_DIR / "static"
+# Directory where static files will be collected for production
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Directories where additional static files are located
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # if you have a directory named "static" for your static files
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR / 'static')  # You might want to separate static and media files
