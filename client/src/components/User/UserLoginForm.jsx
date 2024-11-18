@@ -10,6 +10,8 @@ const UserLoginForm = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
@@ -47,14 +49,14 @@ const UserLoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4">
-      <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         <div className="flex justify-center mb-6">
           <img src={logo} alt="Toota Logo" className="h-20 md:h-24" />
         </div>
-        <h2 className="text-2xl font-bold text-center mb-4 text-gray-900">Welcome back to Toota!</h2>
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">Welcome Back!</h2>
         <p className="text-center text-sm mb-6 text-gray-600">
-          Login now to start moving your goods, property, and more.
+          Log in to access your dashboard and manage your trips.
         </p>
 
         {successMessage && (
@@ -69,46 +71,60 @@ const UserLoginForm = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, errors }) => (
-            <Form className="space-y-4">
-              <div className="relative">
-                <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+            <Form className="space-y-6">
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
+                  <FaEnvelope className="inline mr-2" />
+                  Email Address
+                </label>
                 <Field
                   type="email"
                   name="email"
+                  id="email"
                   placeholder="Enter your email address"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:border-gray-500 focus:ring-0"
+                  className="w-full mt-1 p-3 border rounded focus:outline-none focus:ring focus:border-orange-500"
                 />
-                <ErrorMessage name="email" component="p" className="text-red-500 text-sm mt-1" />
+                <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
               </div>
 
-              <div className="relative">
-                <FaLock className="absolute left-3 top-3 text-gray-400" />
-                <Field
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  placeholder="Enter your password"
-                  className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:border-gray-500 focus:ring-0"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-400"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-                <ErrorMessage name="password" component="p" className="text-red-500 text-sm mt-1" />
+              {/* Password Field */}
+              <div>
+                <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
+                  <FaLock className="inline mr-2" />
+                  Password
+                </label>
+                <div className="relative">
+                  <Field
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    className="w-full mt-1 p-3 border rounded focus:outline-none focus:ring focus:border-orange-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-3 top-3 text-gray-500"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+                <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
               </div>
 
+              {/* Error Message */}
               {errors.generic && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-center">
                   {errors.generic}
                 </div>
               )}
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-orange-500 text-white py-3 px-4 rounded-lg hover:bg-orange-600 transition duration-200 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className="w-full bg-orange-500 text-white py-3 rounded font-bold hover:bg-orange-600 focus:outline-none"
               >
                 {isSubmitting ? 'Logging in...' : 'Login'}
               </button>

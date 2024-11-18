@@ -273,7 +273,7 @@ const DriverRegistrationForm = () => {
             {/* Login Redirect */}
             <p className="text-center mt-4 text-sm">
               Already have an account?{' '}
-              <Link to="/login" className="text-orange-500 hover:underline">
+              <Link to="/login/driver" className="text-orange-500 hover:underline">
                 Log In
               </Link>
             </p>
