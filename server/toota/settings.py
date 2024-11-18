@@ -7,6 +7,7 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Initialize environment variables from .env
 env = environ.Env()
 environ.Env.read_env()
 
@@ -26,7 +27,6 @@ ALLOWED_HOSTS = [
 ]
 
 # Application definition
-
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -97,7 +97,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-# Database
+# Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,7 +105,7 @@ DATABASES = {
     }
 }
 
-# Uncomment and configure for production
+# Uncomment and configure for production with environment variable
 # DATABASES = {
 #     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 # }
@@ -132,6 +132,7 @@ CHANNEL_LAYERS = {
     },
 }
 
+# REST Framework Configuration
 REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': 'error',
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -158,24 +159,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
-
 # Directory where static files will be collected for production
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Fixed path for static files
 
 # Directories where additional static files are located
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Include your local static folder if needed
+]
 
+# Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(BASE_DIR / 'static')  # You might want to separate static and media files
+
+# Directory for media files
+MEDIA_ROOT = BASE_DIR / 'media'  # Separate directory for media files
 
 # Enable WhiteNoise to serve static files
-STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Security and app settings
 APPEND_SLASH = False
 
-# Email
+# Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.tootapp.co.za'
 EMAIL_PORT = 465
@@ -185,6 +192,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
+# Logging Configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
