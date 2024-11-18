@@ -164,7 +164,7 @@ STATICFILES_DIRS = [
 ]
 
 # The directory where collected static files will be saved
-STATIC_ROOT = BASE_DIR / "static”
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR / 'static')  # You might want to separate static and media files
