@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_BOTTOM_LINKS } from '../../../lib/utils/navigation';
 import { Link, useLocation } from 'react-router-dom';
-import logo from "../../../logo.jpg";
+import logo from "../../../assets/logo.png";
+
 import classNames from 'classnames';
 
 const linkStyles = 'flex items-center gap-2 py-2 hover:bg-gray-700 hover:no-underline active:bg-gray-600 rounded-sm text-base';

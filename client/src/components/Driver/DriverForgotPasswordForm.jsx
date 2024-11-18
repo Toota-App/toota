@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Message from './Message';
-import logo from '../../logo.jpg'; // Ensure the path is correct
+import logo from "../../assets/logo.png";
+
 
 const DriverForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
