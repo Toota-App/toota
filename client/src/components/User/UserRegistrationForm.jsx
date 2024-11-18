@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import welcomeImage from '../../assets/WELCOME_SCREEN_-_RIDER[1].png';
+import logo from '../../assets/logo.png';
 
 const UserRegistrationForm = () => {
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const initialValues = {
     fullName: '',
@@ -58,22 +59,27 @@ const UserRegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100">
-      <img src={welcomeImage} alt="Welcome" className="mb-4 w-full max-w-xs" />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
+      {/* Logo and Welcome Section */}
+      <div className="text-center mb-8">
+        <img src={logo} alt="Toota Logo" className="w-24 h-auto mx-auto mb-4" />
+        <h1 className="text-3xl font-semibold text-gray-800">Welcome to Toota!</h1>
+        <p className="text-gray-600 mt-2">Move goods with ease, whether it’s property, packages, or more.</p>
+      </div>
+
+      {/* Registration Form */}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, errors }) => (
-          <Form className="bg-white shadow-md rounded p-6 w-full max-w-md">
-            <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
-
+          <Form className="bg-white shadow-lg rounded p-6 w-full max-w-md">
             {successMessage && (
-              <div className="text-green-700 bg-green-100 p-3 rounded mb-4">{successMessage}</div>
+              <div className="text-green-700 bg-green-100 p-3 rounded mb-4 text-center">{successMessage}</div>
             )}
             {errors.generic && (
-              <div className="text-red-700 bg-red-100 p-3 rounded mb-4">{errors.generic}</div>
+              <div className="text-red-700 bg-red-100 p-3 rounded mb-4 text-center">{errors.generic}</div>
             )}
 
             <div className="mb-4">
@@ -81,7 +87,7 @@ const UserRegistrationForm = () => {
                 name="fullName"
                 type="text"
                 placeholder="Full Name"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-gray-300 rounded"
               />
               <ErrorMessage name="fullName" component="div" className="text-red-500 text-sm mt-1" />
             </div>
@@ -91,13 +97,9 @@ const UserRegistrationForm = () => {
                 name="phoneNumber"
                 type="text"
                 placeholder="Phone Number"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-gray-300 rounded"
               />
-              <ErrorMessage
-                name="phoneNumber"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
+              <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
             <div className="mb-4">
@@ -105,44 +107,54 @@ const UserRegistrationForm = () => {
                 name="email"
                 type="email"
                 placeholder="Email"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-gray-300 rounded"
               />
               <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <Field
                 name="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-gray-300 rounded"
               />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-3 flex items-center"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                👁️
+              </button>
               <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <Field
                 name="confirmPassword"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Confirm Password"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-gray-300 rounded"
               />
-              <ErrorMessage
-                name="confirmPassword"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-3 flex items-center"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                👁️
+              </button>
+              <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded mt-4 hover:bg-orange-600"
+              className="w-full bg-orange-500 text-white font-bold py-3 rounded hover:bg-orange-600"
             >
               Register Your Account
             </button>
 
-            <p className="text-center mt-4 text-sm">
+            <p className="text-center mt-4 text-sm text-gray-600">
               Already have an account?{' '}
               <Link to="/login/user" className="text-blue-500 hover:underline">
                 Log in here
