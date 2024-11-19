@@ -46,6 +46,9 @@ DATABASES = {
     }
 }
 
+
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -66,3 +69,12 @@ LOGGING = {
 
 
 STATIC_ROOT = BASE_DIR/'staticfiles'
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.tootapp.co.za'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
