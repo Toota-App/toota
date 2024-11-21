@@ -19,7 +19,16 @@ const UserLoginForm = () => {
   
 const handleSubmit = async (values, { setErrors, setSubmitting }) => {
   try {
-    const response = await fetch('https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net/api/user/login/', {
+    // Log the base URL to verify its value
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+    console.log("Base URL:", baseUrl);
+
+    // Construct the full request URL using the base URL
+    const requestUrl = `${baseUrl}/api/user/login/`;
+    console.log("Request URL:", requestUrl);
+
+    // Send the POST request
+    const response = await fetch(requestUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,26 +36,46 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
       body: JSON.stringify(values),
     });
 
+    // Log the response status and check if the server is working
+    console.log("Response Status:", response.status);
+
+    // Check if the response is OK (2xx status)
     if (response.ok) {
+      // Log the response data
       const data = await response.json();
+      console.log("Response Data:", data);
+
       if (data.access) {
+        // Save tokens to localStorage
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);
+
+        // Set success message
         setSuccessMessage('Login successful! Redirecting to your dashboard...');
+
+        // Redirect after 2 seconds
         setTimeout(() => navigate('/dashboard/user'), 2000);
       } else {
         throw new Error('Token not found in response');
       }
     } else {
+      // Log error response
       const errorData = await response.json();
+      console.log("Error Response:", errorData);
+
       setErrors({ generic: 'Invalid email or password. Please try again.' });
     }
   } catch (error) {
+    // Log any errors that occur during the process
+    console.error('Error during login:', error);
+
     setErrors({ generic: 'An error occurred. Please try again later.' });
   } finally {
+    // Ensure the form submission state is reset
     setSubmitting(false);
   }
 };
+
 
 
   return (
