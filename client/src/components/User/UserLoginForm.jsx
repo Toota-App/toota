@@ -37,7 +37,7 @@ const UserLoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/login/`, {
+        const response = await fetch('https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net/api/user/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
