@@ -19,11 +19,11 @@ const UserLoginForm = () => {
   
 const handleSubmit = async (values, { setErrors, setSubmitting }) => {
   try {
-    // Log the base URL to verify its value
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+    // Manually specify the base URL
+    const baseUrl = 'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net';
     console.log("Base URL:", baseUrl);
 
-    // Construct the full request URL using the base URL
+    // Construct the full request URL using the manually specified base URL
     const requestUrl = `${baseUrl}/api/user/login/`;
     console.log("Request URL:", requestUrl);
 
@@ -75,6 +75,7 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     setSubmitting(false);
   }
 };
+
 
 
 
