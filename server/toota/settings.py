@@ -81,6 +81,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
     'https://nice-island-045956903.5.azurestaticapps.net',
+]
     
 
 CORS_ALLOW_METHODS = [
