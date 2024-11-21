@@ -32,14 +32,19 @@ const UserRegistrationForm = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-    setSubmitting(true);
     try {
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/sign_up/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          full_name: values.fullName,
+          phone_number: values.phoneNumber,
+          email: values.email,
+          password: values.password,
+          confirm_password: values.confirmPassword,
+        }),
       });
 
       if (response.status === 201) {
@@ -47,15 +52,30 @@ const UserRegistrationForm = () => {
         resetForm();
       } else if (response.status === 400) {
         const errorData = await response.json();
-        setErrors(errorData);
+        const newErrors = {};
+
+        if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
+          newErrors.email = 'Email already exists. Please try another one.';
+        }
+
+        if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
+          newErrors.phoneNumber = 'Phone number already exists. Please try another one.';
+        }
+
+        if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
+          newErrors.fullName = 'Full name already exists. Please try another one.';
+        }
+
+        setErrors(newErrors);
       } else {
         setErrors({ generic: 'An error occurred. Please try again later.' });
       }
     } catch (error) {
       console.error('Registration error:', error);
       setErrors({ generic: 'An error occurred. Please try again later.' });
+    } finally {
+      setSubmitting(false);
     }
-    setSubmitting(false);
   };
 
   return (
@@ -63,8 +83,10 @@ const UserRegistrationForm = () => {
       {/* Logo and Welcome Section */}
       <div className="text-center mb-8">
         <img src={logo} alt="Toota Logo" className="w-24 h-auto mx-auto mb-4" />
-        <h1 className="text-3xl font-semibold text-gray-800">Welcome to Toota!</h1>
-        <p className="text-gray-600 mt-2">Move goods with ease, whether it’s property, packages, or more.</p>
+        <h1 className="text-3xl font-semibold text-gray-800">Create an Account</h1>
+        <p className="text-gray-600 mt-2">
+          Sign up to experience convenient transportation at your fingertips.
+        </p>
       </div>
 
       {/* Registration Form */}
@@ -83,40 +105,56 @@ const UserRegistrationForm = () => {
             )}
 
             <div className="mb-4">
+              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                Full Name
+              </label>
               <Field
+                id="fullName"
                 name="fullName"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Enter your full name"
                 className="w-full p-3 border border-gray-300 rounded"
               />
               <ErrorMessage name="fullName" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
             <div className="mb-4">
+              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                Phone Number
+              </label>
               <Field
+                id="phoneNumber"
                 name="phoneNumber"
                 type="text"
-                placeholder="Phone Number"
+                placeholder="Enter your phone number"
                 className="w-full p-3 border border-gray-300 rounded"
               />
               <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
             <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
               <Field
+                id="email"
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder="Enter your email"
                 className="w-full p-3 border border-gray-300 rounded"
               />
               <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
             </div>
 
             <div className="mb-4 relative">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
               <Field
+                id="password"
                 name="password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="Password"
+                placeholder="Enter your password"
                 className="w-full p-3 border border-gray-300 rounded"
               />
               <button
@@ -130,10 +168,14 @@ const UserRegistrationForm = () => {
             </div>
 
             <div className="mb-4 relative">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                Confirm Password
+              </label>
               <Field
+                id="confirmPassword"
                 name="confirmPassword"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="Confirm Password"
+                placeholder="Confirm your password"
                 className="w-full p-3 border border-gray-300 rounded"
               />
               <button
@@ -149,14 +191,16 @@ const UserRegistrationForm = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-orange-500 text-white font-bold py-3 rounded hover:bg-orange-600"
+              className={`w-full ${
+                isSubmitting ? 'bg-orange-400' : 'bg-orange-500'
+              } text-white font-bold py-3 rounded hover:bg-orange-600`}
             >
-              Register Your Account
+              {isSubmitting ? 'Creating Account...' : 'Create an Account'}
             </button>
 
             <p className="text-center mt-4 text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/login/user" className="text-blue-500 hover:underline">
+              <Link to="/login/user" className="text-orange-500 hover:underline">
                 Log in here
               </Link>
             </p>
