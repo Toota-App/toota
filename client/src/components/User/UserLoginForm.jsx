@@ -16,37 +16,38 @@ const UserLoginForm = () => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
   });
+  
+const handleSubmit = async (values, { setErrors, setSubmitting }) => {
+  try {
+    const response = await fetch('https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net/api/user/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
 
-  const handleSubmit = async (values, { setErrors, setSubmitting }) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/login/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.access) {
-          localStorage.setItem('access_token', data.access);
-          localStorage.setItem('refresh_token', data.refresh);
-          setSuccessMessage('Login successful! Redirecting to your dashboard...');
-          setTimeout(() => navigate('/dashboard/user'), 2000);
-        } else {
-          throw new Error('Token not found in response');
-        }
+    if (response.ok) {
+      const data = await response.json();
+      if (data.access) {
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        setSuccessMessage('Login successful! Redirecting to your dashboard...');
+        setTimeout(() => navigate('/dashboard/user'), 2000);
       } else {
-        const errorData = await response.json();
-        setErrors({ generic: 'Invalid email or password. Please try again.' });
+        throw new Error('Token not found in response');
       }
-    } catch (error) {
-      setErrors({ generic: 'An error occurred. Please try again later.' });
-    } finally {
-      setSubmitting(false);
+    } else {
+      const errorData = await response.json();
+      setErrors({ generic: 'Invalid email or password. Please try again.' });
     }
-  };
+  } catch (error) {
+    setErrors({ generic: 'An error occurred. Please try again later.' });
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
