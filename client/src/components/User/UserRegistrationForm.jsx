@@ -33,7 +33,7 @@ const UserRegistrationForm = () => {
 
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/sign_up/`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/user/sign_up/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
