@@ -16,15 +16,11 @@ const UserLoginForm = () => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
   });
-  
+
 const handleSubmit = async (values, { setErrors, setSubmitting }) => {
   try {
-    // Manually specify the base URL
-    const baseUrl = 'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net';
-    console.log("Base URL:", baseUrl);
-
-    // Construct the full request URL using the manually specified base URL
-    const requestUrl = `${baseUrl}/api/user/login/`;
+    // Use the base URL from the environment variables
+    const requestUrl = `${import.meta.env.VITE_BASE_URL}/api/user/login/`;
     console.log("Request URL:", requestUrl);
 
     // Send the POST request
@@ -36,12 +32,12 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
       body: JSON.stringify(values),
     });
 
-    // Log the response status and check if the server is working
+    // Log the response status
     console.log("Response Status:", response.status);
 
     // Check if the response is OK (2xx status)
     if (response.ok) {
-      // Log the response data
+      // Parse and log the response data
       const data = await response.json();
       console.log("Response Data:", data);
 
@@ -50,7 +46,7 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);
 
-        // Set success message
+        // Display a success message
         setSuccessMessage('Login successful! Redirecting to your dashboard...');
 
         // Redirect after 2 seconds
@@ -59,22 +55,24 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
         throw new Error('Token not found in response');
       }
     } else {
-      // Log error response
+      // Log and handle non-OK responses
       const errorData = await response.json();
       console.log("Error Response:", errorData);
 
-      setErrors({ generic: 'Invalid email or password. Please try again.' });
+      setErrors({ generic: errorData?.detail || 'Invalid email or password. Please try again.' });
     }
   } catch (error) {
-    // Log any errors that occur during the process
+    // Log and handle errors
     console.error('Error during login:', error);
-
     setErrors({ generic: 'An error occurred. Please try again later.' });
   } finally {
-    // Ensure the form submission state is reset
+    // Reset the submission state
     setSubmitting(false);
   }
 };
+
+
+
 
 
 
