@@ -20,7 +20,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://nice-island-045956903.5.azurestaticapps.net'
+    'https://nice-island-045956903.5.azurestaticapps.net',
+     'http://tootapp.co.za'
 ]
 
 STORAGES = {
