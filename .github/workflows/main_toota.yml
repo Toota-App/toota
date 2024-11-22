@@ -1,7 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
 name: Build and deploy Python app to Azure Web App - Toota
 
 on:
@@ -27,20 +23,17 @@ jobs:
           cd server
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: |
-         cd server
-         python -m pip install --upgrade pip
-         pip install -r requirements.txt
-     
+          cd server
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Collect Static files
         run: |
-         cd server
-         python manage.py collectstatic --noinput
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+          cd server
+          python manage.py collectstatic --noinput
 
       - name: Zip artifact for deployment
         run: |
@@ -71,7 +64,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -79,3 +71,20 @@ jobs:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D538BA6E51DE453A9A2CB8452E1A46CA }}
+
+      - name: Set environment variables
+        run: |
+          az webapp config appsettings set \
+            --name Toota \
+            --resource-group Toota_group-97af \
+            --settings \
+            AZURE_POSTGRESQL_CONNECTIONSTRING=${{ secrets.AZURE_POSTGRESQL_CONNECTIONSTRING }} \
+            PASSWORD=${{ secrets.PASSWORD }} \
+            EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} \
+            EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} \
+            EMAIL_HOST=${{ secrets.EMAIL_HOST }} \
+            EMAIL_PORT=${{ secrets.EMAIL_PORT }} \
+            EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} \
+            EMAIL_USE_SSL=${{ secrets.EMAIL_USE_SSL }}
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
