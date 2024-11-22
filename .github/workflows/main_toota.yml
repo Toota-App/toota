@@ -70,7 +70,7 @@ jobs:
         with:
           app-name: 'Toota'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D538BA6E51DE453A9A2CB8452E1A46CA }}
           package: './server/release.zip'
           app-settings-json: |
             {
