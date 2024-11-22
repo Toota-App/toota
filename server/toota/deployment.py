@@ -1,9 +1,9 @@
-import os 
+import os
 from .settings import *
 from .settings import BASE_DIR
 
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ['WEBSITE_HOSTNAME']]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
 DEBUG = False
 SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -20,9 +20,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://nice-island-045956903.5.azurestaticapps.net' 
+    'https://nice-island-045956903.5.azurestaticapps.net'
 ]
-
 
 STORAGES = {
     "default": {
@@ -34,7 +33,7 @@ STORAGES = {
 }
 
 CONNECTION = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
-CONNECTION_STR = {pair.split('=')[0]:pair.split('=')[1] for pair in CONNECTION.split(' ')}
+CONNECTION_STR = {pair.split('=')[0]: pair.split('=')[1] for pair in CONNECTION.split(' ')}
 
 DATABASES = {
     "default": {
@@ -45,9 +44,6 @@ DATABASES = {
         "PASSWORD": CONNECTION_STR['password'],
     }
 }
-
-
-
 
 LOGGING = {
     'version': 1,
@@ -67,5 +63,4 @@ LOGGING = {
     },
 }
 
-
-STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
