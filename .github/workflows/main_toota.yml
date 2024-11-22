@@ -86,5 +86,3 @@ jobs:
             EMAIL_PORT=${{ secrets.EMAIL_PORT }} \
             EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} \
             EMAIL_USE_SSL=${{ secrets.EMAIL_USE_SSL }}
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
