@@ -54,7 +54,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -64,10 +64,29 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'Toota'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D538BA6E51DE453A9A2CB8452E1A46CA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: './server/release.zip'
+          app-settings-json: |
+            {
+              "VITE_BASE_URL": "${{ secrets.VITE_BASE_URL }}",
+              "VITE_SUPABASE_URL": "${{ secrets.VITE_SUPABASE_URL }}",
+              "VITE_SUPABASE_KEY": "${{ secrets.VITE_SUPABASE_KEY }}",
+              "VITE_GOOGLE_MAPS_API_KEY": "${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}",
+              "VITE_DISTANCE_MATRIX_API_KEY": "${{ secrets.VITE_DISTANCE_MATRIX_API_KEY }}",
+              "VITE_PLACES_API_KEY": "${{ secrets.VITE_PLACES_API_KEY }}",
+              "VITE_DIRECTIONS_API_KEY": "${{ secrets.VITE_DIRECTIONS_API_KEY }}",
+              "AZURE_POSTGRESQL_CONNECTIONSTRING": "${{ secrets.AZURE_POSTGRESQL_CONNECTIONSTRING }}",
+              "PASSWORD": "${{ secrets.PASSWORD }}",
+              "EMAIL_HOST_USER": "${{ secrets.EMAIL_HOST_USER }}",
+              "EMAIL_HOST_PASSWORD": "${{ secrets.EMAIL_HOST_PASSWORD }}",
+              "EMAIL_HOST": "${{ secrets.EMAIL_HOST }}",
+              "EMAIL_PORT": "${{ secrets.EMAIL_PORT }}",
+              "EMAIL_USE_TLS": "${{ secrets.EMAIL_USE_TLS }}",
+              "EMAIL_USE_SSL": "${{ secrets.EMAIL_USE_SSL }}"
+            }
