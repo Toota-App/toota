@@ -91,8 +91,9 @@ CORS_ALLOW_METHODS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://localhost:5173',
     'http://localhost:8000',
-    'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
+    'http://tootapp.co.za',
     'https://nice-island-045956903.5.azurestaticapps.net',
+    
     
 ]
 
