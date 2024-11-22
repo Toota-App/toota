@@ -71,18 +71,3 @@ jobs:
           app-name: 'Toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D538BA6E51DE453A9A2CB8452E1A46CA }}
-
-      - name: Set environment variables
-        run: |
-          az webapp config appsettings set \
-            --name Toota \
-            --resource-group Toota_group-97af \
-            --settings \
-            AZURE_POSTGRESQL_CONNECTIONSTRING=${{ secrets.AZURE_POSTGRESQL_CONNECTIONSTRING }} \
-            PASSWORD=${{ secrets.PASSWORD }} \
-            EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} \
-            EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} \
-            EMAIL_HOST=${{ secrets.EMAIL_HOST }} \
-            EMAIL_PORT=${{ secrets.EMAIL_PORT }} \
-            EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} \
-            EMAIL_USE_SSL=${{ secrets.EMAIL_USE_SSL }}
