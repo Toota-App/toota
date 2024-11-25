@@ -5,7 +5,10 @@ from django.core.wsgi import get_wsgi_application
 website_hostname = os.getenv('WEBSITE_HOSTNAME')
 
 # Decide which settings module to use based on WEBSITE_HOSTNAME
-settings_module = 'toota.deployment' if website_hostname else 'toota.settings'
+# settings_module = 'toota.deployment' if website_hostname else 'toota.settings'
+settings_module = 'toota.settings'
+
+
 
 # Set the DJANGO_SETTINGS_MODULE environment variable
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
