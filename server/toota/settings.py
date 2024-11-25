@@ -15,7 +15,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@sgjkndrdxjkixsgjddckhvfjkjdkf'
+#SECRET_KEY = '@sgjkndrdxjkixsgjddckhvfjkjdkf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -101,8 +101,8 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Database
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
+#ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
+#CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
 SECRET_KEY = os.environ['SECRET_KEY']
 
 
