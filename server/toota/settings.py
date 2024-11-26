@@ -19,8 +19,15 @@ SECRET_KEY = '@sgjkndrdxjkixsgjddckhvfjkjdkf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = [
+    'toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
+    'localhost',
+    '127.0.0.1',
+    'auth.tootapp.co.za'
+]
 
-ALLOWED_HOSTS = ["*"]
+
+
 
 # Application definition
 INSTALLED_APPS = [
