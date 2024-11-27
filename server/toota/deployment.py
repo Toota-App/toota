@@ -64,16 +64,25 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'django_email.log',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
             'propagate': True,
+        },
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
         },
     },
 }
