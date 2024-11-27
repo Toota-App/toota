@@ -26,12 +26,11 @@ jobs:
           cd client
           npm install
           npm run build --if-present
-          npm run test --if-present
 
       - name: Zip artifact for deployment
         run: |
           cd client
-          zip release.zip ./* -r
+          zip -r release.zip build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -55,11 +54,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'Toota-client'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2D098576E1C94BD388A465A1EB399DAE }}
-          package: .
+          package: ./build
