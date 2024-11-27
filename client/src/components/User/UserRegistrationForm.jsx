@@ -32,51 +32,60 @@ const UserRegistrationForm = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}api/user/sign_up/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          full_name: values.fullName,
-          phone_number: values.phoneNumber,
-          email: values.email,
-          password: values.password,
-          confirm_password: values.confirmPassword,
-        }),
-      });
+  try {
+    // Manually specify the base URL
+    const baseUrl = 'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net';
+    console.log("Base URL:", baseUrl);
 
-      if (response.status === 201) {
-        setSuccessMessage('Registration successful! Please check your email to verify.');
-        resetForm();
-      } else if (response.status === 400) {
-        const errorData = await response.json();
-        const newErrors = {};
+    // Construct the full request URL
+    const requestUrl = `${baseUrl}/api/user/sign_up/`;
+    console.log("Request URL:", requestUrl);
 
-        if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
-          newErrors.email = 'Email already exists. Please try another one.';
-        }
+    // Send the POST request
+    const response = await fetch(requestUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        full_name: values.fullName,
+        phone_number: values.phoneNumber,
+        email: values.email,
+        password: values.password,
+        confirm_password: values.confirmPassword,
+      }),
+    });
 
-        if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
-          newErrors.phoneNumber = 'Phone number already exists. Please try another one.';
-        }
+    if (response.status === 201) {
+      setSuccessMessage('Registration successful! Please check your email to verify.');
+      resetForm();
+    } else if (response.status === 400) {
+      const errorData = await response.json();
+      const newErrors = {};
 
-        if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
-          newErrors.fullName = 'Full name already exists. Please try another one.';
-        }
-
-        setErrors(newErrors);
-      } else {
-        setErrors({ generic: 'An error occurred. Please try again later.' });
+      if (errorData.email && errorData.email[0] === 'user with this email already exists.') {
+        newErrors.email = 'Email already exists. Please try another one.';
       }
-    } catch (error) {
-      console.error('Registration error:', error);
+
+      if (errorData.phone_number && errorData.phone_number[0] === 'user with this phone number already exists.') {
+        newErrors.phoneNumber = 'Phone number already exists. Please try another one.';
+      }
+
+      if (errorData.full_name && errorData.full_name[0] === 'user with this full name already exists.') {
+        newErrors.fullName = 'Full name already exists. Please try another one.';
+      }
+
+      setErrors(newErrors);
+    } else {
       setErrors({ generic: 'An error occurred. Please try again later.' });
-    } finally {
-      setSubmitting(false);
     }
-  };
+  } catch (error) {
+    console.error('Registration error:', error);
+    setErrors({ generic: 'An error occurred. Please try again later.' });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
