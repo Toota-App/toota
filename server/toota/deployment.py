@@ -56,9 +56,9 @@ EMAIL_HOST = 'mail.tootapp.co.za'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_USER = "support@tootapp.co.za"
+EMAIL_HOST_PASSWORD = "&[HpO$+2^LW="
+DEFAULT_FROM_EMAIL = "support@tootapp.co.za"
 
 LOGGING = {
     'version': 1,
