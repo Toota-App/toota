@@ -22,6 +22,15 @@ jobs:
         run: |
           npm install
           npm run build
+          ls -la dist
+        working-directory: client
+
+      - name: Verify dist folder
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist folder not found!";
+            exit 1;
+          fi
         working-directory: client
 
       - name: Zip artifact for deployment
@@ -50,6 +59,9 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
+
+      - name: Debug: Check deployment contents
+        run: ls -la dist
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
