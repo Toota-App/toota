@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - client-toota
 
 on:
@@ -21,17 +18,16 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: Install dependencies and build the app
         run: |
-          cd client
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
+        working-directory: client
 
       - name: Zip artifact for deployment
         run: |
-          cd client
-          zip release.zip ./* -r
+          zip -r release.zip dist
+        working-directory: client
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -55,11 +51,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'client-toota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_211FC37D921247F68A1196135695E3E9 }}
-          package: .
+          package: ./dist
