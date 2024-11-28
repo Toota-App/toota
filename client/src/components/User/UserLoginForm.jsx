@@ -19,8 +19,12 @@ const UserLoginForm = () => {
 
 const handleSubmit = async (values, { setErrors, setSubmitting }) => {
   try {
-    // Use the base URL from the environment variables
-    const requestUrl = `${import.meta.env.VITE_BASE_URL}/api/user/login/`;
+    // Use the base URL from the environment variables or fall back to a hardcoded URL
+    const baseURL = import.meta.env.VITE_BASE_URL || "https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net/";
+    const requestUrl = `${baseURL}/api/user/login/`;
+
+    // Log the base URL and full request URL for debugging
+    console.log("Base URL:", baseURL);
     console.log("Request URL:", requestUrl);
 
     // Send the POST request
@@ -32,44 +36,35 @@ const handleSubmit = async (values, { setErrors, setSubmitting }) => {
       body: JSON.stringify(values),
     });
 
-    // Log the response status
+    // Log the response status for debugging
     console.log("Response Status:", response.status);
 
-    // Check if the response is OK (2xx status)
     if (response.ok) {
-      // Parse and log the response data
       const data = await response.json();
       console.log("Response Data:", data);
 
       if (data.access) {
-        // Save tokens to localStorage
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);
-
-        // Display a success message
         setSuccessMessage('Login successful! Redirecting to your dashboard...');
-
-        // Redirect after 2 seconds
         setTimeout(() => navigate('/dashboard/user'), 2000);
       } else {
         throw new Error('Token not found in response');
       }
     } else {
-      // Log and handle non-OK responses
       const errorData = await response.json();
       console.log("Error Response:", errorData);
-
       setErrors({ generic: errorData?.detail || 'Invalid email or password. Please try again.' });
     }
   } catch (error) {
-    // Log and handle errors
     console.error('Error during login:', error);
     setErrors({ generic: 'An error occurred. Please try again later.' });
   } finally {
-    // Reset the submission state
     setSubmitting(false);
   }
 };
+
+
 
 
 
