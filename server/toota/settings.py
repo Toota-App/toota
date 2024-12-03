@@ -91,7 +91,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
     'https://nice-island-045956903.5.azurestaticapps.net',
     'https://tootapp.vercel.app',
-    
+]
 
 CORS_ALLOW_METHODS = [
     "DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"
