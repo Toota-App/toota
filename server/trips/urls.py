@@ -9,7 +9,9 @@ from .views import (
     PaymentRetrieveUpdateDestroyAPIView, 
     DriverAcceptanceRateView, 
     DriverTotalTripsCompletedView, 
-    DriverDailyEarningsView
+    DriverDailyEarningsView,
+    TripStatusView,
+
 )
 
 app_name = 'trip'
@@ -25,6 +27,7 @@ urlpatterns = [
     path('driver/<int:driver_id>/acceptance_rate/', DriverAcceptanceRateView.as_view(), name='driver-acceptance-rate'),
     path('driver/<int:driver_id>/total_trips_completed/', DriverTotalTripsCompletedView.as_view(), name='driver-total-trips-completed'),
     path('driver/<int:driver_id>/earnings/<str:date>/', DriverDailyEarningsView.as_view(), name='driver-daily-earnings'),
+    path('trip/<uuid:trip_id>/status/', TripStatusView.as_view(), name='trip-status'),
 ]
 
 

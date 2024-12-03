@@ -39,9 +39,9 @@ class TripSerializer(serializers.ModelSerializer, PhoneNumberValidatorMixin):
             raise serializers.ValidationError({"bid": "Bid amount must be at least 50."})
 
         # Validate the pickup time
-        if data.get('pickup_time') and data['pickup_time'] <= timezone.now():
-            logger.warning("Pickup time is in the past.")
-            raise serializers.ValidationError({"pickup_time": "Pickup time must be in the future."})
+        #if data.get('pickup_time') and data['pickup_time'] <= timezone.now():
+            #logger.warning("Pickup time is in the past.")
+            #raise serializers.ValidationError({"pickup_time": "Pickup time must be in the future."})
 
         # Validate number of floors
         if data.get('number_of_floors') is not None and data['number_of_floors'] < 0:
