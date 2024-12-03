@@ -27,8 +27,9 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'https://nice-island-045956903.5.azurestaticapps.net',
-     'http://tootapp.co.za',
-     'https://tootapp.vercel.app'
+     'https://tootapp.co.za',
+     'https://tootapp.vercel.app',
+     'https://www.tootapp.co.za',
       
 ]
 
