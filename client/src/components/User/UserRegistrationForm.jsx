@@ -34,12 +34,12 @@ const UserRegistrationForm = () => {
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
   try {
     // Manually specify the base URL
-    const baseUrl = 'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net';
-    console.log("Base URL:", baseUrl);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+    //console.log("Base URL:", baseUrl);
 
     // Construct the full request URL
     const requestUrl = `${baseUrl}/api/user/sign_up/`;
-    console.log("Request URL:", requestUrl);
+    //console.log("Request URL:", requestUrl);
 
     // Send the POST request
     const response = await fetch(requestUrl, {
