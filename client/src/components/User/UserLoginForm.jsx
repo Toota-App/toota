@@ -20,12 +20,12 @@ const UserLoginForm = () => {
 const handleSubmit = async (values, { setErrors, setSubmitting }) => {
   try {
     // Use the base URL from the environment variables or fall back to a hardcoded URL
-    const baseURL = import.meta.env.VITE_BASE_URL || "https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net/";
+    const baseURL = import.meta.env.VITE_BASE_URL;
     const requestUrl = `${baseURL}/api/user/login/`;
 
     // Log the base URL and full request URL for debugging
-    console.log("Base URL:", baseURL);
-    console.log("Request URL:", requestUrl);
+    //console.log("Base URL:", baseURL);
+    //console.log("Request URL:", requestUrl);
 
     // Send the POST request
     const response = await fetch(requestUrl, {
