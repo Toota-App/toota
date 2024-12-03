@@ -90,7 +90,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://tootapp.co.za',
     'https://toota-gwgmcdefdqhde3g6.southafricanorth-01.azurewebsites.net',
     'https://nice-island-045956903.5.azurestaticapps.net',
-]
+    'https://tootapp.vercel.app',
     
 
 CORS_ALLOW_METHODS = [
@@ -102,6 +102,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://tootapp.co.za',
     'https://nice-island-045956903.5.azurestaticapps.net',
+    'https://tootapp.vercel.app',
     
     
 ]
