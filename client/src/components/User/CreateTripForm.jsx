@@ -17,6 +17,34 @@ import {
     faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { useNavigate } from 'react-router-dom';
+
+const fetchTripStatus = async (tripId, token) => {
+    try {
+        // Make a GET request to the same endpoint to get the status of the created trip
+        const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/api/trip/`, // Same endpoint to get the trip details
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    trip_id: tripId, // Pass the tripId to get the specific trip's status
+                },
+            }
+        );
+
+        // The response will likely contain the trip status and other data
+        console.log('Trip Status:', response.data);
+        // Handle the trip status or update your state/UI here
+        setMessage({ text: `Trip status: ${response.data.status}`, type: 'success' });
+
+    } catch (error) {
+        console.error('Error fetching trip status:', error);
+        setMessage({ text: 'Failed to fetch trip status. Please try again.', type: 'error' });
+    }
+};
+
 const libraries = ['places'];
 
 const CreateTripForm = () => {
@@ -125,7 +153,7 @@ const CreateTripForm = () => {
     }
 },
 
-
+});
     const handleCloseMessage = () => {
         setMessage(null);
     };
