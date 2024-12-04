@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { ClipLoader } from 'react-spinners'; // Spinner
+import { getAccessToken } from '../../services/AuthService'; // Import the getAccessToken function
 
 const TripStatus = () => {
   const { tripId } = useParams(); // Get tripId from the URL
@@ -20,11 +21,21 @@ const TripStatus = () => {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
+        // Get the access token using the getAccessToken function
+        const token = getAccessToken();
+
+        // Check if the token is valid (optional)
+        if (!token) {
+          setError("You are not authorized. Please log in again.");
+          return;
+        }
+
+        // Corrected endpoint with 'trip' repeated in the URL path
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/trip/${tripId}/status`, // Adjust this based on your actual endpoint
+          `${import.meta.env.VITE_BASE_URL}/api/trip/trip/${tripId}/status/`, // Corrected URL structure
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`, // Use token from localStorage
+              Authorization: `Bearer ${token}`, // Use token from getAccessToken
             },
           }
         );

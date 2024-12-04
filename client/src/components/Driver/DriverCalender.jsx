@@ -4,7 +4,7 @@ import { getAccessToken } from '../../services/AuthService';
 import PaymentForm from './PaymentForm';
 
 const DriverCalendar = () => {
-  const token = getAccessToken();
+  const [token, setToken] = useState(null); // Use state to store token
   const [trips, setTrips] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,8 +14,20 @@ const DriverCalendar = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   useEffect(() => {
-    fetchTrips();
+    // Retrieve the token when the component mounts
+    const fetchToken = async () => {
+      const fetchedToken = await getAccessToken();
+      setToken(fetchedToken);
+    };
+    fetchToken();
   }, []);
+
+  useEffect(() => {
+    // Fetch trips only if the token is available
+    if (token) {
+      fetchTrips();
+    }
+  }, [token]);
 
   const fetchTrips = async () => {
     setIsLoading(true);
@@ -87,6 +99,10 @@ const DriverCalendar = () => {
   const handleOpenModal = () => {
     setShowPaymentModal(true);
   };
+
+  if (!token) {
+    return <p className="text-center text-gray-500">Loading authentication...</p>;
+  }
 
   return (
     <div className="container mx-auto p-4 pt-6">
