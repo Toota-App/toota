@@ -1,0 +1,6249 @@
+[
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 6,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 6,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 6,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 6,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add driver",
+        "content_type": 7,
+        "codename": "add_driver"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change driver",
+        "content_type": 7,
+        "codename": "change_driver"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete driver",
+        "content_type": 7,
+        "codename": "delete_driver"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view driver",
+        "content_type": 7,
+        "codename": "view_driver"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add dropoff location",
+        "content_type": 8,
+        "codename": "add_dropofflocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change dropoff location",
+        "content_type": 8,
+        "codename": "change_dropofflocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete dropoff location",
+        "content_type": 8,
+        "codename": "delete_dropofflocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view dropoff location",
+        "content_type": 8,
+        "codename": "view_dropofflocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add pickup location",
+        "content_type": 9,
+        "codename": "add_pickuplocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change pickup location",
+        "content_type": 9,
+        "codename": "change_pickuplocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete pickup location",
+        "content_type": 9,
+        "codename": "delete_pickuplocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view pickup location",
+        "content_type": 9,
+        "codename": "view_pickuplocation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add trip",
+        "content_type": 10,
+        "codename": "add_trip"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change trip",
+        "content_type": 10,
+        "codename": "change_trip"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete trip",
+        "content_type": 10,
+        "codename": "delete_trip"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view trip",
+        "content_type": 10,
+        "codename": "view_trip"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add payment",
+        "content_type": 11,
+        "codename": "add_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change payment",
+        "content_type": 11,
+        "codename": "change_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete payment",
+        "content_type": 11,
+        "codename": "delete_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view payment",
+        "content_type": 11,
+        "codename": "view_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add Token",
+        "content_type": 12,
+        "codename": "add_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change Token",
+        "content_type": 12,
+        "codename": "change_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete Token",
+        "content_type": 12,
+        "codename": "delete_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view Token",
+        "content_type": 12,
+        "codename": "view_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add token",
+        "content_type": 13,
+        "codename": "add_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change token",
+        "content_type": 13,
+        "codename": "change_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete token",
+        "content_type": 13,
+        "codename": "delete_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view token",
+        "content_type": 13,
+        "codename": "view_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can add outstanding token",
+        "content_type": 14,
+        "codename": "add_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can change outstanding token",
+        "content_type": 14,
+        "codename": "change_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can delete outstanding token",
+        "content_type": 14,
+        "codename": "delete_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can view outstanding token",
+        "content_type": 14,
+        "codename": "view_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can add blacklisted token",
+        "content_type": 15,
+        "codename": "add_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can change blacklisted token",
+        "content_type": 15,
+        "codename": "change_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can delete blacklisted token",
+        "content_type": 15,
+        "codename": "delete_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can view blacklisted token",
+        "content_type": 15,
+        "codename": "view_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "user",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "driver",
+        "permissions": []
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "authentication",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "authentication",
+        "model": "driver"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "trips",
+        "model": "dropofflocation"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "trips",
+        "model": "pickuplocation"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "trips",
+        "model": "trip"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "trips",
+        "model": "payment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "token"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "tokenproxy"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "token_blacklist",
+        "model": "outstandingtoken"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "token_blacklist",
+        "model": "blacklistedtoken"
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$7EGcLvxbp4GTgVEZF9f0ej$GCzP1MU/oY/p4PPbXAk/eupu/twk9AQa+Qz/m9AX6rQ=",
+        "last_login": null,
+        "is_superuser": true,
+        "email": "vinnywalker96@gmail.com",
+        "phone_number": "0786559151",
+        "full_name": "Marlvin Kwenda",
+        "is_staff": true,
+        "is_active": true,
+        "created": "2024-05-31T14:44:06.224Z",
+        "updated": "2024-05-31T14:44:06.224Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$a8yFJEe8t4R0wrDxCAh2Vx$cssAbQSU3PaPLU2dEeqpzyRxZOFxpT35UnJjAvJ/D7g=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nyaruwatastewart27@gmail.com",
+        "phone_number": "0676014490",
+        "full_name": "Stewart Nyaruwata",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-03T16:18:45.554Z",
+        "updated": "2024-06-03T16:18:45.554Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$351rnEwvCkDHbDVAlqFq4F$wmkwf0Znk38ur9hpvmc90N4TTcNInF7+3y4cf1AGa3s=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "blogpostbackend@gmail.com",
+        "phone_number": "0676014491",
+        "full_name": "Ste",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-04T13:45:07.292Z",
+        "updated": "2024-06-04T13:45:07.292Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$XTB8gc8I9ZZnXq4HAPhLAi$L+UWtnzwUHJjJS0cmBH0rQYQw0wZ6UFnTRnsTTRm//k=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "thewinner6770@gmail.com",
+        "phone_number": "0676014494",
+        "full_name": "Enock Tshwane",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-05T18:42:58.636Z",
+        "updated": "2024-06-05T18:42:58.637Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$KqntIelQSokILLzMg9r5Am$rYIHZh1HWfVfCH3VgnQGpP9yZzEyqVYl4G4dHeap7ds=",
+        "last_login": null,
+        "is_superuser": true,
+        "email": "mfundodlamini6@gmail.com",
+        "phone_number": "0614998015",
+        "full_name": "Mfundo Dlamini",
+        "is_staff": true,
+        "is_active": true,
+        "created": "2024-06-19T13:54:58.819Z",
+        "updated": "2024-06-19T13:54:58.819Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$AaDD1ftPLjp5m7Rf5x0k1C$OM02g0w5KTeM11XRSK6ptkUwZhgi0MUyLcvvmdfPojw=",
+        "last_login": null,
+        "is_superuser": true,
+        "email": "mfundotoota@gmail.com",
+        "phone_number": "0736010740",
+        "full_name": "Mfundo Dlamini",
+        "is_staff": true,
+        "is_active": true,
+        "created": "2024-06-19T14:09:52.556Z",
+        "updated": "2024-06-19T14:09:52.556Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$ZEA1xtb6Ink7KCZoW7A4mf$lAEIwJzPpJM+1NPMfuswdPbuG1lNc1Axt8tJHNtHv7M=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "trymunsaka@gmail.com",
+        "phone_number": "0613771790",
+        "full_name": "Respect Munsaka",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-19T16:31:58.980Z",
+        "updated": "2024-06-19T16:31:58.980Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$HCNC6z96Jj0BwYKfNxrbzq$l5yAVLRDf4zN8Z0t+d+CkT8xznB21IRtDotfA9lad9w=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "clintonmaphakge@gmail.com",
+        "phone_number": "0793420759",
+        "full_name": "Clinton Maphakge",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-19T19:06:11.050Z",
+        "updated": "2024-06-19T19:06:11.050Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$NZqtH8nNIOD5SuC2aejI4w$nGSayl8kHyfIHNsW6IpWiSpO9yoUWyFVFuRIDHilpuI=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "stevnyaru@gmail.com",
+        "phone_number": "0676014492",
+        "full_name": "Steven Nyaruwata",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-19T19:58:10.591Z",
+        "updated": "2024-06-19T19:58:10.591Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$N4FVV7dwUzG2Aa8sHey6dU$UbXu6o1Yh5RL0gKxpowZA8zTQPutGhXh6dHMb/4jc18=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nathi.k@outlook.com",
+        "phone_number": "0729608630",
+        "full_name": "Nkosinathi",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T06:07:45.237Z",
+        "updated": "2024-06-20T06:07:45.237Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$PSKPbocD1dmT1oSTDZv6IL$Q4f9I2hgj4rLQVVjUV3Eq2x2zKOhP152md3xZu/slkM=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "cs.mofokeng85@gmail.com",
+        "phone_number": "0768763569",
+        "full_name": "Kamohelo Simon Motaung",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T11:16:42.625Z",
+        "updated": "2024-06-20T11:16:42.625Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$rO6MsQANSshLg2jKJ3UEkK$HZCQVPzbl3pY05fQhENVYWi0fS5TUzXjdFEG1GfPG5g=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "vengaimakandise14@gmail.com",
+        "phone_number": "065 9482310",
+        "full_name": "Vengai Makandise",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T15:30:04.587Z",
+        "updated": "2024-06-20T15:30:04.587Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 13,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$gxZrmKiuOS9ZY3bJOxQHzN$OPcOHYrjyM/D7U897fF14EMdt0yqgwzvRmtuWYZhbv4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "luckynhlanhla875@gmail.com",
+        "phone_number": "0834895831",
+        "full_name": "Lucky Nhlanhla",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T15:49:42.195Z",
+        "updated": "2024-06-20T15:49:42.195Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 14,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$2ryWggPegiroO1RYM58u42$RQ2mITUX2gGYa31LRhM770AFqY/uxu0FgcLme6n2vfw=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mrtnmawadze@gmail.com",
+        "phone_number": "0677369021",
+        "full_name": "MAWADZE MARTIN",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T17:03:44.740Z",
+        "updated": "2024-06-20T17:03:44.740Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$su1Jz8zBkN7ov54k3vLuO0$c8Wv/s6Lc1eQcEQgapPeQIjZ3u+swNho4deTXX5CFKo=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "jselahla8@gmail.com",
+        "phone_number": "0691463411",
+        "full_name": "Jekonias",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T17:06:46.079Z",
+        "updated": "2024-06-20T17:06:46.079Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$EVkgpc0Yrx1zuhrINgl0i3$YKK9Vhoq2B1BXlOn3Bxu3Op5NdPMSPOZo31G3wcLDik=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "jelengqondi@gmail.com",
+        "phone_number": "060 8214398",
+        "full_name": "Ngqondi Jele",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T17:19:09.569Z",
+        "updated": "2024-06-20T17:19:09.569Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 17,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$97kytbUYLAB53pstQIYHKT$LN0bUwzLuPyXtQzEkqFB61zTo/s9SWxzCyT3CSJyiRs=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "dropswift60@gmail.com",
+        "phone_number": "0739018593",
+        "full_name": "Peter Maphutha",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T17:36:22.479Z",
+        "updated": "2024-06-20T17:36:22.479Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$1kAJbTmXegxRHFCWR4fqTy$iqooB4OtW5ATuTwwfDOOeAAXfZufXLQY4FhiahQ3SRM=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "swiftdropsolutionsptyltd@gmail.com",
+        "phone_number": "0658525102",
+        "full_name": "Lichake Jan Motloung",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T17:43:17.545Z",
+        "updated": "2024-06-20T17:43:17.545Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 19,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$rcZV4taP3H507kUcuvV2PP$Ck1aGFr++mJh+xdST46jAForfY/g5C7UHu+cv8N9aKQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "tshepobridge947@gmail.com",
+        "phone_number": "0604109436",
+        "full_name": "TSHEPO BRIDGE BALOYI",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T18:01:47.576Z",
+        "updated": "2024-06-20T18:01:47.576Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$sQO7mmbZnOfeL5YUl8bmnK$UnfOKPQTJ5FVqIsl2DvMae3oUI+9h2VgynGM0et/YbM=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nxumalotbm@gmail.com",
+        "phone_number": "0738872627",
+        "full_name": "Thembinkosi",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T18:26:40.069Z",
+        "updated": "2024-06-20T18:26:40.069Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 21,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$8WOJ2BV5a6G8GVZ97jQpR9$3UwwtOjBWLDr5HI6ObMWg3t9BuKjGuUbzPUc5GR+9J0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mnyandueric@gmail.com",
+        "phone_number": "0650919911",
+        "full_name": "Eric",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T18:34:28.279Z",
+        "updated": "2024-06-20T18:34:28.279Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 22,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$QArOMUGh4fDWPwoCQSu7LV$swdZZMxm9pe5hlVYFwpmfTTLSxlLewNnDvwGB77+Sl8=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mashibelamkhabela@gmail.com",
+        "phone_number": "0672482186",
+        "full_name": "Mashibela Mkhabela",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T18:50:15.979Z",
+        "updated": "2024-06-20T18:50:15.979Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 23,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Nu5PboXuLolvtE3ByEFbYd$4H2Qd31ySbn+HpX+bxyQQRD6Fv++hMHWNbhxL8Y+lZ4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "thabangmoemise22@gmail.com",
+        "phone_number": "0788439952",
+        "full_name": "Thabang Moemise",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T18:59:46.377Z",
+        "updated": "2024-06-20T18:59:46.377Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 24,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$ygIg16i54KwTS6cwTOGTZK$TdpAviU/gS3agkGR4UIGq8G5y+GF5bLsrdzcK5J7u5w=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "sindile.tyanti@gmail.com",
+        "phone_number": "0783740657",
+        "full_name": "Winston Sindile Tyanti",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T19:23:09.973Z",
+        "updated": "2024-06-20T19:23:09.973Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 25,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$vxphvloszYuIFjlKPS3izZ$Cam+Z3iSBY1RvjmzfjecJ+kXwuSAkZDaNXMX7kz6mLw=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "motheomogotsi87@gmail.com",
+        "phone_number": "0605289872",
+        "full_name": "Motheo Mogotsi",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T20:41:39.048Z",
+        "updated": "2024-06-20T20:41:39.048Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 26,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$pPKqr3OK9317Dbl5Fpp27T$2AEpWCYbTNeozweQ48CWcD3wJf/eFYtIEZjhuPPkMqQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "msutukazilolo@gmail.com",
+        "phone_number": "0630472515",
+        "full_name": "MSUTUKAZI",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T20:48:37.750Z",
+        "updated": "2024-06-20T20:48:37.750Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 27,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$mAfe2Zmcnx9Aj1TJFimntR$H6uTANN/YJv5/I7Sudtz65KolBXUxXbz5UuAk2ws7d4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "singhmb2701@gmail.com",
+        "phone_number": "0833096627",
+        "full_name": "Mahendra Singh",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-20T21:22:10.691Z",
+        "updated": "2024-06-20T21:22:10.692Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 28,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$nVJcGApB78ZYvIcKVftMBy$sSj5XHwWsVExuf6UdLLtjo5ojTbacxdPqmh3ez20KIo=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "472905@gmail.com",
+        "phone_number": "0837363800",
+        "full_name": "Lindokuhle Ndaba",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T01:45:52.295Z",
+        "updated": "2024-06-21T01:45:52.295Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 29,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$6k16dMSZ7knqkiZ9G8A951$gW6aY4sGcMZPuyQMHxIaPB2BgYOeyoLQAfv6A2WYuaY=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "maandarat@gmail.com",
+        "phone_number": "0793472973",
+        "full_name": "Maanda Rathari",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T04:12:37.455Z",
+        "updated": "2024-06-21T04:12:37.455Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 30,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$zAO8ZYAF5pDXbkHmlJBZNi$9xESgw3fUhdUp+OtQwJsUJ9Y3jwqbkJWdQV613Phgm0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "luthulinhlanhla8@gmail.com",
+        "phone_number": "0836922375",
+        "full_name": "MR NHLANHLA P LUTHULI",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T04:36:03.155Z",
+        "updated": "2024-06-21T04:36:03.155Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 31,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$fZayKIhqMVoLSXSiJNCUTJ$oaQCEWgjj7Eev3Qyw7KGdflarN68Q/6JY/5JzIQ+mE0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "Mzwandilevala@gmail.com",
+        "phone_number": "0719000347",
+        "full_name": "Mzwandile Vala",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T07:23:33.424Z",
+        "updated": "2024-06-21T07:23:33.424Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 32,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$XEjIxFter7i0Vkwr41tN79$+0jFQ8xETEi304cx6GUIuJUOEv4yd21dx//dTGnxDBc=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "tshepon102@gmail.com",
+        "phone_number": "076 317 5142",
+        "full_name": "Tshepo Nhlapo",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T08:33:41.938Z",
+        "updated": "2024-06-21T08:33:41.938Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 33,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Rhcg4xiRagsOLL2idLE840$fqtRNWmF2NQa5rxLPCaHZe4RVJuZAToT4KCAvycZBbA=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "Thobela.Lelibana@gmail.com",
+        "phone_number": "0732377470",
+        "full_name": "Thobela Lelibana",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T11:08:07.348Z",
+        "updated": "2024-06-21T11:08:07.348Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 34,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$35CHIgkzeXEr1g5mpIpnvc$XlZzejCfyxR0bfqmu1PMx0UgB6vNB1jBLfL3us6ss1Y=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "shummang04@gmail.com",
+        "phone_number": "0722280219",
+        "full_name": "Russel Dop Moele",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T12:46:30.740Z",
+        "updated": "2024-06-21T12:46:30.740Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 35,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$0hDUrzdUv9ibhOQE4Dac2r$gDQnq6ekdU8xbauD4DWkdVtx3GcOlfYYgvfvZioVijk=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "ThapeloTCmbele@gmail.com",
+        "phone_number": "0695846048",
+        "full_name": "Thapelo Mbele",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T13:52:42.834Z",
+        "updated": "2024-06-21T13:52:42.834Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 36,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$unfnEj5tuTc5eqgBxknr2Q$swJUEq1vtlcejIzNxZXfeis9slI/OlJgFrVpSJc6pko=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "phumlanimbanjwa@yahoo.com",
+        "phone_number": "0735939964",
+        "full_name": "Phumlani Brian Mbanjwa",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T18:13:39.517Z",
+        "updated": "2024-06-21T18:13:39.517Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 37,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$kV6yN0EMgRa3VQ6Ht7WTfO$0uH85uSWdaf8j6Mx8nF0x5BTOf7xJhC2VZ0rA0boVm0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "kompechaherman@gmail.com",
+        "phone_number": "081 685 2674",
+        "full_name": "Gomotsang Herman Kompecha",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T19:58:39.698Z",
+        "updated": "2024-06-21T19:58:39.698Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 38,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$blFoKIoZMAlCGA0RykM1Ol$YwwS+rR5v0PUn6DX8azWQ5u/I4vXM6fzW0QQ2G04Pw0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "llucasalohoma@gmail.com",
+        "phone_number": "27763734647",
+        "full_name": "Luca Salohoma",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-21T20:03:05.404Z",
+        "updated": "2024-06-21T20:03:05.404Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 39,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$WcgEiUMUzxGXwsVhrsaXRV$GngHVIq/IoFgomCDiqvVNXmEn8Gtl8MKh6Y3N7N/Jr8=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nkadimenglesley@gmail.com",
+        "phone_number": "0699966873",
+        "full_name": "lesley morereng Nkadimeng",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T01:21:49.263Z",
+        "updated": "2024-06-22T01:21:49.263Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 40,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$khYD2ACqoYLLvpuaRTrSQ8$UkNCKKeJHPqAIWK0CEpSZUdbyQxbEQwwDlBznFCxk/M=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "dumsanishabangu17@gmail.com",
+        "phone_number": "0722796243",
+        "full_name": "Dumsani Shabangu",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T03:59:18.192Z",
+        "updated": "2024-06-22T03:59:18.192Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 41,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$kfewLdCTrI7iBFQZkAh04A$jbPYkm4uzSb9OrXm9w1y6a3IUUqTNILXQJDM4wIDQng=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "angelorhodes@ymail.com",
+        "phone_number": "0655268557",
+        "full_name": "Angelo Rhodes",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T05:56:02.323Z",
+        "updated": "2024-06-22T05:56:02.323Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 42,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$WD7neSRZjiHS76Aw8avC4V$UOKv4uXdsJdjaXAs1Eq4ECB197BgM9v95EdvBK5Ftgs=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "kacrawford114@gmail.com",
+        "phone_number": "670917012",
+        "full_name": "Keith Crawford",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T08:36:49.848Z",
+        "updated": "2024-06-22T08:36:49.848Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 43,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$06W7MCnUsGnjhQ68Kddd9D$5eZ9bIZi4fDzuF/4ddr2g0xyc1Q7+tIXbr6kZ0th+ao=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "ntokozohlatshwayo02@gmail.com",
+        "phone_number": "0719253258",
+        "full_name": "Ntokozo Hlatshwayo",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T10:07:54.553Z",
+        "updated": "2024-06-22T10:07:54.553Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 44,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$2bEQz4oiGe8QIori4NNnFH$ihcjZVG5hotLtH9t4jnwaW5ZXFMdJUUK35+/e6Mdb9s=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "busisiwecarolkhoza@gmail.com",
+        "phone_number": "0812077449",
+        "full_name": "Busisiwe Carol Khoza",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T13:58:46.582Z",
+        "updated": "2024-06-22T13:58:46.582Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 45,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$QAS8eTYr3ti8qK7kjQGYVy$iMjJAa5cSnymVu+UMm0YddU2l2UvRyC8PEmaxfxLbN4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "zumathulani8@gmail.com",
+        "phone_number": "0606742467",
+        "full_name": "Thulani Zuma",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T14:06:01.978Z",
+        "updated": "2024-06-22T14:06:01.978Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 46,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$rTN6vhp1BL330qIfRsCxlV$G2qCxGLSW5YhBWj5MvUnf4AJa7hDlfKPome8XNZZ6Nk=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "fanie.mack@gmail.com",
+        "phone_number": "071 733 8098",
+        "full_name": "Fanie Mbonani",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T14:49:59.217Z",
+        "updated": "2024-06-22T14:49:59.217Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 47,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$JTiAEEPtJEBMcqXNhBv1Qm$YJtdQEaPBeIf00Aos8pvmsIbW1/sv8noUVtp3t9e9v4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "sosman1234a@gmail.com",
+        "phone_number": "073 321 7165",
+        "full_name": "Peter Tlhomelang",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T16:27:22.619Z",
+        "updated": "2024-06-22T16:27:22.619Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 48,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$fGqTj2cahm6Jk8K1vKQPl9$5KlHAvhCQA6NOJwBc8el5eSdZ5TT49IOihTaSpRhrSY=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "ljmkafane@gmail.com",
+        "phone_number": "0762667126",
+        "full_name": "Lunga Mkafane",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T17:14:06.757Z",
+        "updated": "2024-06-22T17:14:06.757Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 49,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$BEdaFEUEUaWud97Vo06RmV$7JgDxKe9amqT5/58me7iRr6ly5pKE5su9rI+Ci7pguA=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "lameckfore@gmail.com",
+        "phone_number": "084 079 0802",
+        "full_name": "Lameck Fore",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-22T17:20:41.546Z",
+        "updated": "2024-06-22T17:20:41.546Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 50,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$3sS81SEtbXqIfrri3NLev0$OxgO3IBhjpfuW91wjEvElsqGfUtHqGnEnzIROjhnCng=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "williandile193@gmail.com",
+        "phone_number": "0836289649",
+        "full_name": "Andile Williams",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T05:38:07.314Z",
+        "updated": "2024-06-23T05:38:07.314Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 51,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$XJJzSIoj1hktIHs9JEvNIw$y04Hlp4U8HtvaqFcLMEbbf0PRwXQjRXt3VIyr0IwYcs=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "dontumelo47@gmail.com",
+        "phone_number": "0658503750",
+        "full_name": "Don sekoati",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T06:07:54.507Z",
+        "updated": "2024-06-23T06:07:54.507Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 52,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$y87oEQcDczRIFqcHf23DI8$UYpq0VulEa48zRhHpYS0Bl76W/pzfumsvDpTaBzJp58=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nudawn78@gmail.com",
+        "phone_number": "0826958093",
+        "full_name": "Mpho",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T07:34:00.138Z",
+        "updated": "2024-06-23T07:34:00.138Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 53,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$l73PtW2r5MRP3T9FBKWgyC$J9a81JHSq06vYrOte7JDOFqCgOniTg8dYWDbbq2OyzY=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "landisazwane@gmal.com",
+        "phone_number": "0785882741",
+        "full_name": "Landisa",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T10:07:24.917Z",
+        "updated": "2024-06-23T10:07:24.917Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 54,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$XJmeJMq6SltXhlbA3qXvoO$L7OR15pDfQxBW2tyKVoJsakQOQlBYyrlbJhhCdgGUuU=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "floyddeedube@gmail.com",
+        "phone_number": "0764904595",
+        "full_name": "Koketso Floyd",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T10:09:03.622Z",
+        "updated": "2024-06-23T10:09:03.622Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 55,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$dmxfWF5yodKcgOEu7SB2mC$HndZv3KXB8543rP29vD8pXOMYDwSID/qptJEwelW16w=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "prosperkapeta23@gmail.com",
+        "phone_number": "0799811321",
+        "full_name": "Prosper",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T15:31:05.364Z",
+        "updated": "2024-06-23T15:31:05.364Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 56,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$frwOB9U2R7a8bZs0fl2Pf4$heawUzV5vlVOlSG2Aa0YNhysSiV/5VuNjDxFqoRjmhM=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "moganomodishe4@gmail.com",
+        "phone_number": "0676504559",
+        "full_name": "Modishe",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T15:57:05.562Z",
+        "updated": "2024-06-23T15:57:05.562Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 57,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$7nBXKueL8ITkFUeY0T7I4K$xhJ+JcHJpUrcUFL19t9DgyoRMhXgcDr3bXaTB5pgW9s=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "znselepe@mliloelectr.co.za",
+        "phone_number": "083 792 9898",
+        "full_name": "Zephania Selepe",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T15:57:57.762Z",
+        "updated": "2024-06-23T15:57:57.762Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 58,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Mz3QmokWbZ3mfaxvJRteam$VZ6Bt3LxXWzfKzdWabBp10dveh4IbNCnTWfy0FKHvqE=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "ipeleng.madisha@gmail.com",
+        "phone_number": "0748023215",
+        "full_name": "Ipeleng Madisha",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T19:42:34.496Z",
+        "updated": "2024-06-23T19:42:34.496Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 59,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$MG4tH3ltU05c2b4DwfB0xP$2Z3F5kQ9vl7IgDTC7L1AjEO9xwXeFvuTrOtuI2ND/W0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "tpconcepts80@gmail.com",
+        "phone_number": "0721468556",
+        "full_name": "Papie Makuane",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-23T19:47:11.404Z",
+        "updated": "2024-06-23T19:47:11.404Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 60,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$KdTTtTfv2dKdoovii5fKZF$WhZHil+3uDkt9QBk3fCzGqsu67nJuNTnRGeuTF/kMTg=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "joevasco99@gmail.com",
+        "phone_number": "0680630009",
+        "full_name": "Emmanuel Juwawo",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T06:18:28.891Z",
+        "updated": "2024-06-24T06:18:28.891Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 61,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$NHGYvO1hjik7MpNkLzBC8B$YXy+YR5bJ64XV+hoPDz/vq4ZX0fOdlbWlbgmlYKDNfQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "enver.eprojects@gmail.com",
+        "phone_number": "0736464041",
+        "full_name": "Envor James Julies",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T09:25:17.545Z",
+        "updated": "2024-06-24T09:25:17.545Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 62,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$IseHRHrtLHZeKTYuntYsQp$Sm5r8am9cIteVlbPwJZ3oMMuG8gcdD68KEJ9bLqMqLA=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "cuylerclinton2003@gmail.com",
+        "phone_number": "0813834094",
+        "full_name": "Clinton Patrick",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T09:49:39.341Z",
+        "updated": "2024-06-24T09:49:39.341Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 63,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$R5e2nOwu8xEhaCox9L0SkY$b9AI8Wj7WTIj6ZzNPE3CTb4n8aPsZWlP2zCRUIMkAPo=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "bonganinkosinathi355@gmail.com",
+        "phone_number": "0658785770",
+        "full_name": "NKOSINATHI Bongani",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T13:14:31.149Z",
+        "updated": "2024-06-24T13:14:31.149Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 64,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$IawIjZtcesl4pKVFMFpgO6$dXzXvmVn6U73cMivbZz7ivDDGgISM7xlBhGgJmNZ5ZA=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "stewartlichess@gmail.com",
+        "phone_number": "067601449",
+        "full_name": "mmm",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T13:39:00.240Z",
+        "updated": "2024-06-24T13:39:00.240Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 65,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Xn1thxWTtoJLs2u0mbcwGY$p2SQl0QVsJFUNBQ0azCr8tHC/eGYR9+rq3mI/bMFS5w=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mashamaitesolly3@gmail.com",
+        "phone_number": "0817392957",
+        "full_name": "Tshegofatso casius mohloana",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T14:26:35.286Z",
+        "updated": "2024-06-24T14:26:35.286Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 66,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Wg4dlNtYmOmYXLy0KsLTqQ$LEklhFUpotvbAvBp7u1Og5bQ9v+oH14LP/jRJhWa+h0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "siphakamiso31@gmail.com",
+        "phone_number": "0649621456",
+        "full_name": "Siphakamiso Zuma",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-24T21:27:37.910Z",
+        "updated": "2024-06-24T21:27:37.910Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 67,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$ZQJ14zrA2X3ji9CgjFSzXs$U+t59Dc1Sm/c8//HZLcxzesTcyLbuCthnQhtlxmwG5c=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "sfiso@shavest.co.za",
+        "phone_number": "073 072 8191",
+        "full_name": "Sfiso Mtshali",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T02:18:57.127Z",
+        "updated": "2024-06-25T02:18:57.127Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 68,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$nJit0WDHODPVKTQPZgKfHf$dqjF2TbZDk0Pf0/IUHNMv0eSskEgnfD1wxotUqP27tI=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "tondechinyamakobvu@gmail.com",
+        "phone_number": "0621006217",
+        "full_name": "Nelson Chinyamakobvu",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T05:20:46.591Z",
+        "updated": "2024-06-25T05:20:46.591Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 69,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$2WotXCTEzEniVbbRoZFcFE$8SOglvGMettaAODVLwbZhJatveG0+BPvKEViZ+G1/yo=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "nissiremovals@gmail.com",
+        "phone_number": "0632195630",
+        "full_name": "hamandishe andrew madziwa",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T15:29:41.041Z",
+        "updated": "2024-06-25T15:29:41.041Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 70,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$KUEAnxKWBTuFStI5x95XXM$Q7kt4ABP2f0Iy+Fi/FZJtz9zzVwoKJnhKGbh9Q8EV1w=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "shonisanikutama0@gmail.com",
+        "phone_number": "0659138460",
+        "full_name": "Shonisani",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T15:46:21.526Z",
+        "updated": "2024-06-25T15:46:21.526Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 71,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$PsIshJeBLwhUuGTZK5gmd3$7hqHrWIDmFP2ZYC8ggtpRfDEuzXyBtTR+vsnQnwsksk=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "obakengl47@gmail.com",
+        "phone_number": "0827473980",
+        "full_name": "Obakeng Lekalakala",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T15:55:49.832Z",
+        "updated": "2024-06-25T15:55:49.832Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 72,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$ZCXpLrm14CB3G7F5V9Ofsy$vAFS0q+LgD1V7rWDwxxgFAG66k0UzkRYK1kjtZgbToc=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "richard.punkie1@gmail.com",
+        "phone_number": "0837644141",
+        "full_name": "Richard",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T16:02:04.134Z",
+        "updated": "2024-06-25T16:02:04.134Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 73,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$755WoHbB0QcohlC3PzzVfg$K3ioVXdqhhqj4YZbxC7tMdXsxehDN2M5Cus6t8AfrWY=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "phathupd@gmail.com",
+        "phone_number": "0797901325",
+        "full_name": "Phathutshedzo Dzhalagome",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T18:09:05.485Z",
+        "updated": "2024-06-25T18:09:05.485Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 74,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$lVqgJB8BWUAG2lFix4RLAx$y1LHu3GemAYqUDg5YtG0w5BByR3k9dm56Lp+GmbeYwU=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "makechana123@gmail.com",
+        "phone_number": "0717160737",
+        "full_name": "Farai Makechana",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-25T21:04:29.559Z",
+        "updated": "2024-06-25T21:04:29.559Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 75,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Wt8eRYeCiUEAh00VytPYRm$XYq4KVK9pGd0yKsZjL6AkSI4QqyGGwubyjq7nEtgpH0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mabuthomaseko51@gmail.com",
+        "phone_number": "061 522 8537",
+        "full_name": "Mabutho Maseko",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-27T17:25:57.506Z",
+        "updated": "2024-06-27T17:25:57.506Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 76,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$eC6qxaFnmjKRvGgWUUrDZ7$7qesQsg7+5BmwY4qs4zxyMP5SlWgjouRaFyyw7LkMRw=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "songmasilela@gmail.com",
+        "phone_number": "0796557842",
+        "full_name": "Mpho Podile",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-06-28T12:29:01.953Z",
+        "updated": "2024-06-28T12:29:01.953Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 77,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$vdAiIt0bDSNxNgi5RsGx2V$JqvA3Q5SyiE5+CQgvh+FMXGa48VdwCLuMAEY6ClfE80=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "admin@toota.co.za",
+        "phone_number": "0736010750",
+        "full_name": "Phindile selahle",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-02T16:40:56.759Z",
+        "updated": "2024-07-02T16:40:56.759Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 78,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$LlIC5SdX7LjKresZeNJCsi$qW6XzZnPkUg3sH4rL2pn7HHq49Vw8cpkMsLPnQRFMxQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "dlaminidonald50@gmail.com",
+        "phone_number": "0731212550",
+        "full_name": "Donald dlamini",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-02T16:49:57.157Z",
+        "updated": "2024-07-02T16:49:57.157Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 79,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$SxIEMCprguXT3eQ4MChWGt$H7oZl8PVqa+w9bgA52oWDIjT+vuNPWx0n2NjlGqH388=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "rowupfamily@gmail.com",
+        "phone_number": "0719314696",
+        "full_name": "Raymond Kazhanje",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-08T11:30:41.191Z",
+        "updated": "2024-07-08T11:30:41.191Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 80,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$lOvDV4B6sKPxi4hh0Fjdqo$QNfqD9a8t208bjeYWs+YV/hRHw9G62NeLawL/y5LVcs=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "Ramothibemillion@gmail.com",
+        "phone_number": "0726119364",
+        "full_name": "Tshepo Ramothibe",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-08T18:28:37.597Z",
+        "updated": "2024-07-08T18:28:37.597Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 81,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Ik80KrfGE8ffVv5pRRJlhT$As+uq0+3ORHeCVvFcDqVMpCOqCYgbySTiSzZVilR9rM=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "kxy77751@tccho.com",
+        "phone_number": "1234567890",
+        "full_name": "TestUser",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-11T13:13:30.368Z",
+        "updated": "2024-07-11T13:13:30.368Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 82,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$Zv36awFiVgI3RbRMFz6C9H$RC8GWH+f59xgzPDhEizd2ucQ1amOFFtvHbqMN9s6EOQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "Nhlanhlacozy@gmail.com",
+        "phone_number": "0679246373",
+        "full_name": "Sibusiso",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-13T09:51:54.319Z",
+        "updated": "2024-07-13T09:51:54.319Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 83,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$EkSfsrssX06tvGwo5vkTFu$44zs0zaezwlmIV63rs31RYyBLdhzOT9eWRh1hqdk6Do=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "vmahlangu66@gmail.com",
+        "phone_number": "0781336504",
+        "full_name": "vusi mahlangu",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-13T13:52:16.391Z",
+        "updated": "2024-07-13T13:52:16.391Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 84,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$jEnElhv8In7noKhpSUJU3P$vDq6XENUoMi4NmVDjm92SMPUxLxdojPVQVntq3Tf0kA=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "sslimjj@gmail.com",
+        "phone_number": "1234567891",
+        "full_name": "Peter Shaun",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-17T10:58:13.296Z",
+        "updated": "2024-07-17T10:58:13.296Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 85,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$EKZF2usdGod4fVoDoc93uJ$whgb4DADvtUmYATI1T77HjPrdN1aXUZO6oBSMx842S4=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "martyofmca@gmail.com",
+        "phone_number": "233542087839",
+        "full_name": "Martin",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-24T21:27:34.033Z",
+        "updated": "2024-07-24T21:27:34.035Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 86,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$rz6ih1VgZAeFUhzGYYcGTB$CGU0bmZgVnscpvTsalj+1nswlTJYWptYz1cxjWQU5uw=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "vinnywalker96@icloud.com",
+        "phone_number": "0678632452",
+        "full_name": "Marlvin Kwenda",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-07-25T14:55:49.670Z",
+        "updated": "2024-07-25T14:55:49.670Z",
+        "is_verified": true,
+        "profile_picture": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 87,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$uHnGD37zegiIrztijvyjbn$TPqWQzkTk66slEnMf6YRn00fXwzuyJ7G89TGo1ZSYM0=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "ttorerwa01@gmail.com",
+        "phone_number": "0638038333",
+        "full_name": "Tatenda Torerwa",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-08-07T19:31:55.524Z",
+        "updated": "2024-08-07T19:31:55.524Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 88,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$x4qtgm7bSe1PRqwC5NnB1H$ocjjctORmYRYv52WMUX7t/PlBuO9GtxlYq553Qof1ug=",
+        "last_login": null,
+        "is_superuser": false,
+        "email": "mishak@gmail.com",
+        "phone_number": "8347857232",
+        "full_name": "Mike",
+        "is_staff": false,
+        "is_active": true,
+        "created": "2024-08-07T19:32:17.017Z",
+        "updated": "2024-08-07T19:32:17.017Z",
+        "is_verified": false,
+        "profile_picture": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 2,
+    "fields": {
+        "vehicle_registration_no": "Fn906968",
+        "vehicle_type": "truck_1",
+        "licence_no": "Bhm23444",
+        "physical_address": "6909 Makwakwa street ivory park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 4,
+    "fields": {
+        "vehicle_registration_no": "BB 00 AA Zx",
+        "vehicle_type": "truck_1",
+        "licence_no": "678900024HDg",
+        "physical_address": "44 karee street midrand",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 7,
+    "fields": {
+        "vehicle_registration_no": "BB98VK GP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "40180004S3S1",
+        "physical_address": "18 Fred drive  Kempton park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 8,
+    "fields": {
+        "vehicle_registration_no": "FXB004L",
+        "vehicle_type": "truck_1",
+        "licence_no": "42800004VC8",
+        "physical_address": "379 Visagie court Pretoria Central 0002",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 10,
+    "fields": {
+        "vehicle_registration_no": "KK94JDGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40S20009V1FM",
+        "physical_address": "7450 Lepele street Roodekop",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 12,
+    "fields": {
+        "vehicle_registration_no": "Cy456980",
+        "vehicle_type": "truck_1",
+        "licence_no": "47129AM",
+        "physical_address": "30405 Grootboom St",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 13,
+    "fields": {
+        "vehicle_registration_no": "Fwv 810 mp",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "41020002JLPG",
+        "physical_address": "Pretoria west, 306 Servaas Street",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 14,
+    "fields": {
+        "vehicle_registration_no": "CF188222",
+        "vehicle_type": "truck_4",
+        "licence_no": "415700006F13",
+        "physical_address": "7 runnersgreen summergreens",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 15,
+    "fields": {
+        "vehicle_registration_no": "DT30FCGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40930009984",
+        "physical_address": "Bs06a0371 motitinyane street Nellmapius x24 mamelodi east",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 16,
+    "fields": {
+        "vehicle_registration_no": "BF 50 ND ZN",
+        "vehicle_type": "truck_4",
+        "licence_no": "6069000288P9",
+        "physical_address": "45 Nqadu Road Ncambedlana Mthatha",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 18,
+    "fields": {
+        "vehicle_registration_no": "LS35SNGP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "401000003KK72",
+        "physical_address": "41 Sapelie Street",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 19,
+    "fields": {
+        "vehicle_registration_no": "KG 27 PC GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40250011755R",
+        "physical_address": "6600 musese crescent mooifontien kempton park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 21,
+    "fields": {
+        "vehicle_registration_no": "BM 24 XP ZN",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "200400001TX1",
+        "physical_address": "112 Ganges road",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 22,
+    "fields": {
+        "vehicle_registration_no": "KK53TR GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "8939000012NM",
+        "physical_address": "531 6th Road",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 23,
+    "fields": {
+        "vehicle_registration_no": "LL87FKGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40990003P11C",
+        "physical_address": "31 AVION MEWS KEMPTON PARK,POMONA 1619A1C",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 24,
+    "fields": {
+        "vehicle_registration_no": "KCK930EC",
+        "vehicle_type": "truck_1",
+        "licence_no": "13040006LPSV",
+        "physical_address": "3 Teakwood Place, Braelyn, East London, 5201",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 25,
+    "fields": {
+        "vehicle_registration_no": "Ktj 578 nw",
+        "vehicle_type": "truck_1",
+        "licence_no": "Code 10",
+        "physical_address": "1939 mokgotlho street fox lake",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 26,
+    "fields": {
+        "vehicle_registration_no": "LMO4CXGP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "893800007HZM",
+        "physical_address": "11 candican road barbeque Downs midrand",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 27,
+    "fields": {
+        "vehicle_registration_no": "ND 274-752",
+        "vehicle_type": "truck_2",
+        "licence_no": "2061000BP1KZ",
+        "physical_address": "26 Lavinia Crescent Shallcross 4093",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 28,
+    "fields": {
+        "vehicle_registration_no": "DD 46 HC GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "8938000000S9T",
+        "physical_address": "Mzimhlophe Hostel",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 29,
+    "fields": {
+        "vehicle_registration_no": "DS 79 KZ GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "865",
+        "physical_address": "F002 phauropark cnr queen & jack germiston",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 30,
+    "fields": {
+        "vehicle_registration_no": "ND637754",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "20550003LWL6",
+        "physical_address": "12A Scone Place Athol Heights Westville",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 31,
+    "fields": {
+        "vehicle_registration_no": "Vnt 759 gp",
+        "vehicle_type": "truck_1",
+        "licence_no": "40550004s7sc",
+        "physical_address": "3277atlanta crescent geluksdal 1550",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 32,
+    "fields": {
+        "vehicle_registration_no": "Ck46zk gp",
+        "vehicle_type": "truck_1",
+        "licence_no": "894500000HHJ",
+        "physical_address": "9071 thobisi street moleleki section katlehong",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 33,
+    "fields": {
+        "vehicle_registration_no": "LF59VCGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40280005x54c",
+        "physical_address": "5327 Nevada Close Cosmo city Johannesburg",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 34,
+    "fields": {
+        "vehicle_registration_no": "J BT977MP",
+        "vehicle_type": "truck_1",
+        "licence_no": "421700002lmz",
+        "physical_address": "R40 road acornhoek 1360",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 36,
+    "fields": {
+        "vehicle_registration_no": "NC27262",
+        "vehicle_type": "truck_1",
+        "licence_no": "200400002JB6",
+        "physical_address": "250 Shezi main road, Hammarsdale, 3699",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 37,
+    "fields": {
+        "vehicle_registration_no": "JFS481NW",
+        "vehicle_type": "truck_1",
+        "licence_no": "4021001257NJ",
+        "physical_address": "6 attwell street lynwood Court denlee",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 38,
+    "fields": {
+        "vehicle_registration_no": "KJ52RLGP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "42010012WBMV",
+        "physical_address": "135 Webber Road hazelpark Lambton germiston",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 39,
+    "fields": {
+        "vehicle_registration_no": "JF04JJGP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "8945000006J8",
+        "physical_address": "6368 crew street kaalfontein",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 40,
+    "fields": {
+        "vehicle_registration_no": "JLV097MP",
+        "vehicle_type": "truck_1",
+        "licence_no": "204800006PS4",
+        "physical_address": "4626 Ob27 street ward 17 Osizweni Newcastle 2952",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 41,
+    "fields": {
+        "vehicle_registration_no": "cry 151 038",
+        "vehicle_type": "truck_1",
+        "licence_no": "code 8",
+        "physical_address": "2 bofin close connaugth estates  elsies river",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 42,
+    "fields": {
+        "vehicle_registration_no": "JR92DMGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "600200045TOL",
+        "physical_address": "4 Regent st Casseldale Springs",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 43,
+    "fields": {
+        "vehicle_registration_no": "KB65HVGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40240024FPVS",
+        "physical_address": "E511 phase 2 tjovitjo Orange farm 1841",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 44,
+    "fields": {
+        "vehicle_registration_no": "ZNN190W",
+        "vehicle_type": "truck_1",
+        "licence_no": "20080026ST20",
+        "physical_address": "1418 Dabula Road Cato Manor Mayville",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 45,
+    "fields": {
+        "vehicle_registration_no": "Np 164294",
+        "vehicle_type": "truck_1",
+        "licence_no": "221100001ysn",
+        "physical_address": "51 Oribi Road Scottsville Pietermaritzburg",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 46,
+    "fields": {
+        "vehicle_registration_no": "LBK 974 MP",
+        "vehicle_type": "truck_1",
+        "licence_no": "C1",
+        "physical_address": "489 Mountain view Zone 2 Kwamhlanga1022",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 47,
+    "fields": {
+        "vehicle_registration_no": "HT 27 NN GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "41690000BCCY",
+        "physical_address": "10402a malewa street P O Orlando west 2",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 48,
+    "fields": {
+        "vehicle_registration_no": "KHM 930 EC",
+        "vehicle_type": "truck_1",
+        "licence_no": "200600013GKB",
+        "physical_address": "Maxesibeni",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 49,
+    "fields": {
+        "vehicle_registration_no": "KG 47 wl GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "AE119423",
+        "physical_address": "4620 moor street kaalfontein midrand",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 50,
+    "fields": {
+        "vehicle_registration_no": "KX32PDGp",
+        "vehicle_type": "truck_1",
+        "licence_no": "40040000FC56",
+        "physical_address": "148 Highland Road Kensington",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 51,
+    "fields": {
+        "vehicle_registration_no": "xrc 840 gp",
+        "vehicle_type": "truck_1",
+        "licence_no": "c1",
+        "physical_address": "4795 etwatwA west",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 52,
+    "fields": {
+        "vehicle_registration_no": "JR34TGGP",
+        "vehicle_type": "truck_4",
+        "licence_no": "404600156KC6",
+        "physical_address": "Unit 206 Leeds, Oval Gardens, Centurion Park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 53,
+    "fields": {
+        "vehicle_registration_no": "kr52lzgp",
+        "vehicle_type": "truck_1",
+        "licence_no": "10",
+        "physical_address": "7 stirruplane",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 54,
+    "fields": {
+        "vehicle_registration_no": "NA",
+        "vehicle_type": "truck_1",
+        "licence_no": "na",
+        "physical_address": "Block Jj",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 55,
+    "fields": {
+        "vehicle_registration_no": "XFS653GP",
+        "vehicle_type": "truck_4",
+        "licence_no": "415700008W64",
+        "physical_address": "72 McHardy street Danville Pretoria",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 56,
+    "fields": {
+        "vehicle_registration_no": "Lf 20 kw gp",
+        "vehicle_type": "truck_4",
+        "licence_no": "40520000927cc",
+        "physical_address": "1416 nobody polokwane 0700",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 57,
+    "fields": {
+        "vehicle_registration_no": "HP15SBGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "894500000898",
+        "physical_address": "99 Clydesdale Road, Crystal Park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 58,
+    "fields": {
+        "vehicle_registration_no": "XDC 521 GP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "41110004X2BC",
+        "physical_address": "75 Block G,Soshanguve",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 59,
+    "fields": {
+        "vehicle_registration_no": "BDW573K",
+        "vehicle_type": "truck_1",
+        "licence_no": "4156000clkg",
+        "physical_address": "1172 Tsikoe Street Ga-rankuwa Tshwane 0208",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 60,
+    "fields": {
+        "vehicle_registration_no": "TNB807GP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "22941AH",
+        "physical_address": "3179 Jacob Ever Street Kaalfontein Midrand",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 61,
+    "fields": {
+        "vehicle_registration_no": "CF 341215",
+        "vehicle_type": "truck_1",
+        "licence_no": "60420002G73R",
+        "physical_address": "16 Angel str, Vredelust, Kuilsriver, Cape Town",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 62,
+    "fields": {
+        "vehicle_registration_no": "JT76LHGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "4995000008BB",
+        "physical_address": "26 Lago Complex 247 South Street Zwarkop Centurion",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 63,
+    "fields": {
+        "vehicle_registration_no": "CD16HYGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40010007KBLC",
+        "physical_address": "241 Makula section",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 64,
+    "fields": {
+        "vehicle_registration_no": "f",
+        "vehicle_type": "truck_1",
+        "licence_no": "p",
+        "physical_address": "hh",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 65,
+    "fields": {
+        "vehicle_registration_no": "Lk76pj GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "422600001685",
+        "physical_address": "612esslen park",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 66,
+    "fields": {
+        "vehicle_registration_no": "JN06KGGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40010007H0VW",
+        "physical_address": "47 Erasmus Street Bramley View Johannesburg 2090",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 67,
+    "fields": {
+        "vehicle_registration_no": "LG87CP GP",
+        "vehicle_type": "truck_1",
+        "licence_no": "49950000005w",
+        "physical_address": "152 Va dalen road",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 68,
+    "fields": {
+        "vehicle_registration_no": "HT 38 VL Hp",
+        "vehicle_type": "truck_1",
+        "licence_no": "47930jC",
+        "physical_address": "28 short street Rosetnville",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 69,
+    "fields": {
+        "vehicle_registration_no": "Cc92czgp",
+        "vehicle_type": "truck_4",
+        "licence_no": "44616j",
+        "physical_address": "99 george street",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 70,
+    "fields": {
+        "vehicle_registration_no": "Vjd 085 gp",
+        "vehicle_type": "truck_1",
+        "licence_no": "41560000FY2R",
+        "physical_address": "2329 block L soshanguve",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 71,
+    "fields": {
+        "vehicle_registration_no": "TPC 000Gp",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "416900000FFK9",
+        "physical_address": "338 mochubi street kilpspruit",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 72,
+    "fields": {
+        "vehicle_registration_no": "LR09pzgp",
+        "vehicle_type": "truck_1",
+        "licence_no": "4020500118sv2",
+        "physical_address": "503 Mandiwana street Chiawelo",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 73,
+    "fields": {
+        "vehicle_registration_no": "CF17TNGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "499500000VMJ",
+        "physical_address": "584/9 botaney crescent ebonypark midrand",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 74,
+    "fields": {
+        "vehicle_registration_no": "VRT 583 GP",
+        "vehicle_type": "truck_4",
+        "licence_no": "40490010R8LC",
+        "physical_address": "91 first avenue",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 75,
+    "fields": {
+        "vehicle_registration_no": "Np 82655",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "20080026RPJ3",
+        "physical_address": "230 Hennie Albert's street alberton",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 76,
+    "fields": {
+        "vehicle_registration_no": "KV51BRGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40550004P5KK",
+        "physical_address": "3024 Ngubane street, Tsakane 1550",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 79,
+    "fields": {
+        "vehicle_registration_no": "CT63NVGP",
+        "vehicle_type": "truck_1.5",
+        "licence_no": "402400245L7D",
+        "physical_address": "56 2nd Avenue Kew 2090 Johannesburg",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 80,
+    "fields": {
+        "vehicle_registration_no": "JD15YFGP",
+        "vehicle_type": "truck_1",
+        "licence_no": "40060006KBN6",
+        "physical_address": "6597 Thlapolome street, Vosloorus ext 9",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 82,
+    "fields": {
+        "vehicle_registration_no": "WDK581",
+        "vehicle_type": "truck_1",
+        "licence_no": "40620005G030",
+        "physical_address": "6 Koekemoer street the ochards extension 11",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 85,
+    "fields": {
+        "vehicle_registration_no": "AS-4991-27",
+        "vehicle_type": "truck_1",
+        "licence_no": "P7590",
+        "physical_address": "Kumasi, Ghana",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "authentication.driver",
+    "pk": 86,
+    "fields": {
+        "vehicle_registration_no": "AEZ-456-yhk",
+        "vehicle_type": "bakkie",
+        "licence_no": "afaJGNJLANLGJ",
+        "physical_address": "33 Countesse Avenue Windsor West, Randburg",
+        "identity_document": "",
+        "driver_licence": "",
+        "vehicle_registration": "",
+        "criminal_record_check": "",
+        "acceptance_rate": "0.00",
+        "total_trips": 0,
+        "accepted_trips": 0
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 1,
+    "fields": {
+        "location": "Randburg",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 2,
+    "fields": {
+        "location": "41 karee street",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 3,
+    "fields": {
+        "location": "Durban",
+        "phone_number": "0738872627"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 4,
+    "fields": {
+        "location": "41 karee street",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 5,
+    "fields": {
+        "location": "41 karee street",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 6,
+    "fields": {
+        "location": "41 karee street",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 7,
+    "fields": {
+        "location": "41 karee street",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 8,
+    "fields": {
+        "location": "jhb market square",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 9,
+    "fields": {
+        "location": "44 Karee St, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 10,
+    "fields": {
+        "location": "1 Jones Rd, Kempton Park, Johannesburg, 1632, South Africa",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 11,
+    "fields": {
+        "location": "55 Forge Rd, Spartan, Kempton Park, 1619, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 12,
+    "fields": {
+        "location": "6909 Makwakwa St, Ivory Park, Midrand, 1693, South Africa",
+        "phone_number": "0676013679"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 13,
+    "fields": {
+        "location": "3452 Mogwera St, Radebe, Thokoza, 1434, South Africa",
+        "phone_number": "0614998015"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 14,
+    "fields": {
+        "location": "44 Karee St, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 15,
+    "fields": {
+        "location": "44 Karee St, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0792124800"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 16,
+    "fields": {
+        "location": "Bloemfontein, South Africa",
+        "phone_number": "8745693210"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 17,
+    "fields": {
+        "location": "45 Commissioner St, Johannesburg, 2000, South Africa",
+        "phone_number": "0124562345"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 18,
+    "fields": {
+        "location": "60 Glenwood Rd, Glenwood, Pretoria, 0081, South Africa",
+        "phone_number": "0112344567"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 19,
+    "fields": {
+        "location": "60 Glenwood Rd, Glenwood, Pretoria, 0081, South Africa",
+        "phone_number": "0112344567"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 20,
+    "fields": {
+        "location": "51 Mozart Ln, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 21,
+    "fields": {
+        "location": "51 Mozart Ln, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 22,
+    "fields": {
+        "location": "51 Mozart Ln, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 23,
+    "fields": {
+        "location": "51 Mozart Ln, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 24,
+    "fields": {
+        "location": "6909 Peawood Pl, Brooklands Lifestyle Estate, Centurion, 0157, South Africa",
+        "phone_number": "0912345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 25,
+    "fields": {
+        "location": "Homestead Rd, J P Bezuidenhout Park, Edenvale, 1609, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 26,
+    "fields": {
+        "location": "56 Saal St, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 27,
+    "fields": {
+        "location": "23 Hazelwood Rd, Hazelwood, Pretoria, 0081, South Africa",
+        "phone_number": "0223456789"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 28,
+    "fields": {
+        "location": "FNZ office, 115 West St, Sandown, Sandton, 2031, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 29,
+    "fields": {
+        "location": "Parkside, East London, 5209, South Africa",
+        "phone_number": "01134567890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 30,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 31,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 32,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 33,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 34,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 35,
+    "fields": {
+        "location": "83 Rivonia Rd, Sandhurst, Sandton, 2196, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 36,
+    "fields": {
+        "location": "255 Rivonia Rd, Morningside, Sandton, 2057, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 37,
+    "fields": {
+        "location": "255 Rivonia Rd, Morningside, Sandton, 2057, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 38,
+    "fields": {
+        "location": "102 Rivonia Rd, Dennehof, Sandton, 2196, South Africa",
+        "phone_number": "0765444 7890"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 39,
+    "fields": {
+        "location": "14th Ave, Fairland, Randburg, South Africa",
+        "phone_number": "0123456783"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 40,
+    "fields": {
+        "location": "27 Minerva Ave, Glenadrienne, Sandton, 2196, South Africa",
+        "phone_number": "0712356788"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 41,
+    "fields": {
+        "location": "Sandton, South Africa",
+        "phone_number": "0718956321"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 42,
+    "fields": {
+        "location": "255 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118527412"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 43,
+    "fields": {
+        "location": "255 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118527412"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 44,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 45,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 46,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 47,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 48,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 49,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 50,
+    "fields": {
+        "location": "555 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0789559151"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 51,
+    "fields": {
+        "location": "456 Dropoff Avenue, Pretoria",
+        "phone_number": "0987654321"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 52,
+    "fields": {
+        "location": "456 Dropoff Avenue, Pretoria",
+        "phone_number": "0987654321"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 53,
+    "fields": {
+        "location": "456 Dropoff Avenue, Pretoria",
+        "phone_number": "0987654321"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 54,
+    "fields": {
+        "location": "54 Bath Ave, Rosebank, Johannesburg, 2196, South Africa",
+        "phone_number": "0112345670"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 55,
+    "fields": {
+        "location": "23 Hazelwood Rd, Hazelwood, Pretoria, 0081, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 56,
+    "fields": {
+        "location": "23 Hazelwood Rd, Hazelwood, Pretoria, 0081, South Africa",
+        "phone_number": "0612345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 57,
+    "fields": {
+        "location": "349 Witch-Hazel Ave, Eco-Park Estate, Centurion, 0144, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 58,
+    "fields": {
+        "location": "23 Hazelwood Rd, Hazelwood, Pretoria, 0081, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 59,
+    "fields": {
+        "location": "3452 Mogwera St, Radebe, Thokoza, 1434, South Africa",
+        "phone_number": "0736010740"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 60,
+    "fields": {
+        "location": "3452 Mogwera St, Radebe, Thokoza, 1434, South Africa",
+        "phone_number": "0736010740"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 61,
+    "fields": {
+        "location": "3452 Mogwera St, Radebe, Thokoza, 1434, South Africa",
+        "phone_number": "0736010740"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 62,
+    "fields": {
+        "location": "3452 Mogwera St, Radebe, Thokoza, 1434, South Africa",
+        "phone_number": "0736010740"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 63,
+    "fields": {
+        "location": "55 Tulbagh Road, Glen marais, Kempton Park, 1619, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 64,
+    "fields": {
+        "location": "56 Saal St, South Africa",
+        "phone_number": "0712345678"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 65,
+    "fields": {
+        "location": "06766 Sanna St, Zola, Soweto, 1878, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 66,
+    "fields": {
+        "location": "44 Karee St, Randpark Ridge, Randburg, 2169, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.dropofflocation",
+    "pk": 67,
+    "fields": {
+        "location": "784 Inanda Rd, New Dawn Park, Newlands West, 4037, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 1,
+    "fields": {
+        "location": "Main  Avenue",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 2,
+    "fields": {
+        "location": "72 makwakwa street ivory",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 3,
+    "fields": {
+        "location": "Durban",
+        "phone_number": "0738872627"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 4,
+    "fields": {
+        "location": "6909 makwakwa street ivory park",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 5,
+    "fields": {
+        "location": "6909 makwakwa street ivory park",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 6,
+    "fields": {
+        "location": "6909 makwakwa street ivory park",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 7,
+    "fields": {
+        "location": "6909 makwakwa street",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 8,
+    "fields": {
+        "location": "6909 makwakwa street",
+        "phone_number": "071235676"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 9,
+    "fields": {
+        "location": "44 Karee St, Randpark Ridge, Randburg, 2169, South Africa",
+        "phone_number": "0712356780"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 10,
+    "fields": {
+        "location": "44 Karee St, Randpark Ridge, Randburg, 2169, South Africa",
+        "phone_number": "0910214409"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 11,
+    "fields": {
+        "location": "44 Karee St, Birchleigh, Kempton Park, 1621, South Africa",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 12,
+    "fields": {
+        "location": "44 Karee St, Noordwyk, Midrand, 1687, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 13,
+    "fields": {
+        "location": "8703 Tobatse St, Thokoza, 1426, South Africa",
+        "phone_number": "0736010740"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 14,
+    "fields": {
+        "location": "6909 Makwakwa St, Ivory Park, Midrand, 1693, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 15,
+    "fields": {
+        "location": "1685 Old Pretoria Rd, Halfway House Estate, Midrand, 1685, South Africa",
+        "phone_number": "0696014490"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 16,
+    "fields": {
+        "location": "Cape Town, South Africa",
+        "phone_number": "0123456789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 17,
+    "fields": {
+        "location": "6 Glastonbury Ave, Somerset Park, uMhlanga, 4319, South Africa",
+        "phone_number": "0112503690"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 18,
+    "fields": {
+        "location": "65 Masabalala Yengwa Ave, Stamford Hill, Durban, 4025, South Africa",
+        "phone_number": "0112345676"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 19,
+    "fields": {
+        "location": "65 Masabalala Yengwa Ave, Stamford Hill, Durban, 4025, South Africa",
+        "phone_number": "0112345676"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 20,
+    "fields": {
+        "location": "44 Stanley Ave, Braamfontein Werf, Johannesburg, 2092, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 21,
+    "fields": {
+        "location": "44 Stanley Ave, Braamfontein Werf, Johannesburg, 2092, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 22,
+    "fields": {
+        "location": "44 Stanley Ave, Braamfontein Werf, Johannesburg, 2092, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 23,
+    "fields": {
+        "location": "44 Stanley Ave, Braamfontein Werf, Johannesburg, 2092, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 24,
+    "fields": {
+        "location": "44 Karee St, Randpark Ridge, Randburg, 2169, South Africa",
+        "phone_number": "0123455678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 25,
+    "fields": {
+        "location": "678 10th Ave, Gezina, Pretoria, 0084, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 26,
+    "fields": {
+        "location": "Koffiefontein Rd, Norton home estate, Benoni, 1501, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 27,
+    "fields": {
+        "location": "54 Bath Ave, Rosebank, Johannesburg, 2196, South Africa",
+        "phone_number": "011234567"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 28,
+    "fields": {
+        "location": "349 Witch-Hazel Ave, Eco-Park Estate, Centurion, 0144, South Africa",
+        "phone_number": "0113456789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 29,
+    "fields": {
+        "location": "Moreleta Park, Pretoria, 0181, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 30,
+    "fields": {
+        "location": "33 Countesses Ave, Windsor West, Randburg, 2943, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 31,
+    "fields": {
+        "location": "33 Countesses Ave, Windsor West, Randburg, 2943, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 32,
+    "fields": {
+        "location": "33 Countesses Ave, Windsor West, Randburg, 2943, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 33,
+    "fields": {
+        "location": "33 Countesses Ave, Windsor West, Randburg, 2943, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 34,
+    "fields": {
+        "location": "33 Countesses Ave, Windsor West, Randburg, 2943, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 35,
+    "fields": {
+        "location": "22 Fredman Dr, Sandown, Sandton, 2196, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 36,
+    "fields": {
+        "location": "11 Hillcrest Ave, Oriel, Germiston, 2007, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 37,
+    "fields": {
+        "location": "11 Hillcrest Ave, Oriel, Germiston, 2007, South Africa",
+        "phone_number": "011 768 3444"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 38,
+    "fields": {
+        "location": "55 Malibongwe Dr, Linden, Randburg, 2104, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 39,
+    "fields": {
+        "location": "1 Sandton Dr, Sandhurst, Sandton, 2196, South Africa",
+        "phone_number": "0112345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 40,
+    "fields": {
+        "location": "Wynberg Military Base, Hospital Street, Wynberg, 7800, Wynberg, Cape Town, 7800, South Africa",
+        "phone_number": "0712356787"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 41,
+    "fields": {
+        "location": "255 Rivonia Rd, Morningside, Sandton, 2057, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 42,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 43,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0786559151"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 44,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 45,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 46,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 47,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 48,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 49,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 50,
+    "fields": {
+        "location": "55 Kent Ave, Ferndale, Randburg, 2194, South Africa",
+        "phone_number": "0118523698"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 51,
+    "fields": {
+        "location": "123 Pickup Street, Johannesburg",
+        "phone_number": "0123456789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 52,
+    "fields": {
+        "location": "44 karee street",
+        "phone_number": "0123456780"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 53,
+    "fields": {
+        "location": "44 karee street",
+        "phone_number": "0123456780"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 54,
+    "fields": {
+        "location": "Hunters Valley Road, Cape Farms, Cape Town, South Africa",
+        "phone_number": "0712345678"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 55,
+    "fields": {
+        "location": "45 Commissioner St, Johannesburg, 2000, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 56,
+    "fields": {
+        "location": "44 Stanley Ave, Milpark, Johannesburg, 2092, South Africa",
+        "phone_number": "0614235670"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 57,
+    "fields": {
+        "location": "Makwarela drive 1, Thohoyandou, 0950, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 58,
+    "fields": {
+        "location": "44 Karee St, Birchleigh, Kempton Park, 1621, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 59,
+    "fields": {
+        "location": "8703 Tobatse St, Thokoza, 1426, South Africa",
+        "phone_number": "0614998015"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 60,
+    "fields": {
+        "location": "8703 Tobatse St, Thokoza, 1426, South Africa",
+        "phone_number": "0614998015"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 61,
+    "fields": {
+        "location": "8703 Tobatse St, Thokoza, 1426, South Africa",
+        "phone_number": "0614998015"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 62,
+    "fields": {
+        "location": "8703 Tobatse St, Thokoza, 1426, South Africa",
+        "phone_number": "0614998015"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 63,
+    "fields": {
+        "location": "44 Stanley Ave, Braamfontein Werf, Johannesburg, 2092, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 64,
+    "fields": {
+        "location": "67 7th Ave, Edenvale, 1609, South Africa",
+        "phone_number": "0712356789"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 65,
+    "fields": {
+        "location": "44 Ilana St, Delville, Germiston, 1401, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 66,
+    "fields": {
+        "location": "6909 Makwakwa St, Ivory Park, Midrand, 1693, South Africa",
+        "phone_number": "0676014490"
+    }
+},
+{
+    "model": "trips.pickuplocation",
+    "pk": 67,
+    "fields": {
+        "location": "68 Mint Rd, Johannesburg, 2000, South Africa",
+        "phone_number": "0892345678"
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "02b95eb6-3507-4728-8073-1ebb5512c4e9",
+    "fields": {
+        "created": "2024-08-22T22:23:06.759Z",
+        "updated": "2024-08-22T22:23:06.759Z",
+        "pickup_location": 55,
+        "dropoff_location": 55,
+        "pickup_time": "2024-08-22T23:23:00Z",
+        "load_description": "testing 1",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "250.00",
+        "number_of_floors": 250,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "07b90c6d-1fc7-4bdf-b107-0b76c1814d7f",
+    "fields": {
+        "created": "2024-08-30T15:06:22.035Z",
+        "updated": "2024-08-30T15:06:22.035Z",
+        "pickup_location": 59,
+        "dropoff_location": 59,
+        "pickup_time": "2024-08-31T15:04:00Z",
+        "load_description": "Fridge",
+        "driver": null,
+        "user": 6,
+        "vehicle_type": "truck_1.5",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "0812d0a3-1d59-45da-bc28-399e04e0ea11",
+    "fields": {
+        "created": "2024-07-19T23:39:06.798Z",
+        "updated": "2024-08-01T22:29:45.473Z",
+        "pickup_location": 21,
+        "dropoff_location": 21,
+        "pickup_time": "2024-07-20T00:28:00Z",
+        "load_description": "testing for now",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "09110c68-84af-42b3-a4cc-6adaa64be825",
+    "fields": {
+        "created": "2024-07-26T11:09:14.592Z",
+        "updated": "2024-08-01T22:43:10.042Z",
+        "pickup_location": 38,
+        "dropoff_location": 38,
+        "pickup_time": "2024-07-26T11:08:00Z",
+        "load_description": "Test",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "0927782c-40be-4999-9315-a00f4e814a98",
+    "fields": {
+        "created": "2024-07-07T08:07:17.503Z",
+        "updated": "2024-08-01T22:22:22.913Z",
+        "pickup_location": 15,
+        "dropoff_location": 15,
+        "pickup_time": "2024-07-07T09:05:00Z",
+        "load_description": "Sofas",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "1500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "1503eeb6-06bb-42e9-8c77-2c379dc8c926",
+    "fields": {
+        "created": "2024-07-26T09:32:19.176Z",
+        "updated": "2024-08-01T22:39:45.345Z",
+        "pickup_location": 31,
+        "dropoff_location": 31,
+        "pickup_time": "2024-07-26T09:17:00Z",
+        "load_description": "Test Load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "157e524e-5a34-4168-a062-9478def65f7d",
+    "fields": {
+        "created": "2024-06-20T18:39:34.196Z",
+        "updated": "2024-06-21T16:50:07.544Z",
+        "pickup_location": 3,
+        "dropoff_location": 3,
+        "pickup_time": "2024-06-21T10:00:00Z",
+        "load_description": "Office Equipment",
+        "driver": 30,
+        "user": 20,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "1500.00",
+        "number_of_floors": 0,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "15b24fce-5600-4df8-ad17-8c26a1436e8d",
+    "fields": {
+        "created": "2024-08-02T10:59:55.077Z",
+        "updated": "2024-08-02T10:59:55.077Z",
+        "pickup_location": 49,
+        "dropoff_location": 49,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "16757712-53d9-4a7d-909c-8e93e2f0f9a7",
+    "fields": {
+        "created": "2024-07-11T13:24:27.522Z",
+        "updated": "2024-07-31T02:36:57.245Z",
+        "pickup_location": 16,
+        "dropoff_location": 16,
+        "pickup_time": "2024-07-11T14:23:00Z",
+        "load_description": "grass",
+        "driver": 2,
+        "user": 81,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "1dbbd5ef-5006-4d86-b2f7-1796ccd8c93d",
+    "fields": {
+        "created": "2024-07-19T23:42:45.893Z",
+        "updated": "2024-08-01T22:23:06.481Z",
+        "pickup_location": 22,
+        "dropoff_location": 22,
+        "pickup_time": "2024-07-20T00:28:00Z",
+        "load_description": "testing for now",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "2148a337-9871-4e2f-b292-010bc36b0bc5",
+    "fields": {
+        "created": "2024-08-22T22:27:49.735Z",
+        "updated": "2024-08-22T22:27:49.735Z",
+        "pickup_location": 56,
+        "dropoff_location": 56,
+        "pickup_time": "2024-08-23T00:24:00Z",
+        "load_description": "testing 3",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "300.00",
+        "number_of_floors": 4,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "238dbb1e-d353-462e-b6a8-afda861fb44f",
+    "fields": {
+        "created": "2024-06-06T19:35:42.881Z",
+        "updated": "2024-06-19T19:54:02.649Z",
+        "pickup_location": 2,
+        "dropoff_location": 2,
+        "pickup_time": "2024-06-06T20:35:00Z",
+        "load_description": "stoves , bed, sofas",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "300.00",
+        "number_of_floors": 0,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "2aed12bf-a30b-460e-ac7b-e26b2e52da4e",
+    "fields": {
+        "created": "2024-08-14T00:25:46.011Z",
+        "updated": "2024-08-14T00:25:46.018Z",
+        "pickup_location": 51,
+        "dropoff_location": 51,
+        "pickup_time": "2024-08-20T14:30:00Z",
+        "load_description": "Furniture moving",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "1500.00",
+        "number_of_floors": 3,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "2d140e78-435e-4ad4-b53e-7347436380d4",
+    "fields": {
+        "created": "2024-09-03T08:56:52.412Z",
+        "updated": "2024-09-03T08:56:52.412Z",
+        "pickup_location": 65,
+        "dropoff_location": 65,
+        "pickup_time": "2024-09-03T08:55:00Z",
+        "load_description": "Fridges",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "150.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "2f0a64e6-3db9-40b3-8a09-37b986e293d1",
+    "fields": {
+        "created": "2024-08-30T15:06:23.251Z",
+        "updated": "2024-08-30T15:06:23.251Z",
+        "pickup_location": 62,
+        "dropoff_location": 62,
+        "pickup_time": "2024-08-31T15:04:00Z",
+        "load_description": "Fridge",
+        "driver": null,
+        "user": 6,
+        "vehicle_type": "truck_1.5",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "2f148f6a-9289-4218-9c61-4fbbf54205bd",
+    "fields": {
+        "created": "2024-08-30T01:23:45.114Z",
+        "updated": "2024-08-30T01:23:45.114Z",
+        "pickup_location": 57,
+        "dropoff_location": 57,
+        "pickup_time": "2024-08-30T01:24:00Z",
+        "load_description": "bed",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "331f5fc2-e82d-4bb5-8ae8-a4f672ba5f54",
+    "fields": {
+        "created": "2024-07-20T01:35:51.695Z",
+        "updated": "2024-08-01T22:38:34.169Z",
+        "pickup_location": 25,
+        "dropoff_location": 25,
+        "pickup_time": "2024-07-20T02:34:00Z",
+        "load_description": "dont freak the app is in development mode",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "0.00",
+        "number_of_floors": 120,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "345c3875-b876-4470-8696-d5fd37e8d2a4",
+    "fields": {
+        "created": "2024-08-02T10:27:49.247Z",
+        "updated": "2024-08-02T10:27:49.247Z",
+        "pickup_location": 43,
+        "dropoff_location": 43,
+        "pickup_time": "2024-08-02T10:22:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "3b34c01c-73ef-431c-a324-adbfd4b65fda",
+    "fields": {
+        "created": "2024-07-04T23:32:26.069Z",
+        "updated": "2024-07-06T16:24:39.440Z",
+        "pickup_location": 14,
+        "dropoff_location": 14,
+        "pickup_time": "2024-07-05T00:32:00Z",
+        "load_description": "furnitures in the house",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "3b3ce277-cff2-42c0-8683-9e8dc93a7c4c",
+    "fields": {
+        "created": "2024-07-20T00:30:47.687Z",
+        "updated": "2024-08-01T22:38:17.040Z",
+        "pickup_location": 23,
+        "dropoff_location": 23,
+        "pickup_time": "2024-07-20T00:28:00Z",
+        "load_description": "testing for now",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "43f6f336-0dab-47de-8551-de6e47d5dbc8",
+    "fields": {
+        "created": "2024-07-02T17:04:55.658Z",
+        "updated": "2024-07-06T16:25:44.606Z",
+        "pickup_location": 12,
+        "dropoff_location": 12,
+        "pickup_time": "2024-07-03T18:00:00Z",
+        "load_description": "House property",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "4a2126af-64a4-4855-bde8-d7cabc1446e3",
+    "fields": {
+        "created": "2024-06-04T13:50:07.683Z",
+        "updated": "2024-06-05T18:48:21.908Z",
+        "pickup_location": 1,
+        "dropoff_location": 1,
+        "pickup_time": "2024-06-04T13:49:00Z",
+        "load_description": "Fridge",
+        "driver": 4,
+        "user": 1,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "54105320-7fe2-4166-929f-dd63242053ba",
+    "fields": {
+        "created": "2024-06-26T01:05:49.580Z",
+        "updated": "2024-07-01T13:01:41.771Z",
+        "pickup_location": 8,
+        "dropoff_location": 8,
+        "pickup_time": "2024-06-26T06:04:00Z",
+        "load_description": "couches , fridges",
+        "driver": 75,
+        "user": 2,
+        "vehicle_type": "truck_8",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "1000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "5a414ee6-30c6-4be7-8e51-8ae2cff6d2cd",
+    "fields": {
+        "created": "2024-07-20T01:23:33.345Z",
+        "updated": "2024-08-01T22:38:23.203Z",
+        "pickup_location": 24,
+        "dropoff_location": 24,
+        "pickup_time": "2024-07-20T02:23:00Z",
+        "load_description": "testing number 2",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "25.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "5b265fa7-7e78-4151-a654-fd0dcc6419d5",
+    "fields": {
+        "created": "2024-06-25T22:56:09.662Z",
+        "updated": "2024-07-06T16:24:58.706Z",
+        "pickup_location": 6,
+        "dropoff_location": 6,
+        "pickup_time": "2024-06-25T23:54:00Z",
+        "load_description": "house property",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "600.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "5fcb0ba4-c1d8-4848-a1c2-d4e4b76b06b5",
+    "fields": {
+        "created": "2024-06-25T22:56:05.611Z",
+        "updated": "2024-07-06T16:24:43.755Z",
+        "pickup_location": 4,
+        "dropoff_location": 4,
+        "pickup_time": "2024-06-25T23:54:00Z",
+        "load_description": "house property",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "600.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "6866a938-c98f-40c4-b38f-ec3e18610411",
+    "fields": {
+        "created": "2024-08-02T09:32:35.141Z",
+        "updated": "2024-08-02T09:32:35.142Z",
+        "pickup_location": 41,
+        "dropoff_location": 41,
+        "pickup_time": "2024-08-02T09:32:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "68d18a49-e430-42bf-acc1-768cba89f2f9",
+    "fields": {
+        "created": "2024-07-18T02:12:29.433Z",
+        "updated": "2024-08-01T22:22:24.958Z",
+        "pickup_location": 18,
+        "dropoff_location": 18,
+        "pickup_time": "2024-07-18T04:13:00Z",
+        "load_description": "furnitures",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "259.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "690941ba-e190-4f95-8e2d-b3a9d1eedabe",
+    "fields": {
+        "created": "2024-09-03T02:18:46.551Z",
+        "updated": "2024-09-03T02:18:46.551Z",
+        "pickup_location": 64,
+        "dropoff_location": 64,
+        "pickup_time": "2024-09-03T03:18:00Z",
+        "load_description": "testing load",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "400.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "6aee8c4e-489f-43bb-bc48-919598ee3d3d",
+    "fields": {
+        "created": "2024-07-26T09:52:01.685Z",
+        "updated": "2024-08-01T22:44:26.219Z",
+        "pickup_location": 33,
+        "dropoff_location": 33,
+        "pickup_time": "2024-07-26T09:51:00Z",
+        "load_description": "Test Load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "70913a6d-5990-4309-9114-e159d768ee08",
+    "fields": {
+        "created": "2024-08-02T10:54:01.680Z",
+        "updated": "2024-08-02T10:54:01.680Z",
+        "pickup_location": 46,
+        "dropoff_location": 46,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "77c73afb-b4a4-49cd-8bc3-e45bdb447b7c",
+    "fields": {
+        "created": "2024-08-30T15:06:22.334Z",
+        "updated": "2024-08-30T15:06:22.334Z",
+        "pickup_location": 60,
+        "dropoff_location": 60,
+        "pickup_time": "2024-08-31T15:04:00Z",
+        "load_description": "Fridge",
+        "driver": null,
+        "user": 6,
+        "vehicle_type": "truck_1.5",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "791bf431-13cb-4b57-b695-46fb4c4ac4f8",
+    "fields": {
+        "created": "2024-09-03T00:26:04.450Z",
+        "updated": "2024-09-03T00:26:04.450Z",
+        "pickup_location": 63,
+        "dropoff_location": 63,
+        "pickup_time": "2024-09-03T01:24:00Z",
+        "load_description": "fridges  testing",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "1500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "794e26a4-a40d-4840-b0f2-359553131379",
+    "fields": {
+        "created": "2024-07-18T02:40:42.084Z",
+        "updated": "2024-08-01T22:30:57.349Z",
+        "pickup_location": 19,
+        "dropoff_location": 19,
+        "pickup_time": "2024-07-18T04:13:00Z",
+        "load_description": "furnitures",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "259.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "7d8b1645-6bd7-426d-8cb1-e5e66e79fcf3",
+    "fields": {
+        "created": "2024-08-02T10:56:43.651Z",
+        "updated": "2024-08-02T10:56:43.651Z",
+        "pickup_location": 47,
+        "dropoff_location": 47,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "7e4c19eb-3900-48ba-826a-dcf852b17d56",
+    "fields": {
+        "created": "2024-08-02T10:54:01.636Z",
+        "updated": "2024-08-02T10:54:01.637Z",
+        "pickup_location": 45,
+        "dropoff_location": 45,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "7eceae2e-5444-4942-ab3b-d54b4c2f1356",
+    "fields": {
+        "created": "2024-08-02T10:52:24.792Z",
+        "updated": "2024-08-02T10:52:24.792Z",
+        "pickup_location": 44,
+        "dropoff_location": 44,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "817256ce-400b-4e40-b779-92444998609e",
+    "fields": {
+        "created": "2024-07-02T22:15:44.048Z",
+        "updated": "2024-07-06T16:23:21.157Z",
+        "pickup_location": 13,
+        "dropoff_location": 13,
+        "pickup_time": "2024-07-11T22:15:00Z",
+        "load_description": "Bed",
+        "driver": 2,
+        "user": 78,
+        "vehicle_type": "truck_1.5",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "250.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "89fef54a-d884-4cf3-b0ef-b1313628572e",
+    "fields": {
+        "created": "2024-07-20T02:21:41.164Z",
+        "updated": "2024-07-31T02:34:58.165Z",
+        "pickup_location": 28,
+        "dropoff_location": 28,
+        "pickup_time": "2024-07-20T02:21:00Z",
+        "load_description": "testing dont freak",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "8bc24155-2bd4-4d77-993a-5c2463c03ded",
+    "fields": {
+        "created": "2024-07-26T10:04:00.031Z",
+        "updated": "2024-08-01T22:46:40.792Z",
+        "pickup_location": 35,
+        "dropoff_location": 35,
+        "pickup_time": "2024-07-26T10:03:00Z",
+        "load_description": "Test load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "909d6fb4-06f8-41d0-bfeb-264d0c2f668c",
+    "fields": {
+        "created": "2024-07-26T11:01:23.142Z",
+        "updated": "2024-08-01T22:46:46.909Z",
+        "pickup_location": 36,
+        "dropoff_location": 36,
+        "pickup_time": "2024-07-26T11:00:00Z",
+        "load_description": "test",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "93356727-058f-4bd0-b8f2-f3da177e4300",
+    "fields": {
+        "created": "2024-07-02T01:35:07.177Z",
+        "updated": "2024-07-06T16:25:20.921Z",
+        "pickup_location": 11,
+        "dropoff_location": 11,
+        "pickup_time": "2024-07-02T02:34:00Z",
+        "load_description": "transporting foods",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "750.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "98e6284f-83ca-4028-ac08-bdfdac64a27c",
+    "fields": {
+        "created": "2024-08-02T11:08:29.720Z",
+        "updated": "2024-08-02T11:08:29.720Z",
+        "pickup_location": 50,
+        "dropoff_location": 50,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "9e4f0d85-ae91-49e1-9a14-e8e44d75918f",
+    "fields": {
+        "created": "2024-07-26T09:50:52.574Z",
+        "updated": "2024-08-01T22:39:51.127Z",
+        "pickup_location": 32,
+        "dropoff_location": 32,
+        "pickup_time": "2024-07-26T09:17:00Z",
+        "load_description": "Test Load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "a251410e-f534-49b3-afe4-348bc89dcefe",
+    "fields": {
+        "created": "2024-08-02T10:59:42.404Z",
+        "updated": "2024-08-02T10:59:42.404Z",
+        "pickup_location": 48,
+        "dropoff_location": 48,
+        "pickup_time": "2024-08-02T10:51:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "a3db18f8-a24a-4dee-a203-fae7e0ad482d",
+    "fields": {
+        "created": "2024-07-19T23:28:49.946Z",
+        "updated": "2024-07-31T02:46:43.859Z",
+        "pickup_location": 20,
+        "dropoff_location": 20,
+        "pickup_time": "2024-07-20T00:28:00Z",
+        "load_description": "testing for now",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "c0f0f691-70df-4177-81e7-1010da794f71",
+    "fields": {
+        "created": "2024-08-16T03:37:23.260Z",
+        "updated": "2024-08-16T03:37:23.260Z",
+        "pickup_location": 53,
+        "dropoff_location": 53,
+        "pickup_time": "2024-08-17T14:30:00Z",
+        "load_description": "Furniture moving",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "150.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "c681ea99-c5b5-4f7e-a5b1-728ed8fa74b1",
+    "fields": {
+        "created": "2024-07-20T02:17:21.168Z",
+        "updated": "2024-08-01T22:22:22.836Z",
+        "pickup_location": 27,
+        "dropoff_location": 27,
+        "pickup_time": "2024-07-20T02:16:00Z",
+        "load_description": "testing dnt freak out",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2340.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "c6c132a2-8586-45ab-ac54-b08fd6a95578",
+    "fields": {
+        "created": "2024-09-05T00:58:29.743Z",
+        "updated": "2024-09-05T00:58:29.743Z",
+        "pickup_location": 66,
+        "dropoff_location": 66,
+        "pickup_time": "2024-09-05T01:58:00Z",
+        "load_description": "testing",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "2000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "c74769db-3a75-4d6c-837b-654965b2d849",
+    "fields": {
+        "created": "2024-07-02T00:45:22.445Z",
+        "updated": "2024-07-06T16:25:25.732Z",
+        "pickup_location": 9,
+        "dropoff_location": 9,
+        "pickup_time": "2024-07-02T03:44:00Z",
+        "load_description": "tvs",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "400.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "c85b4bc5-4a02-4d2e-aa70-3aeafe449e4a",
+    "fields": {
+        "created": "2024-07-26T11:07:40.896Z",
+        "updated": "2024-08-01T22:43:06.852Z",
+        "pickup_location": 37,
+        "dropoff_location": 37,
+        "pickup_time": "2024-07-26T11:00:00Z",
+        "load_description": "test",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "cac2313d-d1f9-4ed3-863a-3559d96f7e74",
+    "fields": {
+        "created": "2024-07-26T09:53:00.062Z",
+        "updated": "2024-08-01T22:44:11.149Z",
+        "pickup_location": 34,
+        "dropoff_location": 34,
+        "pickup_time": "2024-07-26T09:51:00Z",
+        "load_description": "Test Load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "cd6fbe93-4266-4d54-8894-1be34a4c1f82",
+    "fields": {
+        "created": "2024-08-02T10:26:24.858Z",
+        "updated": "2024-08-02T10:26:24.858Z",
+        "pickup_location": 42,
+        "dropoff_location": 42,
+        "pickup_time": "2024-08-02T10:22:00Z",
+        "load_description": "Test",
+        "driver": null,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "d04b9461-67a0-4e6b-861e-5d5134ef1d2d",
+    "fields": {
+        "created": "2024-07-20T01:51:43.937Z",
+        "updated": "2024-08-01T22:38:28.827Z",
+        "pickup_location": 26,
+        "dropoff_location": 26,
+        "pickup_time": "2024-07-20T02:51:00Z",
+        "load_description": "testing emails please",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2390.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "d3e022e4-3664-4643-a418-905ae15743e9",
+    "fields": {
+        "created": "2024-07-20T02:45:02.304Z",
+        "updated": "2024-08-01T22:38:28.753Z",
+        "pickup_location": 29,
+        "dropoff_location": 29,
+        "pickup_time": "2024-07-20T02:44:00Z",
+        "load_description": "testing mode",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "de8256ad-ab0d-43bf-bcdc-6d687bef0b30",
+    "fields": {
+        "created": "2024-06-26T00:28:02.151Z",
+        "updated": "2024-07-06T16:24:48.064Z",
+        "pickup_location": 7,
+        "dropoff_location": 7,
+        "pickup_time": "2024-06-26T00:27:00Z",
+        "load_description": "couches",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "df9f1cfa-0364-4d90-9c89-a5703b8530c6",
+    "fields": {
+        "created": "2024-08-01T22:51:30.107Z",
+        "updated": "2024-08-02T00:51:01.408Z",
+        "pickup_location": 40,
+        "dropoff_location": 40,
+        "pickup_time": "2024-08-01T23:51:00Z",
+        "load_description": "testing logic",
+        "driver": 2,
+        "user": 9,
+        "vehicle_type": "truck_1",
+        "status": "ACCEPTED",
+        "rating": 0,
+        "bid": "6000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "e0f16be4-e585-4afd-a94c-63a7441d2b5c",
+    "fields": {
+        "created": "2024-08-16T03:52:42.118Z",
+        "updated": "2024-08-16T03:52:42.194Z",
+        "pickup_location": 54,
+        "dropoff_location": 54,
+        "pickup_time": "2024-08-17T04:52:00Z",
+        "load_description": "moving furnitures",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "120.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "e26e3602-19d9-46e0-b286-dcd6518a7311",
+    "fields": {
+        "created": "2024-07-26T09:18:11.404Z",
+        "updated": "2024-08-01T22:37:09.723Z",
+        "pickup_location": 30,
+        "dropoff_location": 30,
+        "pickup_time": "2024-07-26T09:17:00Z",
+        "load_description": "Test Load",
+        "driver": 2,
+        "user": 1,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "200.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "e4f45fa5-0746-4776-96da-e226299b18c8",
+    "fields": {
+        "created": "2024-07-02T01:02:28.850Z",
+        "updated": "2024-07-06T16:25:10.878Z",
+        "pickup_location": 10,
+        "dropoff_location": 10,
+        "pickup_time": "2024-07-04T06:01:00Z",
+        "load_description": "stoves etc",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "300.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "e5a4bd14-475b-4956-947b-1a0288172710",
+    "fields": {
+        "created": "2024-08-30T15:06:22.602Z",
+        "updated": "2024-08-30T15:06:22.603Z",
+        "pickup_location": 61,
+        "dropoff_location": 61,
+        "pickup_time": "2024-08-31T15:04:00Z",
+        "load_description": "Fridge",
+        "driver": null,
+        "user": 6,
+        "vehicle_type": "truck_1.5",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "500.00",
+        "number_of_floors": 2,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "e95e4443-e8ac-465f-adc5-47f63c52c71d",
+    "fields": {
+        "created": "2024-09-05T01:42:45.143Z",
+        "updated": "2024-09-05T01:42:45.143Z",
+        "pickup_location": 67,
+        "dropoff_location": 67,
+        "pickup_time": "2024-09-06T03:43:00Z",
+        "load_description": "testing",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "2100.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "ee3da5a2-79c7-433a-9e14-73bc40e486b5",
+    "fields": {
+        "created": "2024-07-15T17:49:37.744Z",
+        "updated": "2024-08-01T22:35:04.288Z",
+        "pickup_location": 17,
+        "dropoff_location": 17,
+        "pickup_time": "2024-07-15T17:49:00Z",
+        "load_description": "Testing",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "bakkie",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "2500.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "eeaf1b41-5075-47c4-8e8b-9423f32a9bac",
+    "fields": {
+        "created": "2024-06-25T22:56:05.624Z",
+        "updated": "2024-07-06T16:24:26.661Z",
+        "pickup_location": 5,
+        "dropoff_location": 5,
+        "pickup_time": "2024-06-25T23:54:00Z",
+        "load_description": "house property",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "600.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "f01b71ea-b00a-4e92-965d-e981137588d4",
+    "fields": {
+        "created": "2024-08-30T09:17:38.301Z",
+        "updated": "2024-08-30T09:17:38.301Z",
+        "pickup_location": 58,
+        "dropoff_location": 58,
+        "pickup_time": "2024-08-30T10:17:00Z",
+        "load_description": "Stoves",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "250.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "f0f1a0ae-04e8-410c-9d8d-f5e0850007e6",
+    "fields": {
+        "created": "2024-08-01T22:07:09.202Z",
+        "updated": "2024-08-01T22:38:28.669Z",
+        "pickup_location": 39,
+        "dropoff_location": 39,
+        "pickup_time": "2024-08-02T22:02:00Z",
+        "load_description": "testing",
+        "driver": 2,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "COMPLETED",
+        "rating": 0,
+        "bid": "3000.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+},
+{
+    "model": "trips.trip",
+    "pk": "f733b350-becd-4113-b289-577fc79f1f83",
+    "fields": {
+        "created": "2024-08-16T03:15:40.298Z",
+        "updated": "2024-08-16T03:15:40.298Z",
+        "pickup_location": 52,
+        "dropoff_location": 52,
+        "pickup_time": "2024-08-17T14:30:00Z",
+        "load_description": "Furniture moving",
+        "driver": null,
+        "user": 2,
+        "vehicle_type": "truck_1",
+        "status": "REQUESTED",
+        "rating": 0,
+        "bid": "150.00",
+        "number_of_floors": 1,
+        "is_accepted": false
+    }
+}
