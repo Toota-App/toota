@@ -110,17 +110,17 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+#}
 
 # Uncomment and configure for production
-# DATABASES = {
-#     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-# }
+DATABASES = {
+     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+ }
 
 AUTH_USER_MODEL = 'authentication.User'
 AUTH_DRIVER_MODEL = 'authentication.Driver'
