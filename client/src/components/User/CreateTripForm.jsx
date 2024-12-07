@@ -17,6 +17,34 @@ import {
     faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { useNavigate } from 'react-router-dom';
+
+const fetchTripStatus = async (tripId, token) => {
+    try {
+        // Make a GET request to the same endpoint to get the status of the created trip
+        const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/api/trip/`, // Same endpoint to get the trip details
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    trip_id: tripId, // Pass the tripId to get the specific trip's status
+                },
+            }
+        );
+
+        // The response will likely contain the trip status and other data
+        console.log('Trip Status:', response.data);
+        // Handle the trip status or update your state/UI here
+        setMessage({ text: `Trip status: ${response.data.status}`, type: 'success' });
+
+    } catch (error) {
+        console.error('Error fetching trip status:', error);
+        setMessage({ text: 'Failed to fetch trip status. Please try again.', type: 'error' });
+    }
+};
+
 const libraries = ['places'];
 
 const CreateTripForm = () => {
@@ -80,26 +108,52 @@ const CreateTripForm = () => {
                 .min(50, 'Bid amount must be at least 50'),
         }),
         onSubmit: async (values) => {
-            try {
-                const response = await axios.post(
-                    `${import.meta.env.VITE_BASE_URL}/api/trip/`,
-                    values,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                formik.resetForm();
-                setMessage({ text: 'Trip created successfully!', type: 'success' });
-            } catch (error) {
-                console.error('Error creating trip:', error);
-                setMessage({ text: 'Failed to create trip. Please try again.', type: 'error' });
+    try {
+        // Step 1: Send the request to create the trip
+        const response = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/api/trip/`,
+            values,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
-        },
-    });
+        );
 
+        // Step 2: Log the entire response for debugging
+        console.log("Response from API:", response);
+
+        // Step 3: Extract the tripId from the response (adjust based on your API response structure)
+        const tripId = response.data.id; // Assuming `id` is the tripId
+
+        // Step 4: Log tripId to confirm it's correctly retrieved
+        console.log("Trip ID:", tripId);
+
+        // Step 5: Reset the form
+        formik.resetForm();
+
+        // Step 6: Show success message
+        setMessage({ text: 'Trip created successfully!', type: 'success' });
+
+        // Step 7: Store the tripId (for later use in status page)
+        // You might want to store it in a state or use it immediately
+        // For example, you can store it in localStorage or context for global use
+        localStorage.setItem('tripId', tripId); // or use a state to store tripId
+
+        // TODO: Optionally navigate to Trip Status page with tripId
+        // Example: navigate(`/trip-status/${tripId}`);
+        
+        // Now, proceed to Stage 2 (fetching trip status) once the trip is created successfully.
+        fetchTripStatus(tripId);
+        
+    } catch (error) {
+        // Step 8: Handle errors if trip creation fails
+        console.error("Error creating trip:", error);
+        setMessage({ text: 'Failed to create trip. Please try again.', type: 'error' });
+    }
+},
+
+});
     const handleCloseMessage = () => {
         setMessage(null);
     };

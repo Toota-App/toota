@@ -24,11 +24,11 @@ const DriverRegistrationForm = () => {
       .required('Phone number is required'),
     physical_address: Yup.string().required('Physical address is required'),
     vehicle_registration_no: Yup.string()
-      .matches(/^[A-Z0-9]{6,8}$/, 'Invalid vehicle registration number format')
+      //.matches(/^[A-Z0-9]{6,8}$/, 'Invalid vehicle registration number format')
       .required('Vehicle registration number is required'),
     vehicle_type: Yup.string().required('Please select a vehicle type'),
     licence_no: Yup.string()
-      .matches(/^[A-Z0-9]{6,12}$/, 'Invalid license number format')
+      //.matches(/^[A-Z0-9]{6,12}$/, 'Invalid license number format')
       .required('Driver’s license number is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
@@ -191,12 +191,12 @@ const DriverRegistrationForm = () => {
                   <option value="" disabled>
                     Select vehicle type
                   </option>
-                  <option value="1 ton truck">1 Ton Truck</option>
-                  <option value="1.5 ton truck">1.5 Ton Truck</option>
-                  <option value="2 ton truck">2 Ton Truck</option>
-                  <option value="4 ton truck">4 Ton Truck</option>
+                  <option value="truck_1">1 Ton Truck</option>
+                  <option value="truck_1.5">1.5 Ton Truck</option>
+                  <option value="truck_2">2 Ton Truck</option>
+                  <option value="truck_4">4 Ton Truck</option>
                   <option value="bakkie">Bakkie</option>
-                  <option value="8 ton truck">8 Ton Truck</option>
+                  <option value="truck_8">8 Ton Truck</option>
                 </Field>
                 <ErrorMessage name="vehicle_type" component="div" className="text-red-500 text-sm mt-1" />
               </div>
