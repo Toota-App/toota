@@ -141,8 +141,8 @@ class TripStatusView(generics.GenericAPIView):
                 "id": trip.id,
                 "status": trip.status,
                 "vehicle_type": trip.vehicle_type,
-                "driver_name": trip.driver.user.full_name if trip.driver else None,  # Full name of the driver
-                "user_name": trip.user.full_name if trip.user else None,  # Full name of the user
+                "driver_name": trip.driver.full_name if trip.driver else None,  # Full name of the driver
+                "user_name": trip.user.full_name if trip.user else None,  # Full name of the use
                 "pickup_location": trip.pickup_location.location,
                 "dropoff_location": trip.dropoff_location.location,
                 "pickup_time": trip.pickup_time,
