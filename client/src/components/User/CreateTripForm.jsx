@@ -19,6 +19,8 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
+const [message, setMessage] = useState(null);
+
 const fetchTripStatus = async (tripId, token) => {
     try {
         // Corrected endpoint with 'trip' repeated in the URL path
