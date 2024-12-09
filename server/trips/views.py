@@ -129,20 +129,19 @@ class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     permission_classes = [permissions.IsAuthenticated]
 
 class TripStatusView(generics.GenericAPIView):
-    permission_classes = [permissions.IsAuthenticated]  # Only authenticated users can access this view
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, trip_id, *args, **kwargs):
         try:
-            # Retrieve the trip by its UUID (primary key)
-            trip = Trip.objects.get(id=trip_id)
+            trip = Trip.objects.select_related('driver', 'user', 'pickup_location', 'dropoff_location').get(id=trip_id)
 
-            # Construct the response data
             trip_data = {
                 "id": trip.id,
                 "status": trip.status,
                 "vehicle_type": trip.vehicle_type,
-                "driver_name": trip.driver.full_name if trip.driver else None,  # Full name of the driver
-                "user_name": trip.user.full_name if trip.user else None,  # Full name of the use
+                "driver_name": trip.driver.full_name if trip.driver else None,
+                "driver_phone": trip.driver.phone_number if trip.driver else None,  # Include phone number
+                "user_name": trip.user.full_name if trip.user else None,
                 "pickup_location": trip.pickup_location.location,
                 "dropoff_location": trip.dropoff_location.location,
                 "pickup_time": trip.pickup_time,
@@ -151,10 +150,7 @@ class TripStatusView(generics.GenericAPIView):
                 "is_accepted": trip.is_accepted,
             }
 
-            # Return the response
             return Response(trip_data, status=status.HTTP_200_OK)
-
         except Trip.DoesNotExist:
-            # If the trip does not exist, return a 404 error
             return Response({"detail": "Trip not found."}, status=status.HTTP_404_NOT_FOUND)
 

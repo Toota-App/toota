@@ -138,7 +138,7 @@ const CreateTripForm = () => {
         localStorage.setItem('tripId', tripId); // or use a state to store tripId
 
         // TODO: Optionally navigate to Trip Status page with tripId
-         navigate(`/trip-status/${tripId}`);
+         navigate(`/dashboard/user/trip-status/${tripId}`);
         
         // Now, proceed to Stage 2 (fetching trip status) once the trip is created successfully.
         fetchTripStatus(tripId);

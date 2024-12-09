@@ -1,71 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 import logo from '../../assets/logo.png';
-import { ClipLoader } from 'react-spinners'; // Spinner
-import { getAccessToken } from '../../services/AuthService'; // Import the getAccessToken function
+import { getAccessToken } from '../../services/AuthService';
 
 const TripStatus = () => {
-  const { tripId } = useParams(); // Get tripId from the URL
-  const [status, setStatus] = useState('loading');
-  const [message, setMessage] = useState('Matching you with the best driver nearby...');
+  const { tripId } = useParams();
+  const [trip, setTrip] = useState(null); // Store full trip details
   const [error, setError] = useState(null);
 
   const statusMessages = {
-    loading: "Matching you with the best driver nearby...",
-    accepted: "Driver accepted the trip. They’re on their way!",
-    in_progress: "The driver is on the way to pick you up!",
-    completed: "Trip completed! Thank you for riding with us!",
+    REQUESTED: "Matching you with the best driver nearby...",
+    ACCEPTED: "Driver accepted the trip. They’re on their way!",
+    IN_PROGRESS: "The driver is on the way to pick you up!",
+    COMPLETED: "Trip completed! Thank you for riding with us!",
+    CANCELLED: "The trip has been cancelled.",
   };
 
   useEffect(() => {
-    const fetchStatus = async () => {
+    const fetchTripDetails = async () => {
       try {
-        // Get the access token using the getAccessToken function
         const token = getAccessToken();
-
-        // Check if the token is valid (optional)
         if (!token) {
           setError("You are not authorized. Please log in again.");
           return;
         }
 
-        // Corrected endpoint with 'trip' repeated in the URL path
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/trip/trip/${tripId}/status/`, // Corrected URL structure
+          `${import.meta.env.VITE_BASE_URL}/api/trip/trip/${tripId}/status/`,
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Use token from getAccessToken
+              Authorization: `Bearer ${token}`,
             },
           }
         );
 
-        const currentStatus = response.data.status;
-        setStatus(currentStatus);
-        setMessage(statusMessages[currentStatus] || 'Updating trip details...');
+        setTrip(response.data);
       } catch (err) {
-        console.error("Error fetching trip status:", err);
-        setError("Failed to fetch trip status. Please try again.");
+        console.error("Error fetching trip details:", err);
+        setError("Failed to fetch trip details. Please try again.");
       }
     };
 
-    // Poll every 5 seconds (or you can implement WebSocket for real-time updates)
-    const interval = setInterval(fetchStatus, 5000);
-    fetchStatus(); // Initial fetch
+    const interval = setInterval(fetchTripDetails, 5000);
+    fetchTripDetails();
 
-    return () => clearInterval(interval); // Cleanup
+    return () => clearInterval(interval);
   }, [tripId]);
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return <p className="text-red-500 text-center">{error}</p>;
   }
 
+  if (!trip) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#FFD700" size={50} />
+      </div>
+    );
+  }
+
+  const { status, driver_name, driver_phone } = trip;
+
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-white shadow-lg rounded-md">
-      <img src={logo} alt="Company Logo" className="w-24 mb-4" />
-      <div className="flex items-center gap-2">
-        {status === 'loading' && <ClipLoader color="#FFD700" size={20} />}
-        <p className="text-gray-700 text-center">{message}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
+      <img src={logo} alt="Company Logo" className="w-24 mb-6" />
+      <div className="relative top-[-10%] w-full max-w-md bg-white shadow-md rounded-lg p-6">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+          Trip Status
+        </h2>
+        <p className="text-gray-700 text-center mb-6">
+          {statusMessages[status] || "Updating trip details..."}
+        </p>
+        {status === 'ACCEPTED' || status === 'IN_PROGRESS' ? (
+          <div className="bg-gray-100 p-4 rounded-md">
+            <p className="text-gray-800">
+              <strong>Driver Name:</strong> {driver_name || 'N/A'}
+            </p>
+            <p className="text-gray-800">
+              <strong>Driver Phone:</strong> {driver_phone || 'N/A'}
+            </p>
+          </div>
+        ) : null}
+        {status === 'COMPLETED' && (
+          <p className="text-green-600 text-center mt-4 font-semibold">
+            Trip completed! Thank you for choosing us.
+          </p>
+        )}
       </div>
     </div>
   );
