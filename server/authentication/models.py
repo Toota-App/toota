@@ -29,6 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.full_name
 
 class Driver(User):
+    acceptance_rate = models.FloatField(default=0.0)
     vehicle_registration_no = models.CharField(max_length=100, unique=True, null=False, blank=False, default='')
     vehicle_type = models.CharField(max_length=100, choices=VEHICLE_TYPES, null=False, blank=False, default='Bike')
     licence_no = models.CharField(max_length=100, unique=True, null=False, blank=False, verbose_name=_("Driver's Licence Number"), default='')

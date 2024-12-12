@@ -15,6 +15,7 @@ import Homepage from "./pages/Homepage";
 import AboutUs from "./pages/AboutUs";
 import BecomeDriver from "./pages/BecomeDriver";
 import FAQPage from './pages/FAQPage';
+import TripStatus from "./components/User/TripStatus";
 
 import Dashboard from './components/User/Dashboard';
 import DriverDashboard from './components/Driver/DriverDashboard';
@@ -62,6 +63,7 @@ function App() {
             <Route path='trip-history' element= {<RideHistory />} />
             <Route path='calendar' element={<UserCalendar />} />
             <Route path='logout' element={<Logout />} />
+	    <Route path="trip-status/:tripId" element={<TripStatus />} />
           </Route>
           <Route path="/signup/admin/" element={<AdminSignup />} />
           <Route path="/login/admin/" element={<AdminLogin />} />
