@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui';
+
 export default {
   content: [
     "./index.html",
@@ -15,7 +17,7 @@ export default {
           '100%': {
             opacity: '1',
             transform: 'scale(1) translateX(0) translateY(0)',
-          }
+          },
         },
         dissolveinend: {
           '0%': {
@@ -33,17 +35,17 @@ export default {
           },
           '100%': {
             transform: 'scale(1)',
-          }
+          },
         },
         herocontentup: {
           '0%': {
             opacity: '0',
-            transform: 'translateY(50%)'
+            transform: 'translateY(50%)',
           },
           '100%': {
             opacity: '1',
             transform: '-translate-y-1/2',
-          }
+          },
         },
         fadeup: {
           '0%': {
@@ -73,7 +75,7 @@ export default {
           '100%': {
             transform: 'translateX(0)',
             opacity: '1',
-          }
+          },
         },
         fadefromend: {
           '0%': {
@@ -105,7 +107,6 @@ export default {
     },
   },
   plugins: [
-    require('daisyui'),
+    daisyui,
   ],
-    
 };
