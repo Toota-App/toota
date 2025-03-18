@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui';
+
 export default {
   content: [
     "./index.html",
@@ -8,82 +10,36 @@ export default {
     extend: {
       keyframes: {
         dissolveinstart: {
-          '0%': {
-            opacity: '0',
-            transform: 'scale(2) translateX(-50%) translateY(-50%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'scale(1) translateX(0) translateY(0)',
-          },
+          '0%': { opacity: '0', transform: 'scale(2) translateX(-50%) translateY(-50%)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateX(0) translateY(0)' },
         },
         dissolveinend: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(100%) translateY(-100%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0) translateY(0)',
-          },
+          '0%': { opacity: '0', transform: 'translateX(100%) translateY(-100%)' },
+          '100%': { opacity: '1', transform: 'translateX(0) translateY(0)' },
         },
         scaledown: {
-          '0%': {
-            transform: 'scale(1.4)',
-          },
-          '100%': {
-            transform: 'scale(1)',
-          },
+          '0%': { transform: 'scale(1.4)' },
+          '100%': { transform: 'scale(1)' },
         },
         herocontentup: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(50%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: '-translate-y-1/2',
-          },
+          '0%': { opacity: '0', transform: 'translateY(50%)' },
+          '100%': { opacity: '1', transform: '-translate-y-1/2' },
         },
         fadeup: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(50%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
+          '0%': { opacity: '0', transform: 'translateY(50%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         fadedown: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(-50%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
+          '0%': { opacity: '0', transform: 'translateY(-50%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         fadefromstart: {
-          '0%': {
-            transform: 'translateX(-100%)',
-            opacity: '0',
-          },
-          '100%': {
-            transform: 'translateX(0)',
-            opacity: '1',
-          },
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         fadefromend: {
-          '0%': {
-            transform: 'translateX(100%)',
-            opacity: '0',
-          },
-          '100%': {
-            transform: 'translateX(0%)',
-            opacity: '1',
-          },
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0%)', opacity: '1' },
         },
       },
       animation: {
@@ -104,5 +60,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui],
 };
