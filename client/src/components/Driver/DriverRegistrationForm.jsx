@@ -11,33 +11,38 @@ const DriverRegistrationForm = () => {
 
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-  // Validation Schema
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email('Invalid email format')
-      .required('Email is required'),
-    full_name: Yup.string()
-      .min(3, 'Full name must be at least 3 characters')
-      .required('Full name is required'),
-    phone_number: Yup.string()
-      .matches(/^0\d{9}$/, 'Phone number must be 10 digits and start with 0')
-      .required('Phone number is required'),
-    physical_address: Yup.string().required('Physical address is required'),
-    vehicle_registration_no: Yup.string()
-      //.matches(/^[A-Z0-9]{6,8}$/, 'Invalid vehicle registration number format')
-      .required('Vehicle registration number is required'),
-    vehicle_type: Yup.string().required('Please select a vehicle type'),
-    licence_no: Yup.string()
-      //.matches(/^[A-Z0-9]{6,12}$/, 'Invalid license number format')
-      .required('Driver’s license number is required'),
-    password: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .required('Password is required'),
-    confirm_password: Yup.string()
-      .oneOf([Yup.ref('password')], 'Passwords must match')
-      .required('Confirm password is required'),
-  });
-
+  email: Yup.string()
+    .email('Invalid email format')
+    .required('Email is required'),
+  full_name: Yup.string()
+    .min(3, 'Full name must be at least 3 characters')
+    .required('Full name is required'),
+  phone_number: Yup.string()
+    .matches(/^0\d{9}$/, 'Phone number must be 10 digits and start with 0')
+    .required('Phone number is required'),
+  physical_address: Yup.string().required('Physical address is required'),
+  vehicle_registration_no: Yup.string()
+    .matches(
+      /^[A-Z]{1,3}\s?\d{1,6}\s?[A-Z]{0,3}$/,
+      'Invalid vehicle registration number format (e.g., GP 123 ABC or CA 4567)'
+    )
+    .required('Vehicle registration number is required'),
+  vehicle_type: Yup.string().required('Please select a vehicle type'),
+  licence_no: Yup.string()
+    .matches(
+      /^[A-Z]?\d{8}-\d{2}$/,
+      'Invalid driver’s license number format (e.g., D12345678-01)'
+    )
+    .required('Driver’s license number is required'),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+  confirm_password: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Confirm password is required'),
+});
+      
   // Form Submission Handler
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
