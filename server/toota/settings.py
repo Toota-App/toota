@@ -117,9 +117,9 @@ DATABASES = {
     }
 }
 
-# Uncomment and configure for production
+#Uncomment and configure for production
 #DATABASES = {
-#     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+     #"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 #}
 
 AUTH_USER_MODEL = 'authentication.User'

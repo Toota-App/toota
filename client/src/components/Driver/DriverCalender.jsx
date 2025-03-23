@@ -23,7 +23,7 @@ const DriverCalendar = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/trip/`, config);
-      setTrips(response.data.filter(trip => trip.status !== 'COMPLETED')); // Filter out completed trips
+      setTrips(response.data.filter(trip => trip.status !== 'COMPLETED'));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -36,6 +36,11 @@ const DriverCalendar = () => {
   };
 
   const handleAcceptTrip = async (trip) => {
+    if (trips.some(t => t.status === 'IN_PROGRESS')) {
+      setMessage({ text: 'Cannot accept another trip until the current trip is completed.', type: 'error' });
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -84,8 +89,11 @@ const DriverCalendar = () => {
     // Handle payment submission here
   };
 
-  const handleOpenModal = () => {
-    setShowPaymentModal(true);
+  const viewDirections = (pickup, dropoff) => {
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
+      pickup
+    )}&destination=${encodeURIComponent(dropoff)}`;
+    window.open(mapsUrl, "_blank");
   };
 
   return (
@@ -99,42 +107,48 @@ const DriverCalendar = () => {
         trips.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {trips.map(trip => (
-              <div key={trip.id} className="bg-white rounded-lg shadow-md p-4">
-                <div className="flex justify-between items-center mb-2">
+              <div key={trip.id} className="bg-gray-50 rounded-lg shadow-lg p-5 border border-gray-300">
+                <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-bold">{trip.name}</h2>
                   {trip.status === 'REQUESTED' && (
                     <button 
                       onClick={() => handleAcceptTrip(trip)} 
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       Accept
                     </button>
                   )}
                   {trip.status === 'ACCEPTED' && (
                     <button 
                       onClick={() => handleStartTrip(trip)} 
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                       Start Trip
                     </button>
                   )}
                   {trip.status === 'IN_PROGRESS' && (
                     <button 
-                      onClick={() => { handleEndTrip(trip); handleOpenModal() }} 
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      onClick={() => { handleEndTrip(trip); }} 
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                       End Trip
                     </button>
                   )}
                 </div>
                 <div className="text-gray-600">
-                  <p><strong>Bid:</strong> {trip.bid}</p>
-                  <p><strong>Number of Floors:</strong> {trip.number_of_floors}</p>
+                  <p><strong>Fare:</strong> <span className="text-black font-bold">ZAR {trip.bid}</span></p>
+                  <p><strong>Pickup Time:</strong> {new Date(trip.pickup_time).toLocaleString()}</p>
                   <p><strong>Load Description:</strong> {trip.load_description}</p>
                   <p><strong>Vehicle Type:</strong> {trip.vehicle_type}</p>
-                  <p><strong>Updated:</strong> {new Date(trip.updated).toLocaleString()}</p>
-                  <p><strong>Pickup Location:</strong> {trip.pickup_location.location} (Phone: {trip.pickup_location.phone_number})</p>
-                  <p><strong>Dropoff Location:</strong> {trip.dropoff_location.location} (Phone: {trip.dropoff_location.phone_number})</p>
-                  <p><strong>Pickup Time:</strong> {new Date(trip.pickup_time).toLocaleString()}</p>
+                  <p><strong>Pickup Location:</strong> {trip.pickup_location.location}</p>
+                  <p><strong>Dropoff Location:</strong> {trip.dropoff_location.location}</p>
+                  <p><strong>Number of Floors:</strong> {trip.number_of_floors}</p>
                   {trip.status === 'ACCEPTED' && (
-                    <p><strong>Drop-off Contact Number:</strong> {trip.dropoff_location.phone_number}</p>
+                    <p><strong>Contact Number:</strong> {trip.dropoff_location.phone_number}</p>
+                  )}
+                  {trip.status === 'IN_PROGRESS' && (
+                    <button 
+                      onClick={() => viewDirections(trip.pickup_location.location, trip.dropoff_location.location)}
+                      className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">
+                      View Directions
+                    </button>
                   )}
                 </div>
               </div>
@@ -143,17 +157,6 @@ const DriverCalendar = () => {
         ) : (
           <p className="text-center text-gray-500">No active trips found.</p>
         )
-      )}
-
-      {selectedTrip && (
-        <dialog open={showPaymentModal} className="modal">
-          <div className="modal-box">
-            <PaymentForm tripId={selectedTrip.id} driverId={selectedTrip.driver.id} bid={selectedTrip.bid} onSubmit={handlePaymentSubmit} token={token} />
-          </div>
-          <form method="dialog" className="modal-backdrop">
-            <button onClick={() => setShowPaymentModal(false)}>Close</button>
-          </form>
-        </dialog>
       )}
 
       {message && (
