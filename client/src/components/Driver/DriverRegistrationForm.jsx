@@ -8,64 +8,113 @@ import logo from '../../assets/logo.png';
 const DriverRegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [debugInfo, setDebugInfo] = useState(null);
 
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const validationSchema = Yup.object({
-  email: Yup.string()
-    .email('Invalid email format')
-    .required('Email is required'),
-  full_name: Yup.string()
-    .min(3, 'Full name must be at least 3 characters')
-    .required('Full name is required'),
-  phone_number: Yup.string()
-    .matches(/^0\d{9}$/, 'Phone number must be 10 digits and start with 0')
-    .required('Phone number is required'),
-  physical_address: Yup.string().required('Physical address is required'),
-  vehicle_registration_no: Yup.string()
-    .matches(
-      /^[A-Z]{1,3}\s?\d{1,6}\s?[A-Z]{0,3}$/,
-      'Invalid vehicle registration number format (e.g., GP 123 ABC or CA 4567)'
-    )
-    .required('Vehicle registration number is required'),
-  vehicle_type: Yup.string().required('Please select a vehicle type'),
-  licence_no: Yup.string()
-    .matches(
-      /^[A-Z]?\d{8}-\d{2}$/,
-      'Invalid driver’s license number format (e.g., D12345678-01)'
-    )
-    .required('Driver’s license number is required'),
-  password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
-    .required('Password is required'),
-  confirm_password: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Confirm password is required'),
-});
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Email is required'),
+    full_name: Yup.string()
+      .min(3, 'Full name must be at least 3 characters')
+      .required('Full name is required'),
+    phone_number: Yup.string()
+      .matches(/^0\d{9}$/, 'Phone number must be 10 digits and start with 0')
+      .required('Phone number is required'),
+    physical_address: Yup.string().required('Physical address is required'),
+    vehicle_registration_no: Yup.string()
+      .matches(
+        /^[A-Z]{1,3}\s?\d{1,6}\s?[A-Z]{0,3}$/,
+        'Invalid vehicle registration number format (e.g., GP 123 ABC or CA 4567)'
+      )
+      .required('Vehicle registration number is required'),
+    vehicle_type: Yup.string().required('Please select a vehicle type'),
+    licence_no: Yup.string()
+      .matches(
+        /^[A-Z]?\d{8}-\d{2}$/,
+        'Invalid driver's license number format (e.g., D12345678-01)'
+      )
+      .required('Driver's license number is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    confirm_password: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Confirm password is required'),
+  });
       
-  // Form Submission Handler
+  // Form Submission Handler with improved error handling and debugging
   const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
+    // Clean values before sending (trim strings and ensure proper format)
+    const cleanedValues = {
+      ...values,
+      phone_number: values.phone_number.trim(),
+      vehicle_type: values.vehicle_type.trim(), // Make sure there's no whitespace
+    };
+    
+    // For debugging only
+    setDebugInfo({
+      sending: cleanedValues
+    });
+    
     try {
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/driver/sign_up/`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(cleanedValues),
       });
+
+      const responseData = await response.json();
+      
+      // Update debug info with response
+      setDebugInfo(prev => ({
+        ...prev,
+        status: response.status,
+        response: responseData
+      }));
 
       if (response.status === 201) {
         setSuccessMessage('Driver account created successfully! Please check your email to verify.');
         resetForm();
       } else if (response.status === 400) {
-        const errorData = await response.json();
-        setErrors(errorData);
+        // Format backend errors to match Formik's error structure
+        const formattedErrors = {};
+        Object.keys(responseData).forEach(key => {
+          if (Array.isArray(responseData[key])) {
+            formattedErrors[key] = responseData[key][0];
+          } else {
+            formattedErrors[key] = responseData[key];
+          }
+        });
+        setErrors(formattedErrors);
+      } else {
+        throw new Error(`Server responded with status ${response.status}`);
       }
     } catch (error) {
       console.error('Signup error:', error);
+      setDebugInfo(prev => ({
+        ...prev,
+        error: error.message
+      }));
       setErrors({ generic: 'An error occurred. Please try again later.' });
     } finally {
       setSubmitting(false);
     }
   };
+
+  // Carefully crafted vehicle types to match backend exactly
+  const vehicleTypes = [
+    { value: "truck_1", label: "1 Ton Truck" },
+    { value: "truck_1.5", label: "1.5 Ton Truck" },
+    { value: "truck_2", label: "2 Ton Truck" },
+    { value: "truck_4", label: "4 Ton Truck" },
+    { value: "bakkie", label: "Bakkie" },
+    { value: "truck_8", label: "8 Ton Truck" }
+  ];
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
@@ -84,7 +133,7 @@ const DriverRegistrationForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors }) => (
           <Form className="bg-white p-8 shadow-md rounded w-full max-w-3xl">
             {/* Logo and Header */}
             <div className="flex justify-center mb-6">
@@ -97,6 +146,23 @@ const DriverRegistrationForm = () => {
               <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                 {successMessage}
               </div>
+            )}
+
+            {/* Generic Error Message */}
+            {errors.generic && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {errors.generic}
+              </div>
+            )}
+
+            {/* Debug Information (remove in production) */}
+            {debugInfo && (
+              <details className="mb-4 p-2 border border-gray-300 rounded">
+                <summary className="font-semibold cursor-pointer">Debug Information</summary>
+                <pre className="text-xs mt-2 p-2 bg-gray-100 overflow-auto">
+                  {JSON.stringify(debugInfo, null, 2)}
+                </pre>
+              </details>
             )}
 
             {/* Form Fields */}
@@ -181,7 +247,7 @@ const DriverRegistrationForm = () => {
                 <ErrorMessage name="vehicle_registration_no" component="div" className="text-red-500 text-sm mt-1" />
               </div>
 
-              {/* Vehicle Type */}
+              {/* Vehicle Type - Modified to ensure exact value matching */}
               <div>
                 <label htmlFor="vehicle_type" className="block text-sm font-semibold text-gray-700">
                   <FaCar className="inline mr-2" />
@@ -193,15 +259,12 @@ const DriverRegistrationForm = () => {
                   name="vehicle_type"
                   className="w-full mt-1 p-3 border rounded focus:outline-none focus:ring focus:border-orange-500"
                 >
-                  <option value="" disabled>
-                    Select vehicle type
-                  </option>
-                  <option value="truck_1">1 Ton Truck</option>
-                  <option value="truck_1.5">1.5 Ton Truck</option>
-                  <option value="truck_2">2 Ton Truck</option>
-                  <option value="truck_4">4 Ton Truck</option>
-                  <option value="bakkie">Bakkie</option>
-                  <option value="truck_8">8 Ton Truck</option>
+                  <option value="">Select vehicle type</option>
+                  {vehicleTypes.map(type => (
+                    <option key={type.value} value={type.value}>
+                      {type.label}
+                    </option>
+                  ))}
                 </Field>
                 <ErrorMessage name="vehicle_type" component="div" className="text-red-500 text-sm mt-1" />
               </div>
@@ -290,4 +353,3 @@ const DriverRegistrationForm = () => {
 };
 
 export default DriverRegistrationForm;
-
