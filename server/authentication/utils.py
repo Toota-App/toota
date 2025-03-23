@@ -3,14 +3,14 @@ from datetime import datetime
 from django.utils import timezone
 import threading
 
-
 VEHICLE_TYPES = (
-        ('truck_1', '1 ton Truck'),
-        ('truck_1.5', '1.5 ton Truck'),
-        ('truck_2', '2 ton Truck'),
-        ('truck_4', '4 ton Truck'),
-    )
-
+    ('truck_1', '1 Ton Truck'),
+    ('truck_1.5', '1.5 Ton Truck'),
+    ('truck_2', '2 Ton Truck'),
+    ('truck_4', '4 Ton Truck'),
+    ('bakkie', 'Bakkie'),          # Add this
+    ('truck_8', '8 Ton Truck')     # Add this
+)
 def get_current_time(format="%Y-%m-%d %H:%M:%S"):
     """
     Get the current time with the specified format.
